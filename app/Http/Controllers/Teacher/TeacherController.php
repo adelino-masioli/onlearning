@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 
 
 use Inertia\Inertia;
@@ -36,14 +37,24 @@ class TeacherController extends Controller
     {
         $validation = $request->validate([
             'name'  => ['required', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255']
         ]);
+        if($request->input('password') != ""){
+            $validation = $request->validate([
+                'password' => 'sometimes|required|string|min:8',
+                'confirmpassword' => 'sometimes|required_with:password|same:password',
+            ]);
+        }
 
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $teacher->update($request->all());
 
         $user = User::findOrFail(Auth::user()->id);
-        $user->update(["name" => $request->input("name")]);
+        $data = ["name" => $request->input("name")];
+        if($request->input('password') != ""){
+            $data = ["password" => Hash::make($request->input('password'))];
+        }
+        $user->update($data);
 
         $request->session()->flash('message', 'Saved successfully!');
 

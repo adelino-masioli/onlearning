@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
 
@@ -22,8 +22,13 @@ export default function FormData({ data }) {
         description: data ? data.description : null,
         degree: data ? data.degree : null,
         qualification: data ? data.qualification : null,
-        seo: data ? data.seo : null
+        seo: data ? data.seo : null,
+        password: "",
+        confirmpassword: ""
     });
+    const [isSwitchOn, setIsSwitchOn] = useState(
+        data && data.seo == 0 ? false : true
+    );
 
     function handleChange(e) {
         const key = e.target.id;
@@ -38,6 +43,17 @@ export default function FormData({ data }) {
         Inertia.post("/teacher/update", values);
     }
 
+    const onSwitchAction = () => {
+        setIsSwitchOn(!isSwitchOn);
+    };
+
+    useEffect(() => {
+        setValues(values => ({
+            ...values,
+            seo: isSwitchOn
+        }));
+    }, [isSwitchOn]);
+
     {
         flash.message && toast.success(flash.message);
     }
@@ -46,7 +62,7 @@ export default function FormData({ data }) {
         <>
             <ToastContainer />
 
-            <Form onSubmit={handleSubmit} noValidate validated={errors}>
+            <Form onSubmit={handleSubmit} noValidate>
                 <Form.Row>
                     <Col>
                         <Form.Group controlId="name">
@@ -58,9 +74,10 @@ export default function FormData({ data }) {
                                 value={values.name}
                                 onChange={handleChange}
                                 required
+                                isInvalid={!!errors.email}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.name && <div>{errors.name[0]}</div>}
+                                {errors.name}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
@@ -74,9 +91,10 @@ export default function FormData({ data }) {
                                 value={values.email}
                                 onChange={handleChange}
                                 required
+                                isInvalid={!!errors.email}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.email && <div>{errors.email[0]}</div>}
+                                {errors.email}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
@@ -95,67 +113,85 @@ export default function FormData({ data }) {
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="formInstagram">
+                        <Form.Group controlId="instagram">
                             <Form.Label>Instagram</Form.Label>
                             <Form.Control
                                 size="lg"
                                 type="text"
                                 placeholder="Instagram"
+                                value={values.instagram}
+                                onChange={handleChange}
                             />
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="formFacebook">
+                        <Form.Group controlId="facebook">
                             <Form.Label>Facebook</Form.Label>
                             <Form.Control
                                 size="lg"
                                 type="text"
                                 placeholder="Facebook"
+                                value={values.facebook}
+                                onChange={handleChange}
                             />
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="formYoutube">
+                        <Form.Group controlId="youtube">
                             <Form.Label>Youtube</Form.Label>
                             <Form.Control
                                 size="lg"
                                 type="text"
                                 placeholder="Youtube"
+                                value={values.youtube}
+                                onChange={handleChange}
                             />
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="formLinkedin">
+                        <Form.Group controlId="linkedin">
                             <Form.Label>Linkedin</Form.Label>
                             <Form.Control
                                 size="lg"
                                 type="text"
                                 placeholder="Linkedin"
+                                value={values.linkedin}
+                                onChange={handleChange}
                             />
                         </Form.Group>
                     </Col>
                 </Form.Row>
 
-                <Form.Group controlId="formDescription">
+                <Form.Group controlId="description">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows="3"
                         placeholder="Description"
+                        value={values.description}
+                        onChange={handleChange}
                     />
                 </Form.Group>
 
-                <Form.Group controlId="formDegree">
+                <Form.Group controlId="degree">
                     <Form.Label>Degree</Form.Label>
-                    <Form.Control as="textarea" rows="3" placeholder="Degree" />
+                    <Form.Control
+                        as="textarea"
+                        rows="3"
+                        placeholder="Degree"
+                        value={values.degree}
+                        onChange={handleChange}
+                    />
                 </Form.Group>
 
-                <Form.Group controlId="formQualifications">
+                <Form.Group controlId="qualification">
                     <Form.Label>Qualifications</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows="3"
                         placeholder="Qualifications"
+                        value={values.qualification}
+                        onChange={handleChange}
                     />
                     <Form.Text className="text-muted">
                         Please enter one per line
@@ -164,31 +200,45 @@ export default function FormData({ data }) {
 
                 <Form.Row>
                     <Col>
-                        <Form.Group controlId="formPassword">
+                        <Form.Group controlId="password">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 size="lg"
                                 type="password"
                                 placeholder="Password"
+                                value={values.password}
+                                onChange={handleChange}
+                                isInvalid={!!errors.password}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.password}
+                            </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="formConfirmPassword">
+                        <Form.Group controlId="confirmpassword">
                             <Form.Label>Confirm password</Form.Label>
                             <Form.Control
                                 size="lg"
                                 type="password"
                                 placeholder="Confirm password"
+                                value={values.confirmpassword}
+                                onChange={handleChange}
+                                isInvalid={!!errors.confirmpassword}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.confirmpassword}
+                            </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                 </Form.Row>
 
-                <Form.Group controlId="formCheckbox">
+                <Form.Group controlId="seo">
                     <Form.Check
                         custom
-                        type="checkbox"
+                        type="switch"
+                        checked={isSwitchOn}
+                        onChange={onSwitchAction}
                         label="Would you like to share your information on search engines?"
                     />
                 </Form.Group>
