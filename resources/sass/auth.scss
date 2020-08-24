@@ -1,0 +1,63 @@
+.gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(54, 198, 244);
+    background: linear-gradient(
+        180deg,
+        rgba(54, 198, 244, 0.8939950980392157) 0%,
+        rgba(54, 198, 244, 0.40940126050420167) 70%,
+        rgba(54, 198, 244, 0.7035189075630253) 100%
+    );
+}
+.auth {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/hero.jpg");
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    position: relative;
+
+    .brand {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        z-index: 2;
+        top: 20px;
+
+        img {
+            width: 180px;
+            height: auto;
+            margin: 10px auto;
+            margin-left: 30px;
+        }
+    }
+
+    .card {
+        border: 0px solid rgba(0, 0, 0, 0.125);
+        -webkit-box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.12);
+        -moz-box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-header {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: #fff;
+        border-bottom: 0px solid rgba(0, 0, 0, 0.125);
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+}

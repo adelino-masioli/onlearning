@@ -1,0 +1,75 @@
+.template {
+    height: 100vh;
+    .sidebar {
+        display: flex;
+        width: 208px;
+        height: 100vh;
+        background-color: $dark;
+        color: $text-light;
+        flex-direction: column;
+
+        .sidebar-header {
+            float: left;
+            width: 100%;
+            padding: 16px;
+
+            img,
+            svg {
+                cursor: pointer;
+            }
+        }
+        .sidebar-content {
+            float: left;
+            width: 100%;
+            padding: 16px 0px;
+
+            a {
+                float: left;
+                width: 100%;
+                padding: 10px;
+                color: $white;
+                svg {
+                    margin-top: -4px;
+                    margin-right: 5px;
+                }
+            }
+            a:hover {
+                color: $blue;
+                background-color: $dark-hover;
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 208px);
+        height: 100vh;
+        overflow: auto;
+        background: rgb(225, 225, 225);
+        background: linear-gradient(
+            180deg,
+            rgba(225, 225, 225, 1) 0%,
+            rgba(255, 255, 255, 1) 40%
+        );
+        color: $dark;
+        padding-top: 10px;
+    }
+
+    //title page
+    .title-page {
+        font-size: 2rem;
+        color: $dark;
+        margin-bottom: 20px;
+        font-weight: 300;
+
+        small {
+            display: block;
+            width: 100%;
+            font-size: 0.8rem;
+            margin-top: 1px;
+            color: $blue;
+            text-transform: uppercase;
+        }
+    }
+}
