@@ -20,8 +20,10 @@ use Illuminate\Support\Facades\Route;
 //Teacher
 Route::namespace('Teacher')->group(function () {
     Route::get('/teacher', ["as" => "teacher", "uses" => "TeacherController@index"]);
-    Route::get('/teacher/profile', ["as" => "teacher-profile", "uses" => "TeacherController@show"]);
-    Route::post('/teacher/update', ["as" => "teacher-update", "uses" => "TeacherController@update"]);
+    Route::get('/teacher/create', ["as" => "teacher-profile", "uses" => "TeacherController@create"]);
+    Route::post('/teacher/store', ["as" => "teacher-store", "uses" => "TeacherController@store"]);
+    Route::get('/teacher/profile', ["as" => "teacher-profile", "uses" => "TeacherController@edit"]);
+    Route::put('/teacher/update', ["as" => "teacher-update", "uses" => "TeacherController@update"]);
 });
 
 

@@ -46680,12 +46680,12 @@ var map = {
 	"./Event/index.js": "./resources/js/pages/Event/index.js",
 	"./Teacher": "./resources/js/pages/Teacher/index.js",
 	"./Teacher/": "./resources/js/pages/Teacher/index.js",
+	"./Teacher/Edit": "./resources/js/pages/Teacher/Edit/index.js",
+	"./Teacher/Edit/": "./resources/js/pages/Teacher/Edit/index.js",
+	"./Teacher/Edit/index": "./resources/js/pages/Teacher/Edit/index.js",
+	"./Teacher/Edit/index.js": "./resources/js/pages/Teacher/Edit/index.js",
 	"./Teacher/Partials/form": "./resources/js/pages/Teacher/Partials/form.js",
 	"./Teacher/Partials/form.js": "./resources/js/pages/Teacher/Partials/form.js",
-	"./Teacher/Show": "./resources/js/pages/Teacher/Show/index.js",
-	"./Teacher/Show/": "./resources/js/pages/Teacher/Show/index.js",
-	"./Teacher/Show/index": "./resources/js/pages/Teacher/Show/index.js",
-	"./Teacher/Show/index.js": "./resources/js/pages/Teacher/Show/index.js",
 	"./Teacher/index": "./resources/js/pages/Teacher/index.js",
 	"./Teacher/index.js": "./resources/js/pages/Teacher/index.js"
 };
@@ -46773,6 +46773,32 @@ function Event() {
 
 /***/ }),
 
+/***/ "./resources/js/pages/Teacher/Edit/index.js":
+/*!**************************************************!*\
+  !*** ./resources/js/pages/Teacher/Edit/index.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Show; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Template__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Template */ "./resources/js/components/Template/index.js");
+/* harmony import */ var _Partials_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Partials/form */ "./resources/js/pages/Teacher/Partials/form.js");
+
+
+
+function Show(_ref) {
+  var teacher = _ref.teacher;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Template__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    data: teacher
+  })));
+}
+
+/***/ }),
+
 /***/ "./resources/js/pages/Teacher/Partials/form.js":
 /*!*****************************************************!*\
   !*** ./resources/js/pages/Teacher/Partials/form.js ***!
@@ -46855,7 +46881,6 @@ function FormData(_ref) {
       setShowToast = _useState6[1];
 
   function handleChange(e) {
-    e.preventDefault();
     var key = e.target.id;
     var value = e.target.value;
     setValues(function (values) {
@@ -46866,7 +46891,7 @@ function FormData(_ref) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post("/teacher/update", values);
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].put("/teacher/update", values);
   }
 
   var onSwitchAction = function onSwitchAction() {
@@ -47009,35 +47034,9 @@ function FormData(_ref) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     size: "lg",
     variant: "success",
-    type: "button",
+    type: "submit",
     onClick: handleSubmit
   }, "Submit")));
-}
-
-/***/ }),
-
-/***/ "./resources/js/pages/Teacher/Show/index.js":
-/*!**************************************************!*\
-  !*** ./resources/js/pages/Teacher/Show/index.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Show; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Template__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Template */ "./resources/js/components/Template/index.js");
-/* harmony import */ var _Partials_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Partials/form */ "./resources/js/pages/Teacher/Partials/form.js");
-
-
-
-function Show(_ref) {
-  var teacher = _ref.teacher;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Template__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    data: teacher
-  })));
 }
 
 /***/ }),

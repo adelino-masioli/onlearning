@@ -26,9 +26,9 @@ class TeacherController extends Controller
         return Inertia::render('Teacher', []);
     }
 
-    public function show()
+    public function edit()
     {
-        return Inertia::render('Teacher/Show', [
+        return Inertia::render('Teacher/Edit', [
             'teacher' => Teacher::where("user_id", Auth::user()->id)->first()
         ]);
     }

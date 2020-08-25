@@ -32,7 +32,6 @@ export default function FormData({ data }) {
     const [showToast, setShowToast] = useState(false);
 
     function handleChange(e) {
-        e.preventDefault();
         const key = e.target.id;
         const value = e.target.value;
         setValues(values => ({
@@ -43,7 +42,7 @@ export default function FormData({ data }) {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.post("/teacher/update", values);
+        Inertia.put("/teacher/update", values);
     }
 
     const onSwitchAction = () => {
@@ -246,7 +245,7 @@ export default function FormData({ data }) {
                 <Button
                     size="lg"
                     variant="success"
-                    type="button"
+                    type="submit"
                     onClick={handleSubmit}
                 >
                     Submit

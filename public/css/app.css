@@ -10949,6 +10949,10 @@ input[type=email] {
   cursor: default !important;
 }
 
+.form-control {
+  font-size: 14px;
+}
+
 textarea:hover,
 input:hover,
 textarea:active,
