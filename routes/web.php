@@ -2,20 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user', ["as" => "user", "uses" => "UserController@index"]);
+
 
 //Teacher
 Route::namespace('Teacher')->group(function () {
@@ -24,14 +16,12 @@ Route::namespace('Teacher')->group(function () {
     Route::put('/teacher/update', ["as" => "teacher-update", "uses" => "TeacherController@update"]);
 });
 
-
-
-Route::get('/', ["as" => "home", "uses" => "EventsController@index"]);
-Route::get('/show/{id}', ["as" => "show", "uses" => "EventsController@show"]);
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/user', ["as" => "user", "uses" => "UserController@index"]);
+//Student
+Route::namespace('Student')->group(function () {
+    Route::get('/student', ["as" => "student", "uses" => "StudentController@index"]);
+    Route::get('/student/create', ["as" => "student-create", "uses" => "StudentController@create"]);
+    Route::post('/student/store', ["as" => "student-store", "uses" => "StudentController@store"]);
+    Route::get('/student/edit/{id}', ["as" => "student-edit", "uses" => "StudentController@edit"]);
+    Route::get('/student/profile', ["as" => "student-profile", "uses" => "StudentController@profile"]);
+    Route::put('/student/update', ["as" => "student-update", "uses" => "StudentController@update"]);
+});
