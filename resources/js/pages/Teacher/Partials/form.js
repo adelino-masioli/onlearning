@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
 
-import { ToastContainer, toast } from "react-toastify";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
+
+import ToastMessage from "../../../components/ToastMessage";
 
 export default function FormData({ data }) {
     const { errors, flash } = usePage();
@@ -29,14 +29,17 @@ export default function FormData({ data }) {
     const [isSwitchOn, setIsSwitchOn] = useState(
         data && data.seo == 0 ? false : true
     );
+    const [showToast, setShowToast] = useState(false);
 
     function handleChange(e) {
+        e.preventDefault();
         const key = e.target.id;
         const value = e.target.value;
         setValues(values => ({
             ...values,
             [key]: value
         }));
+        setShowToast(false);
     }
     function handleSubmit(e) {
         e.preventDefault();
@@ -52,15 +55,12 @@ export default function FormData({ data }) {
             ...values,
             seo: isSwitchOn
         }));
-    }, [isSwitchOn]);
-
-    {
-        flash.message && toast.success(flash.message);
-    }
+        setShowToast(flash.message ? true : false);
+    }, [isSwitchOn, flash]);
 
     return (
         <>
-            <ToastContainer />
+            <ToastMessage showToast={showToast} />
 
             <Form onSubmit={handleSubmit} noValidate>
                 <Form.Row>
@@ -201,7 +201,7 @@ export default function FormData({ data }) {
                 <Form.Row>
                     <Col>
                         <Form.Group controlId="password">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>New password</Form.Label>
                             <Form.Control
                                 size="lg"
                                 type="password"
