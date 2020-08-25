@@ -47,22 +47,27 @@ export default function Template(props) {
                                 <ul>
                                     <SidebarMenu
                                         text="Home"
+                                        url="home"
                                         icon={<FiHome size="20" />}
                                     />
                                     <SidebarMenu
                                         text="Classroom"
+                                        url="home"
                                         icon={<FiFileText size="20" />}
                                     />
                                     <SidebarMenu
                                         text="Students"
+                                        url="home"
                                         icon={<FiUsers size="20" />}
                                     />
                                     <SidebarMenu
                                         text="My profile"
+                                        url="teacher-profile"
                                         icon={<FiUser size="20" />}
                                     />
                                     <SidebarMenu
                                         text="Settings"
+                                        url="home"
                                         icon={<FiCommand size="20" />}
                                     />
                                 </ul>
@@ -81,9 +86,12 @@ export default function Template(props) {
                             </Nav>
 
                             <Nav>
-                                <Nav.Link eventKey={2} href="#memes">
+                                <InertiaLink
+                                    href={route("teacher-profile")}
+                                    className="nav-link"
+                                >
                                     <FiUser /> {name}
-                                </Nav.Link>
+                                </InertiaLink>
 
                                 <InertiaLink
                                     href="/logout"
