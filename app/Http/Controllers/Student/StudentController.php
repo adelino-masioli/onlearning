@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Student;
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -9,27 +9,25 @@ use Illuminate\Support\Facades\Hash;
 
 use Inertia\Inertia;
 use Auth;
-use \App\Models\Teacher;
+use \App\Models\Student;
 use \App\User;
 
-class TeacherController extends Controller
+class StudentController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-
-
     public function index()
     {
-        return Inertia::render('Teacher', []);
+        return Inertia::render('Student', []);
     }
 
     public function edit()
     {
-        return Inertia::render('Teacher/Teacher/Edit', [
-            'teacher' => Teacher::where("user_id", Auth::user()->id)->first()
+        return Inertia::render('Student/Edit', [
+            'student' => Student::where("user_id", Auth::user()->id)->first()
         ]);
     }
 
@@ -46,7 +44,7 @@ class TeacherController extends Controller
             ]);
         }
 
-        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+        $teacher = Student::where("user_id", Auth::user()->id)->first();
         $teacher->update($request->all());
 
         $user = User::findOrFail(Auth::user()->id);
@@ -58,6 +56,6 @@ class TeacherController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-profile')->with('message', 'Saved successfully!');
+        return Redirect::route('student-profile')->with('message', 'Saved successfully!');
     }
 }

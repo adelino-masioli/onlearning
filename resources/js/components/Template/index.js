@@ -80,8 +80,8 @@ export default function Template(props) {
                         <Navbar>
                             <Nav className="mr-auto">
                                 <TitlePage
-                                    title="Editing my profile"
-                                    subtitle="Teacher"
+                                    title={props.title}
+                                    subtitle={props.subtitle}
                                 />
                             </Nav>
 
