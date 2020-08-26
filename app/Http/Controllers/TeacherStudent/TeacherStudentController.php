@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 
 use Inertia\Inertia;
@@ -65,10 +66,12 @@ class TeacherStudentController extends Controller
 
     public function update(Request $request)
     {
+        $student = Student::where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'name'  => ['required', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255']
+            'name'  => 'required|max:255',
+            'email' => 'required|string|max:255|email|unique:students,email,' .$student->id,
         ]);
+
         if($request->input('password') != ""){
             $validation = $request->validate([
                 'password' => 'sometimes|required|string|min:8',
@@ -76,7 +79,6 @@ class TeacherStudentController extends Controller
             ]);
         }
 
-        $student = Student::findOrFail($request->input("id"))->first();
         $student->update($request->all());
 
         $user = User::findOrFail($student->user_id);

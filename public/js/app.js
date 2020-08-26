@@ -45833,9 +45833,14 @@ function ToastMessage(_ref) {
   var _usePage = Object(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_1__["usePage"])(),
       flash = _usePage.flash;
 
-  {
-    showToast && react_toastify__WEBPACK_IMPORTED_MODULE_2__["toast"].success(flash.message);
+  var customId = "custom-id-yes";
+
+  if (showToast == true) {
+    react_toastify__WEBPACK_IMPORTED_MODULE_2__["toast"].success(flash.message, {
+      toastId: customId
+    });
   }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, showToast && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_2__["ToastContainer"], {
     role: "alert"
   }));
