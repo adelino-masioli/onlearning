@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
 
@@ -10,8 +10,9 @@ import ToastMessage from "../../../../components/ToastMessage";
 
 export default function FormData({ data }) {
     const { errors, flash } = usePage();
+    const formRef = useRef();
 
-    const [values, setValues] = useState({
+    const initialize = {
         name: data ? data.name : "",
         email: data ? data.email : "",
         phone: data ? data.phone : "",
@@ -27,11 +28,22 @@ export default function FormData({ data }) {
         status: data ? data.status : "",
         password: "",
         confirmpassword: ""
-    });
+    };
+
+    const [values, setValues] = useState(initialize);
     const [isSwitchOn, setIsSwitchOn] = useState(
         data && data.status != 0 ? true : false
     );
     const [showToast, setShowToast] = useState(false);
+
+    function clearForm() {
+        if (flash.message) {
+            Array.from(document.querySelectorAll("input")).forEach(
+                input => (input.value = "")
+            );
+            setValues(initialize);
+        }
+    }
 
     function handleChange(e) {
         const key = e.target.id;
@@ -44,7 +56,7 @@ export default function FormData({ data }) {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.post("/teacher/student/store", values);
+        Inertia.post(route("teacher-student-store"), values);
     }
 
     const onSwitchAction = () => {
@@ -57,13 +69,16 @@ export default function FormData({ data }) {
             status: isSwitchOn
         }));
         setShowToast(flash.message ? true : false);
+
+        //clear form
+        clearForm();
     }, [isSwitchOn, flash]);
 
     return (
         <>
             <ToastMessage showToast={showToast} />
 
-            <Form onSubmit={handleSubmit} noValidate>
+            <Form onSubmit={handleSubmit} noValidate ref={formRef}>
                 <Form.Row>
                     <Col>
                         <Form.Group controlId="name">

@@ -46,7 +46,7 @@ class TeacherStudentController extends Controller
         $data = $request->all();
         $data += ["user_id" => 1];
 
-        Student::create($data);
+        //Student::create($data);
 
         $request->session()->flash('message', 'Saved successfully!');
 

@@ -46301,7 +46301,8 @@ function FormData(_ref) {
       errors = _usePage.errors,
       flash = _usePage.flash;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+  var formRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  var initialize = {
     name: data ? data.name : "",
     email: data ? data.email : "",
     phone: data ? data.phone : "",
@@ -46317,7 +46318,9 @@ function FormData(_ref) {
     status: data ? data.status : "",
     password: "",
     confirmpassword: ""
-  }),
+  };
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(initialize),
       _useState2 = _slicedToArray(_useState, 2),
       values = _useState2[0],
       setValues = _useState2[1];
@@ -46332,6 +46335,15 @@ function FormData(_ref) {
       showToast = _useState6[0],
       setShowToast = _useState6[1];
 
+  function clearForm() {
+    if (flash.message) {
+      Array.from(document.querySelectorAll("input")).forEach(function (input) {
+        return input.value = "";
+      });
+      setValues(initialize);
+    }
+  }
+
   function handleChange(e) {
     var key = e.target.id;
     var value = e.target.value;
@@ -46343,7 +46355,7 @@ function FormData(_ref) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post("/teacher/student/store", values);
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(route("teacher-student-store"), values);
   }
 
   var onSwitchAction = function onSwitchAction() {
@@ -46356,13 +46368,16 @@ function FormData(_ref) {
         status: isSwitchOn
       });
     });
-    setShowToast(flash.message ? true : false);
+    setShowToast(flash.message ? true : false); //clear form
+
+    clearForm();
   }, [isSwitchOn, flash]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ToastMessage__WEBPACK_IMPORTED_MODULE_6__["default"], {
     showToast: showToast
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onSubmit: handleSubmit,
-    noValidate: true
+    noValidate: true,
+    ref: formRef
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
     controlId: "name"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Full name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
