@@ -103,6 +103,15 @@ img {
     height: auto;
 }
 
+table-sm th,
+.table-md td {
+    padding: 0.5rem;
+    a,
+    .link {
+        cursor: pointer;
+    }
+}
+
 //auth
 @import "auth";
 

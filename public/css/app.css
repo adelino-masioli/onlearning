@@ -11001,6 +11001,18 @@ img {
   height: auto;
 }
 
+table-sm th,
+.table-md td {
+  padding: 0.5rem;
+}
+
+table-sm th a,
+table-sm th .link,
+.table-md td a,
+.table-md td .link {
+  cursor: pointer;
+}
+
 .gradient {
   position: absolute;
   width: 100%;

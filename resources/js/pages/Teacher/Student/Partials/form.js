@@ -184,7 +184,7 @@ export default function FormData({ data, handleForm }) {
                                 size="md"
                             >
                                 <option value="Beginner">Beginner</option>
-                                <option value="A1 Elementary<">
+                                <option value="A1 Elementary">
                                     A1 Elementary
                                 </option>
                                 <option value="A2 Pre-intermediate">

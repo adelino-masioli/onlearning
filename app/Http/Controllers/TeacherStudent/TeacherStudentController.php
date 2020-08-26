@@ -23,7 +23,9 @@ class TeacherStudentController extends Controller
 
     public function index()
     {
-        return Inertia::render('Teacher/Student', []);
+        return Inertia::render('Teacher/Student', [
+            'students' => Student::all()
+        ]);
     }
 
     public function create()
@@ -91,5 +93,15 @@ class TeacherStudentController extends Controller
         $request->session()->flash('message', 'Saved successfully!');
 
         return Redirect::route('teacher-student-edit', $student->uuid);
+    }
+
+    public function status(Request $request)
+    {
+        $student = Student::where('id', $request->input("id"))->first();
+
+        $status = $student->status == 0 ? 1 : 0;
+        $student->update(["status" => $status]);
+
+        return Redirect::route('teacher-student');
     }
 }

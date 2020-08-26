@@ -19,11 +19,12 @@ Route::namespace('Teacher')->group(function () {
 
 //TeacherStudent
 Route::namespace('TeacherStudent')->group(function () {
-    Route::get('/teacher/student', ["as" => "teacher-student", "uses" => "TeacherStudentController@index"]);
+    Route::get('/teacher/students', ["as" => "teacher-student", "uses" => "TeacherStudentController@index"]);
     Route::get('/teacher/student/create', ["as" => "teacher-student-create", "uses" => "TeacherStudentController@create"]);
     Route::post('/teacher/student/store', ["as" => "teacher-student-store", "uses" => "TeacherStudentController@store"]);
     Route::get('/teacher/student/edit/{uuid}', ["as" => "teacher-student-edit", "uses" => "TeacherStudentController@edit"]);
     Route::put('/teacher/student/update', ["as" => "teacher-student-update", "uses" => "TeacherStudentController@update"]);
+    Route::post('/teacher/student/status', ["as" => "teacher-student-update-status", "uses" => "TeacherStudentController@status"]);
 });
 
 
