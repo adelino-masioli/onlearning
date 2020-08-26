@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Inertia } from "@inertiajs/inertia";
+
 import { usePage } from "@inertiajs/inertia-react";
 
 import Form from "react-bootstrap/Form";
@@ -8,11 +8,12 @@ import Col from "react-bootstrap/Col";
 
 import ToastMessage from "../../../../components/ToastMessage";
 
-export default function FormData({ data }) {
+export default function FormData({ data, handleForm }) {
     const { errors, flash } = usePage();
     const formRef = useRef();
 
-    const initialize = {
+    const [values, setValues] = useState({
+        id: data ? data.id : "",
         name: data ? data.name : "",
         email: data ? data.email : "",
         phone: data ? data.phone : "",
@@ -28,22 +29,11 @@ export default function FormData({ data }) {
         status: data ? data.status : "",
         password: "",
         confirmpassword: ""
-    };
-
-    const [values, setValues] = useState(initialize);
+    });
     const [isSwitchOn, setIsSwitchOn] = useState(
         data && data.status != 0 ? true : false
     );
     const [showToast, setShowToast] = useState(false);
-
-    function clearForm() {
-        if (flash.message) {
-            Array.from(document.querySelectorAll("input")).forEach(
-                input => (input.value = "")
-            );
-            setValues(initialize);
-        }
-    }
 
     function handleChange(e) {
         const key = e.target.id;
@@ -56,7 +46,7 @@ export default function FormData({ data }) {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.post(route("teacher-student-store"), values);
+        handleForm(values);
     }
 
     const onSwitchAction = () => {
@@ -69,9 +59,6 @@ export default function FormData({ data }) {
             status: isSwitchOn
         }));
         setShowToast(flash.message ? true : false);
-
-        //clear form
-        clearForm();
     }, [isSwitchOn, flash]);
 
     return (
@@ -79,6 +66,13 @@ export default function FormData({ data }) {
             <ToastMessage showToast={showToast} />
 
             <Form onSubmit={handleSubmit} noValidate ref={formRef}>
+                <Form.Control
+                    type="hidden"
+                    value={values.id}
+                    onChange={handleChange}
+                    isInvalid={!!errors.id}
+                />
+
                 <Form.Row>
                     <Col>
                         <Form.Group controlId="name">

@@ -33,30 +33,33 @@ class TeacherStudentController extends Controller
     public function store(Request $request)
     {
         $validation = $request->validate([
-            'name'  => ['required', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255']
+            'name'            => ['required', 'max:255'],
+            'email'           => ['required', 'string', 'email', 'max:255', 'unique:students'],
+            'password'        => ['required', 'string', 'min:8'],
+            'confirmpassword' => ['required_with:password', 'same:password']
         ]);
-        /*if($request->input('password') != ""){
-            $validation = $request->validate([
-                'password' => 'sometimes|required|string|min:8',
-                'confirmpassword' => 'sometimes|required_with:password|same:password',
-            ]);
-        }*/
+
+        $user = User::create([
+            'name'     => $request->input('name'),
+            'email'    => $request->input('email'),
+            'profile'  => 'student',
+            'password' => Hash::make($request->input('password')),
+        ]);
 
         $data = $request->all();
-        $data += ["user_id" => 1];
+        $data += ["user_id" => $user->id];
 
-        //Student::create($data);
+        $student = Student::create($data);
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-student-create');
+        return Redirect::route('teacher-student-edit', $student->uuid);
     }
 
-    public function edit()
+    public function edit($uuid)
     {
         return Inertia::render('Teacher/Student/Edit', [
-            'teacher' => Teacher::where("user_id", Auth::user()->id)->first()
+            'student' => Student::where("uuid", $uuid)->first()
         ]);
     }
 
@@ -73,10 +76,10 @@ class TeacherStudentController extends Controller
             ]);
         }
 
-        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
-        $teacher->update($request->all());
+        $student = Student::findOrFail($request->input("id"))->first();
+        $student->update($request->all());
 
-        $user = User::findOrFail(Auth::user()->id);
+        $user = User::findOrFail($student->user_id);
         $data = ["name" => $request->input("name")];
         if($request->input('password') != ""){
             $data = ["password" => Hash::make($request->input('password'))];
@@ -85,6 +88,6 @@ class TeacherStudentController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-student-profile')->with('message', 'Saved successfully!');
+        return Redirect::route('teacher-student-edit', $student->uuid);
     }
 }
