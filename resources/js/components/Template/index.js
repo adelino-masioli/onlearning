@@ -51,8 +51,8 @@ export default function Template(props) {
                                         icon={<FiHome size="20" />}
                                     />
                                     <SidebarMenu
-                                        text="Classroom"
-                                        url="home"
+                                        text="Courses"
+                                        url="teacher-course"
                                         icon={<FiFileText size="20" />}
                                     />
                                     <SidebarMenu

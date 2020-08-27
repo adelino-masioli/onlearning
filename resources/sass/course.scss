@@ -1,0 +1,22 @@
+.highlight {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    margin: 0 0 2rem 0;
+
+    h1 {
+        width: 100%;
+        float: left;
+        font-weight: 300;
+        font-size: 1.4rem;
+    }
+
+    ul > li {
+        font-weight: 300;
+        float: left;
+
+        .card-title {
+            font-weight: 400;
+        }
+    }
+}

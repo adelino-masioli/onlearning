@@ -51,6 +51,15 @@ a:hover {
     min-width: 130px;
 }
 
+.btn-new {
+    padding: 0.45rem;
+    min-width: 150px;
+    max-width: 200px;
+    svg {
+        font-size: 20px;
+    }
+}
+
 .btn-primary {
     color: #ffffff;
 }
@@ -125,3 +134,6 @@ table-sm th,
 
 //teacher
 @import "teacher";
+
+//course
+@import "course";

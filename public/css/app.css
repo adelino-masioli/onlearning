@@ -10945,6 +10945,16 @@ a:hover {
   min-width: 130px;
 }
 
+.btn-new {
+  padding: 0.45rem;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.btn-new svg {
+  font-size: 20px;
+}
+
 .btn-primary {
   color: #ffffff;
 }
@@ -11130,9 +11140,10 @@ table-sm th .link,
   height: 100vh;
   overflow: auto;
   background: #e1e1e1;
-  background: linear-gradient(180deg, #e1e1e1 0%, white 20%);
+  background: linear-gradient(180deg, #e1e1e1 0%, white 10%);
   color: #3c3c3c;
   padding-top: 10px;
+  padding-bottom: 18px;
 }
 
 .template .title-page {
@@ -11151,6 +11162,10 @@ table-sm th .link,
   text-transform: uppercase;
 }
 
+.template .filter {
+  background-color: #f8fafc;
+}
+
 .template .filter .card-title {
   margin-bottom: 0rem;
 }
@@ -11160,5 +11175,28 @@ table-sm th .link,
   padding-right: 1rem;
   padding-top: 0.8rem;
   padding-bottom: 0.6rem;
+}
+
+.highlight {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  margin: 0 0 2rem 0;
+}
+
+.highlight h1 {
+  width: 100%;
+  float: left;
+  font-weight: 300;
+  font-size: 1.4rem;
+}
+
+.highlight ul > li {
+  font-weight: 300;
+  float: left;
+}
+
+.highlight ul > li .card-title {
+  font-weight: 400;
 }
 

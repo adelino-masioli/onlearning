@@ -16,7 +16,6 @@ Route::namespace('Teacher')->group(function () {
     Route::put('/teacher/update', ["as" => "teacher-update", "uses" => "TeacherController@update"]);
 });
 
-
 //TeacherStudent
 Route::namespace('TeacherStudent')->group(function () {
     Route::get('/teacher/students', ["as" => "teacher-student", "uses" => "TeacherStudentController@index"]);
@@ -26,6 +25,14 @@ Route::namespace('TeacherStudent')->group(function () {
     Route::put('/teacher/student/update', ["as" => "teacher-student-update", "uses" => "TeacherStudentController@update"]);
     Route::post('/teacher/student/status', ["as" => "teacher-student-update-status", "uses" => "TeacherStudentController@status"]);
 });
+
+
+//Course
+Route::namespace('Course')->group(function () {
+    Route::get('/teacher/courses', ["as" => "teacher-course", "uses" => "CourseController@index"]);
+    Route::get('/teacher/courses/create', ["as" => "teacher-course-create", "uses" => "CourseController@create"]);
+});
+
 
 
 //Student

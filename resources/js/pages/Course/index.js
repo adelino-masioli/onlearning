@@ -10,16 +10,18 @@ import {
     FiThumbsUp,
     FiXCircle,
     FiEdit2,
-    FiFrown
+    FiFrown,
+    FiPlus
 } from "react-icons/fi";
 
-import Template from "../../../components/Template";
-import Link from "../../../components/Link";
-import Confirm from "../../../components/Confirm";
-import Search from "../../../components/Search";
+import Template from "../../components/Template";
+import Link from "../../components/Link";
+import Confirm from "../../components/Confirm";
+import Search from "../../components/Search";
+import PopCard from "../../components/PopCard";
 
-export default function Student({ students }) {
-    const [listRegisters, setListRegisters] = useState(students);
+export default function Course({ courses }) {
+    const [listRegisters, setListRegisters] = useState(courses);
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
 
@@ -35,7 +37,7 @@ export default function Student({ students }) {
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = students.filter(function(item) {
+        const results = courses.filter(function(item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
@@ -50,7 +52,62 @@ export default function Student({ students }) {
 
     return (
         <>
-            <Template title="My students" subtitle="Teacher">
+            <Template title="My courses" subtitle="Teacher">
+                <div className="highlight">
+                    <Link
+                        classAtrributes="btn btn-secondary btn-new  mb-4"
+                        tootip="Create new course"
+                        placement="bottom"
+                        tootip="Create new course"
+                        text="Create new course"
+                        icon={<FiPlus />}
+                        url={route("teacher-course")}
+                    />
+                    <ul className="row">
+                        <h1 className="col-md-12">Last edited courses</h1>
+                        <li className="col-xs-12 col-md-3">
+                            <PopCard
+                                title="Card Title"
+                                description="Some quick example text to build on the card title"
+                                cover="https://plchldr.co/i/300x80?bg=36c6f4"
+                                url={route("teacher-course")}
+                                status="Draft"
+                                variant="secondary"
+                            />
+                        </li>
+                        <li className="col-xs-12 col-md-3">
+                            <PopCard
+                                title="Card Title"
+                                description="Some quick example text to build on the card title"
+                                cover="https://plchldr.co/i/300x80?bg=36c6f4"
+                                url={route("teacher-course")}
+                                status="Published"
+                                variant="success"
+                            />
+                        </li>
+                        <li className="col-xs-12 col-md-3">
+                            <PopCard
+                                title="Card Title"
+                                description="Some quick example text to build on the card title"
+                                cover="https://plchldr.co/i/300x80?bg=36c6f4"
+                                url={route("teacher-course")}
+                                status="Published"
+                                variant="success"
+                            />
+                        </li>
+                        <li className="col-xs-12 col-md-3">
+                            <PopCard
+                                title="Card Title"
+                                description="Some quick example text to build on the card title"
+                                cover="https://plchldr.co/i/300x80?bg=36c6f4"
+                                url={route("teacher-course")}
+                                status="Published"
+                                variant="success"
+                            />
+                        </li>
+                    </ul>
+                </div>
+
                 <Search
                     placeholder="Enter your search to filter"
                     handleFunction={handleFilter}
@@ -72,16 +129,16 @@ export default function Student({ students }) {
                             <th className="text-center">#</th>
                             <th className="text-center text-uppercase">Name</th>
                             <th className="text-center text-uppercase">
-                                Email
-                            </th>
-                            <th className="text-center text-uppercase">
-                                Phone
-                            </th>
-                            <th className="text-center text-uppercase">
-                                Country
-                            </th>
-                            <th className="text-center text-uppercase">
                                 Level
+                            </th>
+                            <th className="text-center text-uppercase">
+                                Created At
+                            </th>
+                            <th className="text-center text-uppercase">
+                                Lessons
+                            </th>
+                            <th className="text-center text-uppercase">
+                                Students
                             </th>
                             <th className="text-center text-uppercase">
                                 Status
@@ -102,60 +159,60 @@ export default function Student({ students }) {
                                 </td>
                             </tr>
                         )}
-                        {listRegisters.map(student => (
-                            <tr key={student.id} id={student.id}>
-                                <td className="text-center">{student.id}</td>
-                                <td>{student.name}</td>
-                                <td>{student.email}</td>
-                                <td>{student.phone}</td>
-                                <td>{student.country}</td>
-                                <td>{student.level}</td>
+                        {listRegisters.map(register => (
+                            <tr key={register.id} id={register.id}>
+                                <td className="text-center">{register.id}</td>
+                                <td>{register.name}</td>
+                                <td>{register.level}</td>
+                                <td>{register.date}</td>
+                                <td className="text-center">{register.id}</td>
+                                <td className="text-center">{register.id}</td>
                                 <td className="text-center">
-                                    {student.status == 0 ? (
+                                    {register.status == 0 ? (
                                         <Badge variant="secondary">
-                                            Inactive
+                                            Published
                                         </Badge>
                                     ) : (
-                                        <Badge variant="success">Active</Badge>
+                                        <Badge variant="success">Draft</Badge>
                                     )}
                                 </td>
                                 <td className="text-center">
-                                    {student.status == 0 ? (
+                                    {register.status == 0 ? (
                                         <span className="mr-3 text-muted">
                                             <FiXCircle />
                                         </span>
                                     ) : (
                                         <Link
                                             classAtrributes="mr-3"
-                                            tootip={`Edit ${student.name}`}
+                                            tootip={`Edit ${register.name}`}
                                             placement="top"
                                             icon={<FiEdit2 />}
                                             url={route("teacher-student-edit", {
-                                                uuid: student.uuid
+                                                uuid: register.uuid
                                             })}
                                         />
                                     )}
 
                                     <Link
                                         classAtrributes={
-                                            student.status == 1
+                                            register.status == 1
                                                 ? "text-danger link"
                                                 : "text-success link"
                                         }
                                         tootip={
-                                            student.status == 0
-                                                ? `Enable ${student.name}`
-                                                : `Disable ${student.name}`
+                                            register.status == 0
+                                                ? `Enable ${register.name}`
+                                                : `Disable ${register.name}`
                                         }
                                         placement="top"
                                         icon={
-                                            student.status == 0 ? (
+                                            register.status == 0 ? (
                                                 <FiThumbsUp />
                                             ) : (
                                                 <FiThumbsDown />
                                             )
                                         }
-                                        value={student}
+                                        value={register}
                                         handleFunction={handleConfirm}
                                     />
                                 </td>

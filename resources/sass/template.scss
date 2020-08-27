@@ -50,10 +50,11 @@
         background: linear-gradient(
             180deg,
             rgba(225, 225, 225, 1) 0%,
-            rgba(255, 255, 255, 1) 20%
+            rgba(255, 255, 255, 1) 10%
         );
         color: $dark;
         padding-top: 10px;
+        padding-bottom: 18px;
     }
 
     //title page
@@ -74,6 +75,7 @@
     }
 
     .filter {
+        background-color: $body-bg;
         .card-title {
             margin-bottom: 0rem;
         }
