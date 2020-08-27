@@ -8,6 +8,20 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', ["as" => "user", "uses" => "UserController@index"]);
 
+Route::get('images/{filename}', function ($filename)
+{
+    $path = storage_path() . '/app/public/' . $filename;
+
+    if(!File::exists($path)) abort(404);
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
 
 //Teacher
 Route::namespace('Teacher')->group(function () {
@@ -32,6 +46,7 @@ Route::namespace('Course')->group(function () {
     Route::get('/teacher/courses', ["as" => "teacher-course", "uses" => "CourseController@index"]);
     Route::get('/teacher/courses/create', ["as" => "teacher-course-create", "uses" => "CourseController@create"]);
     Route::post('/teacher/courses/store', ["as" => "teacher-course-store", "uses" => "CourseController@store"]);
+    Route::get('/teacher/courses/edit/{uuid}', ["as" => "teacher-course-edit", "uses" => "CourseController@edit"]);
 });
 
 

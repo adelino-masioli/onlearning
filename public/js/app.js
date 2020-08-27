@@ -49590,6 +49590,10 @@ var map = {
 	"./Course/Create/": "./resources/js/pages/Course/Create/index.js",
 	"./Course/Create/index": "./resources/js/pages/Course/Create/index.js",
 	"./Course/Create/index.js": "./resources/js/pages/Course/Create/index.js",
+	"./Course/Edit": "./resources/js/pages/Course/Edit/index.js",
+	"./Course/Edit/": "./resources/js/pages/Course/Edit/index.js",
+	"./Course/Edit/index": "./resources/js/pages/Course/Edit/index.js",
+	"./Course/Edit/index.js": "./resources/js/pages/Course/Edit/index.js",
 	"./Course/Partials/form": "./resources/js/pages/Course/Partials/form.js",
 	"./Course/Partials/form.js": "./resources/js/pages/Course/Partials/form.js",
 	"./Course/index": "./resources/js/pages/Course/index.js",
@@ -49687,6 +49691,44 @@ function Create() {
 
 /***/ }),
 
+/***/ "./resources/js/pages/Course/Edit/index.js":
+/*!*************************************************!*\
+  !*** ./resources/js/pages/Course/Edit/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Edit; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Template__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/Template */ "./resources/js/components/Template/index.js");
+/* harmony import */ var _Partials_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Partials/form */ "./resources/js/pages/Course/Partials/form.js");
+
+
+
+
+function Edit(_ref) {
+  var course = _ref.course;
+
+  function handleSubmit(values) {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(route("teacher-course-update"), values);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Template__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    title: "Editing course <strong>".concat(course.register.title, "</strong>"),
+    subtitle: "Teacher"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    datas: course,
+    handleForm: handleSubmit
+  })));
+}
+
+/***/ }),
+
 /***/ "./resources/js/pages/Course/Partials/form.js":
 /*!****************************************************!*\
   !*** ./resources/js/pages/Course/Partials/form.js ***!
@@ -49747,12 +49789,12 @@ function Formdatas(_ref) {
   var formRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    id: datas ? datas.id : "",
-    title: datas ? datas.title : "",
-    level: datas ? datas.level : "",
-    description: datas ? datas.description : "",
-    image: datas ? datas.cover : "",
-    status: datas ? datas.status : 0
+    id: datas ? datas.register.id : "",
+    title: datas ? datas.register.title : "",
+    level: datas ? datas.register.level : "",
+    description: datas ? datas.register.description : "",
+    image: datas ? datas.cover.cover : "",
+    status: datas ? datas.register.status : 0
   }),
       _useState2 = _slicedToArray(_useState, 2),
       values = _useState2[0],
@@ -49903,7 +49945,10 @@ function Formdatas(_ref) {
     name: "image",
     required: true,
     isInvalid: !!errors.image
-  })), selectedFileUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  })), selectedFileUrl || datas ? datas ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: datas.cover,
+    alt: "Selected file"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: selectedFileUrl,
     alt: "Selected file"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiUploadCloud"], {

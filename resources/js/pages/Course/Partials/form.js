@@ -16,12 +16,12 @@ export default function Formdatas({ datas, handleForm }) {
     const formRef = useRef();
 
     const [values, setValues] = useState({
-        id: datas ? datas.id : "",
-        title: datas ? datas.title : "",
-        level: datas ? datas.level : "",
-        description: datas ? datas.description : "",
-        image: datas ? datas.cover : "",
-        status: datas ? datas.status : 0
+        id: datas ? datas.register.id : "",
+        title: datas ? datas.register.title : "",
+        level: datas ? datas.register.level : "",
+        description: datas ? datas.register.description : "",
+        image: datas ? datas.cover.cover : "",
+        status: datas ? datas.register.status : 0
     });
     const [isSwitchOn, setIsSwitchOn] = useState(
         datas && datas.status != 0 ? true : false
@@ -177,8 +177,15 @@ export default function Formdatas({ datas, handleForm }) {
                             required
                             isInvalid={!!errors.image}
                         />
-                        {selectedFileUrl ? (
-                            <img src={selectedFileUrl} alt="Selected file" />
+                        {selectedFileUrl || datas ? (
+                            datas ? (
+                                <img src={datas.cover} alt="Selected file" />
+                            ) : (
+                                <img
+                                    src={selectedFileUrl}
+                                    alt="Selected file"
+                                />
+                            )
                         ) : (
                             <p>
                                 <FiUploadCloud size={30} />

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Auth;
 use DB;
+use Str;
 use \App\Models\Student;
 use \App\Models\Course;
 
@@ -41,7 +42,7 @@ class CourseController extends Controller
         ]);
 
         $file = $request->file("image");
-        $path = $file ? $file->store('covers') : NULL;
+        $path = $file ? $file->store('public') : NULL;
 
         $data = $request->all();
         $data += ["teacher_id" => Auth::user()->id];
@@ -51,6 +52,19 @@ class CourseController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-create');
+        return Redirect::route('teacher-course-edit', $course->uuid);
     }
+
+
+    public function edit($uuid)
+    {
+        $course = Course::where("uuid", $uuid)->first();
+        return Inertia::render('Course/Edit', [
+            'course' => [
+                "register" => $course,
+                "cover" => url("images", Str::of($course->cover)->explode('/')[1]),
+            ]
+        ]);
+    }
+
 }
