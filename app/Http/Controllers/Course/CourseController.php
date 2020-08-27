@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 
 use Inertia\Inertia;
@@ -27,5 +28,21 @@ class CourseController extends Controller
     public function create()
     {
         return Inertia::render('Course/Create', []);
+    }
+
+    public function store(Request $request)
+    {
+        $file = $request->file("cover");
+        $path = $file->store('covers');
+
+        return $path;
+
+        $destinationPath = 'uploads';
+        $file->move($destinationPath,$file->getClientOriginalName());
+
+        return $request;
+        $request->session()->flash('message', 'Saved successfully!');
+
+        return Redirect::route('teacher-course-create');
     }
 }

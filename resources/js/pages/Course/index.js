@@ -61,7 +61,7 @@ export default function Course({ courses }) {
                         tootip="Create new course"
                         text="Create new course"
                         icon={<FiPlus />}
-                        url={route("teacher-course")}
+                        url={route("teacher-course-create")}
                     />
                     <ul className="row">
                         <h1 className="col-md-12">Last edited courses</h1>

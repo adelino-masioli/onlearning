@@ -33,6 +33,12 @@ class AppServiceProvider extends ServiceProvider
         // Synchronously
         Inertia::share('app.name', Config::get('app.name'));
 
+        Inertia::share('csrf_token', function () {
+            return [
+                'token' => csrf_token(),
+            ];
+        });
+
         Inertia::share([
             'errors' => function () {
                 return Session::get('errors')

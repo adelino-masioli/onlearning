@@ -31,6 +31,7 @@ Route::namespace('TeacherStudent')->group(function () {
 Route::namespace('Course')->group(function () {
     Route::get('/teacher/courses', ["as" => "teacher-course", "uses" => "CourseController@index"]);
     Route::get('/teacher/courses/create', ["as" => "teacher-course-create", "uses" => "CourseController@create"]);
+    Route::post('/teacher/courses/store', ["as" => "teacher-course-store", "uses" => "CourseController@store"]);
 });
 
 
