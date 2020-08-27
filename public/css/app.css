@@ -10940,6 +10940,11 @@ a:hover {
   min-width: 220px;
 }
 
+.btn-md {
+  padding: 0.35rem;
+  min-width: 130px;
+}
+
 .btn-primary {
   color: #ffffff;
 }
@@ -11125,7 +11130,7 @@ table-sm th .link,
   height: 100vh;
   overflow: auto;
   background: #e1e1e1;
-  background: linear-gradient(180deg, #e1e1e1 0%, white 40%);
+  background: linear-gradient(180deg, #e1e1e1 0%, white 20%);
   color: #3c3c3c;
   padding-top: 10px;
 }
@@ -11144,5 +11149,16 @@ table-sm th .link,
   margin-top: 1px;
   color: #36c6f4;
   text-transform: uppercase;
+}
+
+.template .filter .card-title {
+  margin-bottom: 0rem;
+}
+
+.template .filter .card-body {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.6rem;
 }
 

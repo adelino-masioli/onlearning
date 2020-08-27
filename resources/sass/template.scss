@@ -50,7 +50,7 @@
         background: linear-gradient(
             180deg,
             rgba(225, 225, 225, 1) 0%,
-            rgba(255, 255, 255, 1) 40%
+            rgba(255, 255, 255, 1) 20%
         );
         color: $dark;
         padding-top: 10px;
@@ -70,6 +70,18 @@
             margin-top: 1px;
             color: $blue;
             text-transform: uppercase;
+        }
+    }
+
+    .filter {
+        .card-title {
+            margin-bottom: 0rem;
+        }
+        .card-body {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.8rem;
+            padding-bottom: 0.6rem;
         }
     }
 }

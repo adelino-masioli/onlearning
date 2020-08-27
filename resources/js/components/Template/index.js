@@ -57,7 +57,7 @@ export default function Template(props) {
                                     />
                                     <SidebarMenu
                                         text="Students"
-                                        url="home"
+                                        url="teacher-student"
                                         icon={<FiUsers size="20" />}
                                     />
                                     <SidebarMenu
