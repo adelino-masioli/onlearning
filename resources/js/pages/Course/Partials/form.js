@@ -20,8 +20,8 @@ export default function Formdatas({ datas, handleForm }) {
         title: datas ? datas.title : "",
         level: datas ? datas.level : "",
         description: datas ? datas.description : "",
-        cover: datas ? datas.cover : "",
-        status: datas ? datas.status : ""
+        image: datas ? datas.cover : "",
+        status: datas ? datas.status : 0
     });
     const [isSwitchOn, setIsSwitchOn] = useState(
         datas && datas.status != 0 ? true : false
@@ -60,14 +60,13 @@ export default function Formdatas({ datas, handleForm }) {
         data.append("title", values.title || "");
         data.append("level", values.level || "");
         data.append("description", values.description || "");
-        data.append("status", values.status || "");
+        data.append("status", values.status || 0);
         data.append("_token", csrf_token.token);
 
         if (selectedFile) {
-            data.append("cover", selectedFile);
+            data.append("image", selectedFile);
         }
         handleForm(data);
-        console.log(selectedFile);
     }
 
     const onSwitchAction = () => {
@@ -104,7 +103,12 @@ export default function Formdatas({ datas, handleForm }) {
                                 placeholder="Title"
                                 value={values.title}
                                 onChange={handleChange}
+                                required
+                                isInvalid={!!errors.title}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.title}
+                            </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
 
@@ -117,7 +121,10 @@ export default function Formdatas({ datas, handleForm }) {
                                 onChange={handleChange}
                                 value={values.level}
                                 size="md"
+                                required
+                                isInvalid={!!errors.level}
                             >
+                                <option value="">Select a course</option>
                                 <option value="Beginner">Beginner</option>
                                 <option value="A1 Elementary">
                                     A1 Elementary
@@ -136,6 +143,9 @@ export default function Formdatas({ datas, handleForm }) {
                                     C2 Proficiency
                                 </option>
                             </Form.Control>
+                            <Form.Control.Feedback type="invalid">
+                                {errors.level}
+                            </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                 </Form.Row>
@@ -148,17 +158,24 @@ export default function Formdatas({ datas, handleForm }) {
                         placeholder="Description"
                         value={values.description}
                         onChange={handleChange}
+                        required
+                        isInvalid={!!errors.description}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.description}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="description">
-                    <Form.Label>Thumbnail</Form.Label>
+                    <Form.Label>Cover</Form.Label>
 
                     <div {...getRootProps()} className="dropzone">
-                        <input
+                        <Form.Control
                             {...getInputProps()}
                             accept="image/*"
-                            name="cover"
+                            name="image"
+                            required
+                            isInvalid={!!errors.image}
                         />
                         {selectedFileUrl ? (
                             <img src={selectedFileUrl} alt="Selected file" />
@@ -171,6 +188,10 @@ export default function Formdatas({ datas, handleForm }) {
                             </p>
                         )}
                     </div>
+
+                    <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.image}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group controlId="status">

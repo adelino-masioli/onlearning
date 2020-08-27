@@ -12,6 +12,7 @@ use Inertia\Inertia;
 use Auth;
 use DB;
 use \App\Models\Student;
+use \App\Models\Course;
 
 class CourseController extends Controller
 {
@@ -32,15 +33,22 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        $file = $request->file("cover");
-        $path = $file->store('covers');
+        $validation = $request->validate([
+            'title'        => ['required', 'max:255'],
+            'level'        => ['required'],
+            'description'  => ['required'],
+            'image'        => ['required']
+        ]);
 
-        return $path;
+        $file = $request->file("image");
+        $path = $file ? $file->store('covers') : NULL;
 
-        $destinationPath = 'uploads';
-        $file->move($destinationPath,$file->getClientOriginalName());
+        $data = $request->all();
+        $data += ["teacher_id" => Auth::user()->id];
+        $data += ["cover" => $path];
 
-        return $request;
+        $course = Course::create($data);
+
         $request->session()->flash('message', 'Saved successfully!');
 
         return Redirect::route('teacher-course-create');
