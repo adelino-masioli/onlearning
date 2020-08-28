@@ -12,7 +12,8 @@ import {
     FiEdit2,
     FiFrown,
     FiPlus,
-    FiSmile
+    FiSmile,
+    FiBookOpen
 } from "react-icons/fi";
 
 import Template from "../../components/Template";
@@ -22,7 +23,7 @@ import Search from "../../components/Search";
 import PopCard from "../../components/PopCard";
 import { Col } from "react-bootstrap";
 
-export default function Course({ courses }) {
+export default function Course({ courses, highlights }) {
     const [listRegisters, setListRegisters] = useState(courses);
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
@@ -79,16 +80,31 @@ export default function Course({ courses }) {
                         </Col>
                         <h1 className="col-md-12">Last edited courses</h1>
 
-                        <li className="col-xs-12 col-md-3">
-                            <PopCard
-                                title="Card Title"
-                                description="Some quick example text to build on the card title"
-                                cover="https://plchldr.co/i/300x80?bg=36c6f4"
-                                url={route("teacher-course")}
-                                status="Draft"
-                                variant="secondary"
-                            />
-                        </li>
+                        {highlights.map(highlight => (
+                            <li
+                                className="col-xs-12 col-md-3"
+                                key={highlight.id}
+                            >
+                                <PopCard
+                                    title={highlight.title}
+                                    description={highlight.description}
+                                    cover={highlight.cover}
+                                    url={route("teacher-course-edit", {
+                                        uuid: highlight.uuid
+                                    })}
+                                    status={
+                                        highlight.status == 0
+                                            ? "Draft"
+                                            : "Published"
+                                    }
+                                    variant={
+                                        highlight.status == 0
+                                            ? "secondary"
+                                            : "success"
+                                    }
+                                />
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
@@ -173,6 +189,17 @@ export default function Course({ courses }) {
                                     )}
                                 </td>
                                 <td className="text-center">
+                                    <Link
+                                        classAtrributes="mr-3 btn btn-table btn-primary"
+                                        tootip={`Lessons of ${register.title}`}
+                                        placement="top"
+                                        text="Lessons"
+                                        icon={<FiBookOpen />}
+                                        url={route("teacher-course-edit", {
+                                            uuid: register.uuid
+                                        })}
+                                    />
+
                                     {register.status == 0 ? (
                                         <span className="mr-3 text-muted">
                                             <FiXCircle />
@@ -183,7 +210,7 @@ export default function Course({ courses }) {
                                             tootip={`Edit ${register.title}`}
                                             placement="top"
                                             icon={<FiEdit2 />}
-                                            url={route("teacher-student-edit", {
+                                            url={route("teacher-course-edit", {
                                                 uuid: register.uuid
                                             })}
                                         />

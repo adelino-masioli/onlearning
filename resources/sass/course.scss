@@ -18,6 +18,18 @@
         .card-title {
             font-weight: 400;
         }
+
+        .image {
+            display: flex;
+            overflow: hidden;
+            max-height: 100px;
+            align-content: center;
+            justify-content: center;
+            justify-items: center;
+            img {
+                height: 100%;
+            }
+        }
     }
 }
 

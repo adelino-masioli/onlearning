@@ -12,6 +12,7 @@ use Inertia\Inertia;
 use Auth;
 use DB;
 use Str;
+use Image;
 use \App\Models\Student;
 use \App\Models\Course;
 
@@ -24,7 +25,26 @@ class CourseController extends Controller
 
     public function index()
     {
-        return Inertia::render('Course', ["courses" => Course::select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->get()]);
+        $highlights = [];
+        $last = Course::take(4)->orderBy('updated_at', 'desc')->get();
+        foreach ($last as $last) {
+
+            $reg = [
+                'uuid'        => $last->uuid,
+                'id'          => $last->id,
+                'title'       => $last->title,
+                'description' => $last->description,
+                'status'      => $last->status,
+                'title'       => $last->title,
+                'cover'       => url('/uploads/teachers/covers/thumbnail/'.$last->cover)
+            ];
+            $highlights[] = $reg;
+        }
+
+        return Inertia::render('Course', [
+            "courses" => Course::select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->get(),
+            'highlights' => $highlights
+            ]);
     }
 
     public function create()
@@ -41,12 +61,12 @@ class CourseController extends Controller
             'image'        => 'required'
         ]);
 
-        $file = $request->file("image");
-        $path = $file ? $file->store('public') : NULL;
+        //upload image
+        $image = Self::upload($request->file("image"));
 
         $data = $request->all();
         $data += ["teacher_id" => Auth::user()->id];
-        $data += ["cover" => $path];
+        $data += ["cover" => $image ? $image : NULL];
 
         $course = Course::create($data);
 
@@ -62,7 +82,7 @@ class CourseController extends Controller
         return Inertia::render('Course/Edit', [
             'course' => [
                 "register" => $course,
-                "cover" => url("images", Str::of($course->cover)->explode('/')[1]),
+                "cover" => url("uploads/teachers/covers/", $course->cover),
             ]
         ]);
     }
@@ -77,12 +97,11 @@ class CourseController extends Controller
             'description'  => 'required'
         ]);
 
-
-        $file = $request->file("image");
-        $path = $file ? $file->store('public') : $course->cover;
+        //upload image
+        $image = Self::upload($request->file("image"));
 
         $data = $request->all();
-        $data += ["cover" => $path];
+        $data += ["cover" => $image ? $image : NULL];
 
         $course->update($data);
 
@@ -110,6 +129,24 @@ class CourseController extends Controller
         $course->update(["show" => $show]);
 
         return Redirect::route('teacher-course');
+    }
+
+    public function upload($file)
+    {
+        $imagename = time().'.'.$file->extension();
+        $destinationPath = public_path('/uploads/teachers/covers/thumbnail');
+
+        //create thumb
+        $img = Image::make($file->path());
+        $img->resize(400, 150, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$imagename);
+
+        //create full image
+        $destinationPath = public_path('/uploads/teachers/covers');
+        $file->move($destinationPath, $imagename);
+
+        return $imagename;
     }
 
 }

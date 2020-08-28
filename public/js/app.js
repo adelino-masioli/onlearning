@@ -53673,10 +53673,12 @@ function PopCard(_ref) {
       url = _ref.url,
       status = _ref.status,
       variant = _ref.variant;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Img, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "image"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Img, {
     variant: "top",
     src: cover
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Title, null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Text, null, description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement = {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Title, null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_1__["default"].Text, null, description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement = {
     tootip: "Edit course",
     placement: "top"
   }, _defineProperty(_React$createElement, "tootip", "Edit course"), _defineProperty(_React$createElement, "text", "Edit course"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_3__["FiEdit2"], null)), _defineProperty(_React$createElement, "url", url), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -54119,7 +54121,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 function Edit(_ref) {
-  var _React$createElement;
+  var _React$createElement, _React$createElement2;
 
   var course = _ref.course;
 
@@ -54131,10 +54133,14 @@ function Edit(_ref) {
     title: "Editing course <strong>".concat(course.register.title, "</strong>"),
     subtitle: "Teacher"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement = {
-    classAtrributes: "btn btn-secondary btn-new  mb-4",
+    classAtrributes: "btn btn-secondary btn-new  mb-4 mr-2",
+    tootip: "Create new course",
+    placement: "bottom"
+  }, _defineProperty(_React$createElement, "tootip", "Create new course"), _defineProperty(_React$createElement, "text", "Create new course"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiPlus"], null)), _defineProperty(_React$createElement, "url", route("teacher-course-create")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement2 = {
+    classAtrributes: "btn btn-primary btn-new  mb-4",
     tootip: "Create new lesson",
     placement: "bottom"
-  }, _defineProperty(_React$createElement, "tootip", "Create new lesson"), _defineProperty(_React$createElement, "text", "Create new lesson"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiPlus"], null)), _defineProperty(_React$createElement, "url", route("teacher-course-create")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, _defineProperty(_React$createElement2, "tootip", "Create new lesson"), _defineProperty(_React$createElement2, "text", "Create new lesson"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiBookOpen"], null)), _defineProperty(_React$createElement2, "url", route("teacher-course-create")), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_5__["default"], {
     datas: course,
     handleForm: handleSubmit
   })));
@@ -54462,7 +54468,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Course(_ref) {
   var _React$createElement;
 
-  var courses = _ref.courses;
+  var courses = _ref.courses,
+      highlights = _ref.highlights;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(courses),
       _useState2 = _slicedToArray(_useState, 2),
@@ -54525,16 +54532,21 @@ function Course(_ref) {
     placement: "bottom"
   }, _defineProperty(_React$createElement, "tootip", "Create new course"), _defineProperty(_React$createElement, "text", "Create new course"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiPlus"], null)), _defineProperty(_React$createElement, "url", route("teacher-course-create")), _React$createElement))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "col-md-12"
-  }, "Last edited courses"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "col-xs-12 col-md-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PopCard__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    title: "Card Title",
-    description: "Some quick example text to build on the card title",
-    cover: "https://plchldr.co/i/300x80?bg=36c6f4",
-    url: route("teacher-course"),
-    status: "Draft",
-    variant: "secondary"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, "Last edited courses"), highlights.map(function (highlight) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "col-xs-12 col-md-3",
+      key: highlight.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PopCard__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      title: highlight.title,
+      description: highlight.description,
+      cover: highlight.cover,
+      url: route("teacher-course-edit", {
+        uuid: highlight.uuid
+      }),
+      status: highlight.status == 0 ? "Draft" : "Published",
+      variant: highlight.status == 0 ? "secondary" : "success"
+    }));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_9__["default"], {
     placeholder: "Enter your search to filter",
     handleFunction: handleFilter
   }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -54592,14 +54604,23 @@ function Course(_ref) {
       variant: "success"
     }, "Published")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
-    }, register.status == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      classAtrributes: "mr-3 btn btn-table btn-primary",
+      tootip: "Lessons of ".concat(register.title),
+      placement: "top",
+      text: "Lessons",
+      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiBookOpen"], null),
+      url: route("teacher-course-edit", {
+        uuid: register.uuid
+      })
+    }), register.status == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "mr-3 text-muted"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiXCircle"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
       classAtrributes: "mr-3",
       tootip: "Edit ".concat(register.title),
       placement: "top",
       icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiEdit2"], null),
-      url: route("teacher-student-edit", {
+      url: route("teacher-course-edit", {
         uuid: register.uuid
       })
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {

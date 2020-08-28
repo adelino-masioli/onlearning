@@ -10953,6 +10953,13 @@ a:hover {
   font-size: 20px;
 }
 
+.btn-table {
+  min-width: 100px;
+  max-width: 100px;
+  padding: 0.1rem;
+  font-size: 12px;
+}
+
 .btn-primary {
   color: #ffffff;
 }
@@ -11196,6 +11203,19 @@ table-sm th .link,
 
 .highlight ul > li .card-title {
   font-weight: 400;
+}
+
+.highlight ul > li .image {
+  display: flex;
+  overflow: hidden;
+  max-height: 100px;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.highlight ul > li .image img {
+  height: 100%;
 }
 
 .dropzone {

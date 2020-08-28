@@ -15,7 +15,9 @@ export default function PopCard({
     return (
         <>
             <Card>
-                <Card.Img variant="top" src={cover} />
+                <div className="image">
+                    <Card.Img variant="top" src={cover} />
+                </div>
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{description}</Card.Text>
