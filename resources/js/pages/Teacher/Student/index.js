@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
 import Table from "react-bootstrap/Table";
@@ -47,6 +47,10 @@ export default function Student({ students }) {
         });
         setListRegisters(results);
     }
+
+    useEffect(() => {
+        setListRegisters(students);
+    }, [students]);
 
     return (
         <>

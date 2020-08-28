@@ -22,6 +22,7 @@ class Course extends Model
         'description',
         'level',
         'cover',
+        'show',
         'status',
     ];
 

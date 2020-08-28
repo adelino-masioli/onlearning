@@ -104,4 +104,5 @@ class TeacherStudentController extends Controller
 
         return Redirect::route('teacher-student');
     }
+
 }

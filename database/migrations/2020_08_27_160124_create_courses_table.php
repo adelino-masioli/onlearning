@@ -21,8 +21,9 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('level');
-            $table->string('cover');
-            $table->string('status');
+            $table->string('cover')->nullable();
+            $table->string('show')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

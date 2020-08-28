@@ -21,10 +21,14 @@ export default function Formdatas({ datas, handleForm }) {
         level: datas ? datas.register.level : "",
         description: datas ? datas.register.description : "",
         image: datas ? datas.cover.cover : "",
+        show: datas ? datas.register.show : 0,
         status: datas ? datas.register.status : 0
     });
     const [isSwitchOn, setIsSwitchOn] = useState(
         datas && datas.status != 0 ? true : false
+    );
+    const [isSwitchOnLandingPage, setIsSwitchOnLandingPage] = useState(
+        datas && datas.show != 0 ? true : false
     );
     const [showToast, setShowToast] = useState(false);
     const [selectedFile, setSelectedFile] = useState();
@@ -60,6 +64,7 @@ export default function Formdatas({ datas, handleForm }) {
         data.append("title", values.title || "");
         data.append("level", values.level || "");
         data.append("description", values.description || "");
+        data.append("show", values.show || 0);
         data.append("status", values.status || 0);
         data.append("_token", csrf_token.token);
 
@@ -73,13 +78,18 @@ export default function Formdatas({ datas, handleForm }) {
         setIsSwitchOn(!isSwitchOn);
     };
 
+    const onSwitchOnLandingPageAction = () => {
+        setIsSwitchOnLandingPage(!isSwitchOnLandingPage);
+    };
+
     useEffect(() => {
         setValues(values => ({
             ...values,
-            status: isSwitchOn
+            status: isSwitchOn,
+            show: isSwitchOnLandingPage
         }));
         setShowToast(flash.message ? true : false);
-    }, [isSwitchOn, flash]);
+    }, [isSwitchOn, isSwitchOnLandingPage, flash]);
 
     return (
         <>
@@ -201,15 +211,28 @@ export default function Formdatas({ datas, handleForm }) {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group controlId="status">
-                    <Form.Check
-                        custom
-                        type="switch"
-                        checked={isSwitchOn}
-                        onChange={onSwitchAction}
-                        label="Is it published?"
-                    />
-                </Form.Group>
+                <Form.Row>
+                    <Col className="col-md-3">
+                        <Form.Group controlId="status">
+                            <Form.Check
+                                custom
+                                type="switch"
+                                checked={isSwitchOn}
+                                onChange={onSwitchAction}
+                                label="Is it published?"
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Form.Group controlId="show">
+                        <Form.Check
+                            custom
+                            type="switch"
+                            checked={isSwitchOnLandingPage}
+                            onChange={onSwitchOnLandingPageAction}
+                            label="Show on landing page?"
+                        />
+                    </Form.Group>
+                </Form.Row>
                 <br />
                 <Button
                     size="lg"

@@ -24,7 +24,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        return Inertia::render('Course', ["courses" => Student::select("students.*",  DB::raw("DATE_FORMAT(students.created_at, '%d/%m/%Y') as date"))->get()]);
+        return Inertia::render('Course', ["courses" => Course::select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->get()]);
     }
 
     public function create()
@@ -35,10 +35,10 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $validation = $request->validate([
-            'title'        => ['required', 'max:255'],
-            'level'        => ['required'],
-            'description'  => ['required'],
-            'image'        => ['required']
+            'title'        => 'required|max:255|unique:courses,title,'.Auth::user()->id.',teacher_id',
+            'level'        => 'required',
+            'description'  => 'required',
+            'image'        => 'required'
         ]);
 
         $file = $request->file("image");
@@ -65,6 +65,51 @@ class CourseController extends Controller
                 "cover" => url("images", Str::of($course->cover)->explode('/')[1]),
             ]
         ]);
+    }
+
+
+    public function update(Request $request)
+    {
+        $course = Course::where('id', $request->input("id"))->first();
+        $validation = $request->validate([
+            'title'        => 'required|max:255|unique:courses,title,'.Auth::user()->id.',teacher_id',
+            'level'        => 'required',
+            'description'  => 'required'
+        ]);
+
+
+        $file = $request->file("image");
+        $path = $file ? $file->store('public') : $course->cover;
+
+        $data = $request->all();
+        $data += ["cover" => $path];
+
+        $course->update($data);
+
+
+        $request->session()->flash('message', 'Saved successfully!');
+
+        return Redirect::route('teacher-course-edit', $course->uuid);
+    }
+
+    public function status(Request $request)
+    {
+        $course = Course::where('id', $request->input("id"))->first();
+
+        $status = $course->status == 0 ? 1 : 0;
+        $course->update(["status" => $status]);
+
+        return Redirect::route('teacher-course');
+    }
+
+    public function show(Request $request)
+    {
+        $course = Course::where('id', $request->input("id"))->first();
+
+        $show = $course->show == 0 ? 1 : 0;
+        $course->update(["show" => $show]);
+
+        return Redirect::route('teacher-course');
     }
 
 }

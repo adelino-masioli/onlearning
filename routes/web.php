@@ -47,6 +47,9 @@ Route::namespace('Course')->group(function () {
     Route::get('/teacher/courses/create', ["as" => "teacher-course-create", "uses" => "CourseController@create"]);
     Route::post('/teacher/courses/store', ["as" => "teacher-course-store", "uses" => "CourseController@store"]);
     Route::get('/teacher/courses/edit/{uuid}', ["as" => "teacher-course-edit", "uses" => "CourseController@edit"]);
+    Route::post('/teacher/courses/update', ["as" => "teacher-course-update", "uses" => "CourseController@update"]);
+    Route::post('/teacher/courses/status', ["as" => "teacher-course-update-status", "uses" => "CourseController@status"]);
+    Route::post('/teacher/courses/show', ["as" => "teacher-course-update-show", "uses" => "CourseController@show"]);
 });
 
 
