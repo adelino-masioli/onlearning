@@ -85,33 +85,4 @@ class LessonController extends Controller
     }
 
 
-
-    public function show(Request $request)
-    {
-        $course = Course::where('id', $request->input("id"))->first();
-
-        $show = $course->show == 0 ? 1 : 0;
-        $course->update(["show" => $show]);
-
-        return Redirect::route('teacher-course');
-    }
-
-    public function upload($file)
-    {
-        $imagename = time().'.'.$file->extension();
-        $destinationPath = public_path('/uploads/teachers/covers/thumbnail');
-
-        //create thumb
-        $img = Image::make($file->path());
-        $img->resize(400, 150, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$imagename);
-
-        //create full image
-        $destinationPath = public_path('/uploads/teachers/covers');
-        $file->move($destinationPath, $imagename);
-
-        return $imagename;
-    }
-
 }

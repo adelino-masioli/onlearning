@@ -20,10 +20,10 @@ export default function Edit({ lesson }) {
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                    tootip="Back to class"
+                    tootip="Back to lesson"
                     placement="bottom"
-                    tootip="Back to class"
-                    text="Back to class"
+                    tootip="Back to lesson"
+                    text="Back to lesson"
                     icon={<FiChevronLeft />}
                     url={route("teacher-course-lesson", lesson.course.uuid)}
                 />
@@ -35,7 +35,10 @@ export default function Edit({ lesson }) {
                     tootip="Add materials"
                     text="Add materials"
                     icon={<FiBookOpen />}
-                    url={route("teacher-course-create")}
+                    url={route(
+                        "teacher-course-lesson-material-create",
+                        lesson.uuid
+                    )}
                 />
                 <FormData
                     data={lesson}

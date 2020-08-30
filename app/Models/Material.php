@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Lesson extends Model
+class Material extends Model
 {
     use \App\Http\Traits\UsesUuid;
 
@@ -16,22 +16,16 @@ class Lesson extends Model
      * @var array
      */
     protected $fillable = [
-        'course_id',
+        'lesson_id',
         'uuid',
         'title',
         'description',
-        'video',
-        'download',
+        'link',
         'status',
     ];
 
-    public function material()
+    public function lesson()
     {
-        return $this->hasMany('App\Models\Material');
-    }
-
-    public function course()
-    {
-        return $this->belongsTo('App\Models\Course');
+        return $this->belongsTo('App\Models\Lesson');
     }
 }

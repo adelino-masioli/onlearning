@@ -61,6 +61,15 @@ Route::namespace('Lesson')->group(function () {
     Route::post('/teacher/courses/lesson/update', ["as" => "teacher-course-lesson-update", "uses" => "LessonController@update"]);
 });
 
+//Material
+Route::namespace('Material')->group(function () {
+    Route::get('/teacher/courses/lessons/material/{lessonuuid}', ["as" => "teacher-course-lesson-material", "uses" => "MaterialController@index"]);
+    Route::get('/teacher/courses/lesson/material/create/{uuid}', ["as" => "teacher-course-lesson-material-create", "uses" => "MaterialController@create"]);
+    Route::post('/teacher/courses/lesson/material/store', ["as" => "teacher-course-lesson-material-store", "uses" => "MaterialController@store"]);
+    Route::get('/teacher/courses/lesson/material/edit/{uuid}', ["as" => "teacher-course-lesson-material-edit", "uses" => "MaterialController@edit"]);
+    Route::post('/teacher/courses/lesson/material/update', ["as" => "teacher-course-lesson-material-update", "uses" => "MaterialController@update"]);
+});
+
 
 
 //Student

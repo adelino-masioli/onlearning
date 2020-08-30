@@ -7,26 +7,26 @@ import Template from "../../../components/Template";
 import Link from "../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Create({ course }) {
+export default function Create({ lesson }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-lesson-store"), values);
+        Inertia.post(route("teacher-course-lesson-material-store"), values);
     }
     return (
         <>
             <Template
-                title={`Create new lesson <strong>${course.title}</strong>`}
+                title={`Create new material <strong>${lesson.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                    tootip="Back to lesson"
+                    tootip="Back to materials"
                     placement="bottom"
-                    tootip="Back to lesson"
-                    text="Back to lesson"
+                    tootip="Back to materials"
+                    text="Back to materials"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course-lesson", course.uuid)}
+                    url={route("teacher-course-lesson-material", lesson.uuid)}
                 />
-                <FormData course={course} handleForm={handleSubmit} />
+                <FormData lesson={lesson} handleForm={handleSubmit} />
             </Template>
         </>
     );
