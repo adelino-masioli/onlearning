@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class ExamQuestion extends Model
+class ExamQuestionAnswer extends Model
 {
     use \App\Http\Traits\UsesUuid;
 
@@ -16,20 +16,16 @@ class ExamQuestion extends Model
      * @var array
      */
     protected $fillable = [
-        'exam_id',
+        'exam_question_id',
         'uuid',
-        'question',
-        'time',
+        'answer',
+        'is_correct',
         'status',
     ];
 
-    public function exam()
+    public function question()
     {
-        return $this->belongsTo('App\Models\Exam');
-    }
-    public function answer()
-    {
-        return $this->hasMany('App\Models\ExamQuestionAnswer');
+        return $this->belongsTo('App\Models\ExamQuestion');
     }
 
 }

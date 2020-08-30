@@ -81,13 +81,21 @@ Route::namespace('Exam')->group(function () {
 
 //ExamQuestion
 Route::namespace('ExamQuestion')->group(function () {
-    Route::get('/teacher/courses/lessons/exam/question/{examuuid}', ["as" => "teacher-course-lesson-question-exam", "uses" => "ExamQuestionController@index"]);
+    Route::get('/teacher/courses/lessons/exam/question/{examuuid}', ["as" => "teacher-course-lesson-exam-question", "uses" => "ExamQuestionController@index"]);
     Route::get('/teacher/courses/lesson/exam/create/question/{uuid}', ["as" => "teacher-course-lesson-exam-question-create", "uses" => "ExamQuestionController@create"]);
     Route::post('/teacher/courses/lesson/exam/question/store', ["as" => "teacher-course-lesson-exam-question-store", "uses" => "ExamQuestionController@store"]);
     Route::get('/teacher/courses/lesson/exam/edit/question/{uuid}', ["as" => "teacher-course-lesson-exam-question-edit", "uses" => "ExamQuestionController@edit"]);
     Route::post('/teacher/courses/lesson/exam/update/question', ["as" => "teacher-course-lesson-exam-question-update", "uses" => "ExamQuestionController@update"]);
 });
 
+//ExamQuestionAnswer
+Route::namespace('ExamQuestionAnswer')->group(function () {
+    Route::get('/teacher/courses/lessons/exam/question/answer/{questionuuid}', ["as" => "teacher-course-lesson-question-exam-answer", "uses" => "ExamQuestionAnswerController@index"]);
+    Route::get('/teacher/courses/lesson/exam/create/question/answer/{uuid}', ["as" => "teacher-course-lesson-exam-question-answer-create", "uses" => "ExamQuestionAnswerController@create"]);
+    Route::post('/teacher/courses/lesson/exam/question/answer/store', ["as" => "teacher-course-lesson-exam-question-answer-store", "uses" => "ExamQuestionAnswerController@store"]);
+    Route::get('/teacher/courses/lesson/exam/edit/question/answer/{uuid}', ["as" => "teacher-course-lesson-exam-question-answer-edit", "uses" => "ExamQuestionAnswerController@edit"]);
+    Route::post('/teacher/courses/lesson/exam/update/question/answer', ["as" => "teacher-course-lesson-exam-question-answer-update", "uses" => "ExamQuestionAnswerController@update"]);
+});
 
 
 //Student

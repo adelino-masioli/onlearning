@@ -43,10 +43,10 @@ export default function Edit({ lesson }) {
 
                 <Link
                     classAtrributes="btn btn-warning btn-new  mb-4"
-                    tootip="Create new test"
+                    tootip="Create new exam"
                     placement="bottom"
-                    tootip="Create new test"
-                    text="Create new test"
+                    tootip="Create new exam"
+                    text="Create new exam"
                     icon={<FiPlus />}
                     url={route(
                         "teacher-course-lesson-exam-create",

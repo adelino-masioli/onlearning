@@ -12,13 +12,13 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function ExamQuestion({ questions, exam }) {
-    const [listRegisters, setListRegisters] = useState(questions);
+export default function ExamQuestionAnswer({ answers, question }) {
+    const [listRegisters, setListRegisters] = useState(answers);
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = questions.filter(function(item) {
+        const results = answers.filter(function(item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
@@ -32,13 +32,13 @@ export default function ExamQuestion({ questions, exam }) {
     }
 
     useEffect(() => {
-        setListRegisters(questions);
-    }, [questions]);
+        setListRegisters(answers);
+    }, [answers]);
 
     return (
         <>
             <Template
-                title={`Exame questions  <strong>${exam.title}</strong>`}
+                title={`Question  answers <strong>${question.question}</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
@@ -46,30 +46,30 @@ export default function ExamQuestion({ questions, exam }) {
                         <Col>
                             <Link
                                 classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                                tootip="List all exams"
+                                tootip="List all questions"
                                 placement="bottom"
-                                tootip="List all exams"
-                                text="List all exams"
+                                tootip="List all questions"
+                                text="List all questions"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-lesson-exam",
-                                    exam.lesson.uuid
+                                    "teacher-course-lesson-exam-question",
+                                    question.exam.uuid
                                 )}
                             />
                             <Link
                                 classAtrributes="btn btn-primary btn-new  mb-4"
-                                tootip="Create new question"
+                                tootip="Create new answer"
                                 placement="bottom"
-                                tootip="Create new question"
-                                text="Create new question"
+                                tootip="Create new answer"
+                                text="Create new answer"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-lesson-exam-question-create",
-                                    exam.uuid
+                                    "teacher-course-lesson-exam-question-answer-create",
+                                    question.uuid
                                 )}
                             />
                         </Col>
-                        <h1 className="col-md-12">List of exam questions</h1>
+                        <h1 className="col-md-12">List of exam answers</h1>
                     </ul>
                 </div>
 
@@ -93,14 +93,18 @@ export default function ExamQuestion({ questions, exam }) {
                         <tr>
                             <th className="text-center">#</th>
                             <th className="text-center text-uppercase">
+                                Answer
+                            </th>
+                            <th className="text-center text-uppercase">
                                 Question
                             </th>
-                            <th className="text-center text-uppercase">Exam</th>
 
                             <th className="text-center text-uppercase">
                                 Created At
                             </th>
-                            <th className="text-center text-uppercase">Time</th>
+                            <th className="text-center text-uppercase">
+                                Is correct?
+                            </th>
                             <th className="text-center text-uppercase">
                                 Status
                             </th>
@@ -123,10 +127,17 @@ export default function ExamQuestion({ questions, exam }) {
                         {listRegisters.map(register => (
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
-                                <td>{register.question}</td>
-                                <td>{register.exam.title}</td>
+                                <td>{register.answer}</td>
+                                <td>{question.question}</td>
                                 <td>{register.date}</td>
-                                <td className="text-center">{register.time}</td>
+                                <td className="text-center">
+                                    {register.is_correct == 0 ? (
+                                        <Badge variant="secondary">No</Badge>
+                                    ) : (
+                                        <Badge variant="success">Yes</Badge>
+                                    )}
+                                </td>
+
                                 <td className="text-center">
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>
@@ -139,12 +150,12 @@ export default function ExamQuestion({ questions, exam }) {
                                 <td className="text-center">
                                     <Link
                                         classAtrributes="text-success link"
-                                        tootip={`Edit ${register.question}`}
+                                        tootip={`Edit ${register.answer}`}
                                         placement="top"
-                                        text="Edit question"
+                                        text="Edit answer"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-lesson-exam-question-edit",
+                                            "teacher-course-lesson-exam-question-answer-edit",
                                             register.uuid
                                         )}
                                     />

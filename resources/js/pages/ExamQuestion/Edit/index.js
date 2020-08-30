@@ -1,7 +1,7 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-import { FiChevronLeft } from "react-icons/fi";
+import { FiChevronLeft, FiPlus } from "react-icons/fi";
 
 import Template from "../../../components/Template";
 import Link from "../../../components/Link";
@@ -29,8 +29,21 @@ export default function Edit({ exam_question, exam }) {
                     text="Back to questions"
                     icon={<FiChevronLeft />}
                     url={route(
-                        "teacher-course-lesson-question-exam",
+                        "teacher-course-lesson-exam-question",
                         exam.uuid
+                    )}
+                />
+
+                <Link
+                    classAtrributes="btn btn-primary btn-new  mb-4 mr-2"
+                    tootip="Add new answer"
+                    placement="bottom"
+                    tootip="Add new answer"
+                    text="Add new answer"
+                    icon={<FiPlus />}
+                    url={route(
+                        "teacher-course-lesson-exam-question-answer-create",
+                        exam_question.uuid
                     )}
                 />
 
