@@ -1,7 +1,7 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-import { FiChevronLeft, FiBookOpen } from "react-icons/fi";
+import { FiChevronLeft, FiPlus } from "react-icons/fi";
 
 import Template from "../../../components/Template";
 import Link from "../../../components/Link";
@@ -29,14 +29,27 @@ export default function Edit({ lesson }) {
                 />
 
                 <Link
-                    classAtrributes="btn btn-primary btn-new  mb-4"
-                    tootip="Add materials"
+                    classAtrributes="btn btn-primary btn-new  mb-4 mr-2"
+                    tootip="Add new material"
                     placement="bottom"
-                    tootip="Add materials"
-                    text="Add materials"
-                    icon={<FiBookOpen />}
+                    tootip="Add new material"
+                    text="Add new material"
+                    icon={<FiPlus />}
                     url={route(
                         "teacher-course-lesson-material-create",
+                        lesson.uuid
+                    )}
+                />
+
+                <Link
+                    classAtrributes="btn btn-warning btn-new  mb-4"
+                    tootip="Create new test"
+                    placement="bottom"
+                    tootip="Create new test"
+                    text="Create new test"
+                    icon={<FiPlus />}
+                    url={route(
+                        "teacher-course-lesson-exam-create",
                         lesson.uuid
                     )}
                 />

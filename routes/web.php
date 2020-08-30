@@ -70,6 +70,14 @@ Route::namespace('Material')->group(function () {
     Route::post('/teacher/courses/lesson/material/update', ["as" => "teacher-course-lesson-material-update", "uses" => "MaterialController@update"]);
 });
 
+//Exam
+Route::namespace('Exam')->group(function () {
+    Route::get('/teacher/courses/lessons/exam/{lessonuuid}', ["as" => "teacher-course-lesson-exam", "uses" => "ExamController@index"]);
+    Route::get('/teacher/courses/lesson/exam/create/{uuid}', ["as" => "teacher-course-lesson-exam-create", "uses" => "ExamController@create"]);
+    Route::post('/teacher/courses/lesson/exam/store', ["as" => "teacher-course-lesson-exam-store", "uses" => "ExamController@store"]);
+    Route::get('/teacher/courses/lesson/exam/edit/{uuid}', ["as" => "teacher-course-lesson-exam-edit", "uses" => "ExamController@edit"]);
+    Route::post('/teacher/courses/lesson/exam/update', ["as" => "teacher-course-lesson-exam-update", "uses" => "ExamController@update"]);
+});
 
 
 //Student

@@ -30,6 +30,11 @@ class Lesson extends Model
         return $this->hasMany('App\Models\Material');
     }
 
+    public function exame()
+    {
+        return $this->hasMany('App\Models\Exame');
+    }
+
     public function course()
     {
         return $this->belongsTo('App\Models\Course');

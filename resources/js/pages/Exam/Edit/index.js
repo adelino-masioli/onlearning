@@ -7,33 +7,30 @@ import Template from "../../../components/Template";
 import Link from "../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Edit({ material }) {
+export default function Edit({ exam }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-lesson-material-update"), values);
+        Inertia.post(route("teacher-course-lesson-exam-update"), values);
     }
 
     return (
         <>
             <Template
-                title={`Editing course <strong>${material.lesson.title}</strong>`}
+                title={`Editing exam <strong>${exam.lesson.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                    tootip="Back to materials"
+                    tootip="Back to exams"
                     placement="bottom"
-                    tootip="Back to materials"
-                    text="Back to materials"
+                    tootip="Back to exams"
+                    text="Back to exams"
                     icon={<FiChevronLeft />}
-                    url={route(
-                        "teacher-course-lesson-material",
-                        material.lesson.uuid
-                    )}
+                    url={route("teacher-course-lesson-exam", exam.lesson.uuid)}
                 />
 
                 <FormData
-                    data={material}
-                    lesson={material.lesson}
+                    data={exam}
+                    lesson={exam.lesson}
                     handleForm={handleSubmit}
                 />
             </Template>
