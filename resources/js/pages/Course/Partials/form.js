@@ -176,7 +176,7 @@ export default function Formdatas({ datas, handleForm }) {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group controlId="description">
+                <Form.Group controlId="image">
                     <Form.Label>Cover</Form.Label>
 
                     <div {...getRootProps()} className="dropzone">

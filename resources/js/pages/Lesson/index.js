@@ -5,26 +5,16 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import {
-    FiThumbsDown,
-    FiThumbsUp,
-    FiXCircle,
-    FiEdit2,
-    FiFrown,
-    FiPlus,
-    FiSmile,
-    FiBookOpen
-} from "react-icons/fi";
+import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
 import Confirm from "../../components/Confirm";
 import Search from "../../components/Search";
-import PopCard from "../../components/PopCard";
 import { Col } from "react-bootstrap";
 
-export default function Course({ courses, highlights }) {
-    const [listRegisters, setListRegisters] = useState(courses);
+export default function Lesson({ lessons, course }) {
+    const [listRegisters, setListRegisters] = useState(lessons);
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
 
@@ -37,15 +27,10 @@ export default function Course({ courses, highlights }) {
         Inertia.post(route("teacher-course-update-status"), data);
     };
 
-    const handleShowLandingPage = (status, value) => {
-        const data = { id: value.id };
-        Inertia.post(route("teacher-course-update-show"), data);
-    };
-
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = courses.filter(function(item) {
+        const results = lessons.filter(function(item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
@@ -59,52 +44,41 @@ export default function Course({ courses, highlights }) {
     }
 
     useEffect(() => {
-        setListRegisters(courses);
-    }, [courses]);
+        setListRegisters(lessons);
+    }, [lessons]);
 
     return (
         <>
-            <Template title="My courses" subtitle="Teacher">
+            <Template
+                title={`Course Lessons <strong>${course.title}</strong>`}
+                subtitle="Teacher"
+            >
                 <div className="highlight">
                     <ul className="row">
                         <Col>
                             <Link
-                                classAtrributes="btn btn-secondary btn-new  mb-4"
-                                tootip="Create new course"
+                                classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
+                                tootip="List all courses"
                                 placement="bottom"
-                                tootip="Create new course"
-                                text="Create new course"
+                                tootip="List all courses"
+                                text="List all courses"
+                                icon={<FiChevronLeft />}
+                                url={route("teacher-course")}
+                            />
+                            <Link
+                                classAtrributes="btn btn-primary btn-new  mb-4"
+                                tootip="Create new lesson"
+                                placement="bottom"
+                                tootip="Create new lesson"
+                                text="Create new lesson"
                                 icon={<FiPlus />}
-                                url={route("teacher-course-create")}
+                                url={route(
+                                    "teacher-course-lesson-create",
+                                    course.uuid
+                                )}
                             />
                         </Col>
                         <h1 className="col-md-12">Last edited courses</h1>
-
-                        {highlights.map(highlight => (
-                            <li
-                                className="col-xs-12 col-md-3"
-                                key={highlight.id}
-                            >
-                                <PopCard
-                                    title={highlight.title}
-                                    description={highlight.description}
-                                    cover={highlight.cover}
-                                    url={route("teacher-course-edit", {
-                                        uuid: highlight.uuid
-                                    })}
-                                    status={
-                                        highlight.status == 0
-                                            ? "Draft"
-                                            : "Published"
-                                    }
-                                    variant={
-                                        highlight.status == 0
-                                            ? "secondary"
-                                            : "success"
-                                    }
-                                />
-                            </li>
-                        ))}
                     </ul>
                 </div>
 
@@ -131,19 +105,16 @@ export default function Course({ courses, highlights }) {
                                 Course
                             </th>
                             <th className="text-center text-uppercase">
-                                Level
+                                Lesson
                             </th>
                             <th className="text-center text-uppercase">
                                 Created At
                             </th>
                             <th className="text-center text-uppercase">
-                                Lessons
+                                Video
                             </th>
                             <th className="text-center text-uppercase">
-                                Students
-                            </th>
-                            <th className="text-center text-uppercase">
-                                Show on landing page?
+                                Download
                             </th>
                             <th className="text-center text-uppercase">
                                 Status
@@ -190,76 +161,13 @@ export default function Course({ courses, highlights }) {
                                 </td>
                                 <td className="text-center">
                                     <Link
-                                        classAtrributes="mr-3 btn btn-table btn-primary"
-                                        tootip={`Lessons of ${register.title}`}
+                                        classAtrributes="text-success link"
+                                        tootip={`Edit ${register.title}`}
                                         placement="top"
-                                        text="Lessons"
+                                        text="Edit lesson"
                                         icon={<FiBookOpen />}
-                                        url={route("teacher-course-lesson", {
-                                            uuid: register.uuid
-                                        })}
-                                    />
-
-                                    {register.status == 0 ? (
-                                        <span className="mr-3 text-muted">
-                                            <FiXCircle />
-                                        </span>
-                                    ) : (
-                                        <Link
-                                            classAtrributes="mr-3"
-                                            tootip={`Edit ${register.title}`}
-                                            placement="top"
-                                            icon={<FiEdit2 />}
-                                            url={route("teacher-course-edit", {
-                                                uuid: register.uuid
-                                            })}
-                                        />
-                                    )}
-
-                                    <Link
-                                        classAtrributes={
-                                            register.status == 0
-                                                ? "text-danger link mr-3"
-                                                : "text-success link mr-3"
-                                        }
-                                        tootip={
-                                            register.status == 0
-                                                ? `Enable ${register.title}`
-                                                : `Disable ${register.title}`
-                                        }
-                                        placement="top"
-                                        icon={
-                                            register.status == 0 ? (
-                                                <FiThumbsDown />
-                                            ) : (
-                                                <FiThumbsUp />
-                                            )
-                                        }
                                         value={register}
                                         handleFunction={handleConfirm}
-                                    />
-
-                                    <Link
-                                        classAtrributes={
-                                            register.show == 0
-                                                ? "text-danger link"
-                                                : "text-success link"
-                                        }
-                                        tootip={
-                                            register.show == 0
-                                                ? `Show on landing page ${register.title}`
-                                                : `Hide on landing page ${register.title}`
-                                        }
-                                        placement="top"
-                                        icon={
-                                            register.show == 0 ? (
-                                                <FiFrown />
-                                            ) : (
-                                                <FiSmile />
-                                            )
-                                        }
-                                        value={register}
-                                        handleFunction={handleShowLandingPage}
                                     />
                                 </td>
                             </tr>
@@ -269,7 +177,7 @@ export default function Course({ courses, highlights }) {
                 {show && (
                     <Confirm
                         header="Confirmatiom"
-                        text="Are you sure you want to disable this course?"
+                        text="Are you sure you want to disable this lesson?"
                         label="Confirm"
                         showConfirm={show}
                         handleConfirm={handleConfirm}

@@ -7,6 +7,9 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+@import "../../node_modules/react-toastify/dist/ReactToastify.css";
+@import "../../node_modules/react-quill/dist/quill.snow.css";
+
 body {
     -webkit-font-smoothing: antialiased;
     height: 100vh;
@@ -129,6 +132,14 @@ table-sm th,
     .link {
         cursor: pointer;
     }
+}
+
+//reset editor
+.ql-container {
+    min-height: 300px;
+}
+.ql-editor.ql-blank::before {
+    font-style: normal;
 }
 
 //auth

@@ -52,6 +52,14 @@ Route::namespace('Course')->group(function () {
     Route::post('/teacher/courses/show', ["as" => "teacher-course-update-show", "uses" => "CourseController@show"]);
 });
 
+//Lesson
+Route::namespace('Lesson')->group(function () {
+    Route::get('/teacher/courses/lessons/{uuid}', ["as" => "teacher-course-lesson", "uses" => "LessonController@index"]);
+    Route::get('/teacher/courses/lesson/create/{uuid}', ["as" => "teacher-course-lesson-create", "uses" => "LessonController@create"]);
+    Route::post('/teacher/courses/lesson/store', ["as" => "teacher-course-lesson-store", "uses" => "LessonController@store"]);
+    Route::get('/teacher/courses/lesson/edit/{uuid}', ["as" => "teacher-course-lesson-edit", "uses" => "LessonController@edit"]);
+});
+
 
 
 //Student
