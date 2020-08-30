@@ -29,7 +29,7 @@ class LessonController extends Controller
         $course = Course::where("uuid", $uuid)->first();
         return Inertia::render('Lesson', [
             "course" => $course,
-            "lessons" => Lesson::select("lessons.*",  DB::raw("DATE_FORMAT(lessons.created_at, '%d/%m/%Y') as date"))->where("lessons.course_id", $course->id)->get(),
+            "lessons" => Lesson::with("course")->select("lessons.*",  DB::raw("DATE_FORMAT(lessons.created_at, '%d/%m/%Y') as date"))->where("lessons.course_id", $course->id)->get(),
             ]);
     }
 
@@ -50,55 +50,41 @@ class LessonController extends Controller
 
         $data = $request->all();
 
-        $course = Lesson::create($data);
+        $lesson = Lesson::create($data);
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-edit', $course->uuid);
+        return Redirect::route('teacher-course-lesson-edit', $lesson->uuid);
     }
 
 
     public function edit($uuid)
     {
-        $lesson = Lesson::where("uuid", $uuid)->first();
+        $lesson = Lesson::with("course")->where("uuid", $uuid)->first();
         return Inertia::render('Lesson/Edit', [
-            'lessob' =>  $course
+            'lesson' =>  $lesson
         ]);
     }
 
 
     public function update(Request $request)
     {
-        $course = Course::where('id', $request->input("id"))->first();
+        $lesson = Lesson::with("course")->where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:courses,title,'.Auth::user()->id.',teacher_id',
-            'level'        => 'required',
+            'title'        => 'required|max:255|unique:lessons,title,'.$request->input("course_id").',course_id',
             'description'  => 'required'
         ]);
 
-        //upload image
-        $image = Self::upload($request->file("image"));
-
         $data = $request->all();
-        $data += ["cover" => $image ? $image : NULL];
 
-        $course->update($data);
-
+        $lesson->update($data);
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-edit', $course->uuid);
+        return Redirect::route('teacher-course-lesson-edit', $lesson->uuid);
     }
 
-    public function status(Request $request)
-    {
-        $course = Course::where('id', $request->input("id"))->first();
 
-        $status = $course->status == 0 ? 1 : 0;
-        $course->update(["status" => $status]);
-
-        return Redirect::route('teacher-course');
-    }
 
     public function show(Request $request)
     {

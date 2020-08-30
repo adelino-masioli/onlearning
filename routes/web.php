@@ -54,10 +54,11 @@ Route::namespace('Course')->group(function () {
 
 //Lesson
 Route::namespace('Lesson')->group(function () {
-    Route::get('/teacher/courses/lessons/{uuid}', ["as" => "teacher-course-lesson", "uses" => "LessonController@index"]);
+    Route::get('/teacher/courses/lessons/{courseuuid}', ["as" => "teacher-course-lesson", "uses" => "LessonController@index"]);
     Route::get('/teacher/courses/lesson/create/{uuid}', ["as" => "teacher-course-lesson-create", "uses" => "LessonController@create"]);
     Route::post('/teacher/courses/lesson/store', ["as" => "teacher-course-lesson-store", "uses" => "LessonController@store"]);
     Route::get('/teacher/courses/lesson/edit/{uuid}', ["as" => "teacher-course-lesson-edit", "uses" => "LessonController@edit"]);
+    Route::post('/teacher/courses/lesson/update', ["as" => "teacher-course-lesson-update", "uses" => "LessonController@update"]);
 });
 
 

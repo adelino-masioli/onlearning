@@ -9,7 +9,6 @@ import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
-import Confirm from "../../components/Confirm";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
@@ -17,15 +16,6 @@ export default function Lesson({ lessons, course }) {
     const [listRegisters, setListRegisters] = useState(lessons);
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
-
-    const handleConfirm = (status, value) => {
-        setShow(status);
-        setUser(value);
-    };
-    const handleInactive = value => {
-        const data = { id: value.id };
-        Inertia.post(route("teacher-course-update-status"), data);
-    };
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
@@ -102,10 +92,13 @@ export default function Lesson({ lessons, course }) {
                         <tr>
                             <th className="text-center">#</th>
                             <th className="text-center text-uppercase">
+                                Lesson
+                            </th>
+                            <th className="text-center text-uppercase">
                                 Course
                             </th>
                             <th className="text-center text-uppercase">
-                                Lesson
+                                Nível
                             </th>
                             <th className="text-center text-uppercase">
                                 Created At
@@ -139,16 +132,14 @@ export default function Lesson({ lessons, course }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.level}</td>
+                                <td>{register.course.title}</td>
+                                <td>{register.course.level}</td>
                                 <td>{register.date}</td>
-                                <td className="text-center">{register.id}</td>
-                                <td className="text-center">{register.id}</td>
                                 <td className="text-center">
-                                    {register.show == 0 ? (
-                                        <Badge variant="danger">No</Badge>
-                                    ) : (
-                                        <Badge variant="success">Yes</Badge>
-                                    )}
+                                    {register.video}
+                                </td>
+                                <td className="text-center">
+                                    {register.download}
                                 </td>
                                 <td className="text-center">
                                     {register.status == 0 ? (
@@ -166,25 +157,16 @@ export default function Lesson({ lessons, course }) {
                                         placement="top"
                                         text="Edit lesson"
                                         icon={<FiBookOpen />}
-                                        value={register}
-                                        handleFunction={handleConfirm}
+                                        url={route(
+                                            "teacher-course-lesson-edit",
+                                            register.uuid
+                                        )}
                                     />
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
-                {show && (
-                    <Confirm
-                        header="Confirmatiom"
-                        text="Are you sure you want to disable this lesson?"
-                        label="Confirm"
-                        showConfirm={show}
-                        handleConfirm={handleConfirm}
-                        handleFunction={handleInactive}
-                        value={user}
-                    />
-                )}
             </Template>
         </>
     );

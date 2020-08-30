@@ -1,43 +1,47 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-import { FiPlus, FiBookOpen } from "react-icons/fi";
+import { FiChevronLeft, FiBookOpen } from "react-icons/fi";
 
 import Template from "../../../components/Template";
 import Link from "../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Edit({ course }) {
+export default function Edit({ lesson }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-update"), values);
+        Inertia.post(route("teacher-course-lesson-update"), values);
     }
 
     return (
         <>
             <Template
-                title={`Editing course <strong>${course.register.title}</strong>`}
+                title={`Editing course <strong>${lesson.course.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                    tootip="Create new course"
+                    tootip="Back to class"
                     placement="bottom"
-                    tootip="Create new course"
-                    text="Create new course"
-                    icon={<FiPlus />}
-                    url={route("teacher-course-create")}
+                    tootip="Back to class"
+                    text="Back to class"
+                    icon={<FiChevronLeft />}
+                    url={route("teacher-course-lesson", lesson.course.uuid)}
                 />
 
                 <Link
                     classAtrributes="btn btn-primary btn-new  mb-4"
-                    tootip="Create new lesson"
+                    tootip="Add materials"
                     placement="bottom"
-                    tootip="Create new lesson"
-                    text="Create new lesson"
+                    tootip="Add materials"
+                    text="Add materials"
                     icon={<FiBookOpen />}
                     url={route("teacher-course-create")}
                 />
-                <FormData datas={course} handleForm={handleSubmit} />
+                <FormData
+                    data={lesson}
+                    course={lesson.course}
+                    handleForm={handleSubmit}
+                />
             </Template>
         </>
     );

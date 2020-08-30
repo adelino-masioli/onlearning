@@ -195,9 +195,10 @@ export default function Course({ courses, highlights }) {
                                         placement="top"
                                         text="Lessons"
                                         icon={<FiBookOpen />}
-                                        url={route("teacher-course-lesson", {
-                                            uuid: register.uuid
-                                        })}
+                                        url={route(
+                                            "teacher-course-lesson",
+                                            register.uuid
+                                        )}
                                     />
 
                                     {register.status == 0 ? (

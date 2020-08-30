@@ -27,6 +27,6 @@ class Lesson extends Model
 
     public function course()
     {
-        return $this->hasOne('App\Models\Course');
+        return $this->belongsTo('App\Models\Course');
     }
 }

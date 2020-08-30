@@ -16,10 +16,10 @@ export default function Formdata({ data, course, handleForm }) {
     const [values, setValues] = useState({
         id: data ? data.id : "",
         title: data ? data.title : "",
-        video: data ? data.video : "",
-        download: data ? data.download : "",
         description: data ? data.description : "",
-        status: data ? data.status : 0,
+        video: data && data.video ? data.video : "",
+        download: data && data.download ? data.download : "",
+        status: data && data.status ? data.status : 0,
         course_id: course.id
     });
 
@@ -56,11 +56,17 @@ export default function Formdata({ data, course, handleForm }) {
     };
 
     useEffect(() => {
-        setValues(values => ({
-            ...values,
-            status: isSwitchOn
-        }));
-        setShowToast(flash.message ? true : false);
+        let mounted = true;
+
+        if (mounted) {
+            setValues(values => ({
+                ...values,
+                status: isSwitchOn
+            }));
+            setShowToast(flash.message ? true : false);
+        }
+
+        return () => (mounted = false);
     }, [isSwitchOn, flash]);
 
     return (
