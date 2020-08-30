@@ -28,4 +28,8 @@ class Exam extends Model
     {
         return $this->belongsTo('App\Models\Lesson');
     }
+    public function question()
+    {
+        return $this->hasMany('App\Models\ExamQuestion');
+    }
 }

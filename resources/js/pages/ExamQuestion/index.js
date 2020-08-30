@@ -12,13 +12,13 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function Exame({ exams, lesson }) {
-    const [listRegisters, setListRegisters] = useState(exams);
+export default function ExamQuestion({ questions, exam }) {
+    const [listRegisters, setListRegisters] = useState(questions);
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = exams.filter(function(item) {
+        const results = questions.filter(function(item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
@@ -32,13 +32,13 @@ export default function Exame({ exams, lesson }) {
     }
 
     useEffect(() => {
-        setListRegisters(exams);
-    }, [exams]);
+        setListRegisters(questions);
+    }, [questions]);
 
     return (
         <>
             <Template
-                title={`Lesson Exame  <strong>${lesson.title}</strong>`}
+                title={`Exame questions  <strong>${exam.title}</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
@@ -46,30 +46,30 @@ export default function Exame({ exams, lesson }) {
                         <Col>
                             <Link
                                 classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                                tootip="List all lessons"
+                                tootip="List all exams"
                                 placement="bottom"
-                                tootip="List all lessons"
-                                text="List all lessons"
+                                tootip="List all exams"
+                                text="List all exams"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-lesson",
-                                    lesson.course.uuid
+                                    "teacher-course-lesson-exam",
+                                    exam.lesson.uuid
                                 )}
                             />
                             <Link
                                 classAtrributes="btn btn-primary btn-new  mb-4"
-                                tootip="Create new exam"
+                                tootip="Create new question"
                                 placement="bottom"
-                                tootip="Create new exam"
-                                text="Create new exam"
+                                tootip="Create new question"
+                                text="Create new question"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-lesson-exam-create",
-                                    lesson.uuid
+                                    "teacher-course-lesson-exam-question-create",
+                                    exam.uuid
                                 )}
                             />
                         </Col>
-                        <h1 className="col-md-12">List of exams</h1>
+                        <h1 className="col-md-12">List of exam questions</h1>
                     </ul>
                 </div>
 
@@ -93,18 +93,14 @@ export default function Exame({ exams, lesson }) {
                         <tr>
                             <th className="text-center">#</th>
                             <th className="text-center text-uppercase">
-                                Material
+                                Question
                             </th>
-                            <th className="text-center text-uppercase">
-                                Lesson
-                            </th>
+                            <th className="text-center text-uppercase">Exam</th>
 
                             <th className="text-center text-uppercase">
                                 Created At
                             </th>
-                            <th className="text-center text-uppercase">
-                                Average
-                            </th>
+                            <th className="text-center text-uppercase">Time</th>
                             <th className="text-center text-uppercase">
                                 Status
                             </th>
@@ -127,10 +123,10 @@ export default function Exame({ exams, lesson }) {
                         {listRegisters.map(register => (
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
-                                <td>{register.title}</td>
-                                <td>{register.lesson.title}</td>
+                                <td>{register.question}</td>
+                                <td>{register.exam.title}</td>
                                 <td>{register.date}</td>
-                                <td>{register.average}</td>
+                                <td className="text-center">{register.time}</td>
                                 <td className="text-center">
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>
@@ -143,12 +139,12 @@ export default function Exame({ exams, lesson }) {
                                 <td className="text-center">
                                     <Link
                                         classAtrributes="text-success link"
-                                        tootip={`Edit ${register.title}`}
+                                        tootip={`Edit ${register.question}`}
                                         placement="top"
                                         text="Edit exam"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-lesson-exam-edit",
+                                            "teacher-course-lesson-exam-question-edit",
                                             register.uuid
                                         )}
                                     />

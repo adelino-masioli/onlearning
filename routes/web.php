@@ -79,6 +79,16 @@ Route::namespace('Exam')->group(function () {
     Route::post('/teacher/courses/lesson/exam/update', ["as" => "teacher-course-lesson-exam-update", "uses" => "ExamController@update"]);
 });
 
+//ExamQuestion
+Route::namespace('ExamQuestion')->group(function () {
+    Route::get('/teacher/courses/lessons/exam/question/{examuuid}', ["as" => "teacher-course-lesson-question-exam", "uses" => "ExamQuestionController@index"]);
+    Route::get('/teacher/courses/lesson/exam/create/question/{uuid}', ["as" => "teacher-course-lesson-exam-question-create", "uses" => "ExamQuestionController@create"]);
+    Route::post('/teacher/courses/lesson/exam/question/store', ["as" => "teacher-course-lesson-exam-question-store", "uses" => "ExamQuestionController@store"]);
+    Route::get('/teacher/courses/lesson/exam/edit/question/{uuid}', ["as" => "teacher-course-lesson-exam-question-edit", "uses" => "ExamQuestionController@edit"]);
+    Route::post('/teacher/courses/lesson/exam/update/question', ["as" => "teacher-course-lesson-exam-question-update", "uses" => "ExamQuestionController@update"]);
+});
+
+
 
 //Student
 Route::namespace('Student')->group(function () {
