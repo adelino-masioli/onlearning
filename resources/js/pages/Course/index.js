@@ -179,7 +179,7 @@ export default function Course({ courses, highlights }) {
                                         text={register.students.length}
                                         icon={<FiUsers />}
                                         url={route(
-                                            "teacher-course-classroom",
+                                            "teacher-course-student",
                                             register.uuid
                                         )}
                                     />

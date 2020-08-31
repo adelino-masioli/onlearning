@@ -70,7 +70,7 @@ export default function Student({ students }) {
                                 url={route("teacher-student-create")}
                             />
                         </Col>
-                        <h1 className="col-md-12">Last of students</h1>
+                        <h1 className="col-md-12">List of students</h1>
                     </ul>
                 </div>
 
