@@ -12,7 +12,7 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function Exame({ exams, lesson }) {
+export default function Exame({ exams, classroom }) {
     const [listRegisters, setListRegisters] = useState(exams);
 
     function handleFilter(search) {
@@ -38,7 +38,7 @@ export default function Exame({ exams, lesson }) {
     return (
         <>
             <Template
-                title={`Lesson Exame  <strong>${lesson.title}</strong>`}
+                title={`classroom Exame  <strong>${classroom.title}</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
@@ -46,14 +46,14 @@ export default function Exame({ exams, lesson }) {
                         <Col>
                             <Link
                                 classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                                tootip="List all lessons"
+                                tootip="List all classrooms"
                                 placement="bottom"
-                                tootip="List all lessons"
-                                text="List all lessons"
+                                tootip="List all classrooms"
+                                text="List all classrooms"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-lesson",
-                                    lesson.course.uuid
+                                    "teacher-course-classroom",
+                                    classroom.course.uuid
                                 )}
                             />
                             <Link
@@ -64,8 +64,8 @@ export default function Exame({ exams, lesson }) {
                                 text="Create new exam"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-lesson-exam-create",
-                                    lesson.uuid
+                                    "teacher-course-classroom-exam-create",
+                                    classroom.uuid
                                 )}
                             />
                         </Col>
@@ -96,7 +96,7 @@ export default function Exame({ exams, lesson }) {
                                 Material
                             </th>
                             <th className="text-center text-uppercase">
-                                Lesson
+                                classroom
                             </th>
 
                             <th className="text-center text-uppercase">
@@ -128,7 +128,7 @@ export default function Exame({ exams, lesson }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.lesson.title}</td>
+                                <td>{register.classroom.title}</td>
                                 <td>{register.date}</td>
                                 <td>{register.average}</td>
                                 <td className="text-center">
@@ -148,7 +148,7 @@ export default function Exame({ exams, lesson }) {
                                         text="Edit exam"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-lesson-exam-edit",
+                                            "teacher-course-classroom-exam-edit",
                                             register.uuid
                                         )}
                                     />

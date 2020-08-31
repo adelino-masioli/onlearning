@@ -6,14 +6,12 @@ import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
 import {
-    FiThumbsDown,
-    FiThumbsUp,
     FiXCircle,
     FiEdit2,
     FiFrown,
     FiPlus,
-    FiSmile,
-    FiBookOpen
+    FiBookOpen,
+    FiUsers
 } from "react-icons/fi";
 
 import Template from "../../components/Template";
@@ -137,7 +135,7 @@ export default function Course({ courses, highlights }) {
                                 Created At
                             </th>
                             <th className="text-center text-uppercase">
-                                Lessons
+                                Classrooms
                             </th>
                             <th className="text-center text-uppercase">
                                 Students
@@ -170,58 +168,46 @@ export default function Course({ courses, highlights }) {
                                 <td>{register.title}</td>
                                 <td>{register.level}</td>
                                 <td>{register.date}</td>
-                                <td className="text-center">{register.id}</td>
-                                <td className="text-center">{register.id}</td>
                                 <td className="text-center">
-                                    {register.show == 0 ? (
-                                        <Badge variant="danger">No</Badge>
-                                    ) : (
-                                        <Badge variant="success">Yes</Badge>
-                                    )}
-                                </td>
-                                <td className="text-center">
-                                    {register.status == 0 ? (
-                                        <Badge variant="secondary">Draft</Badge>
-                                    ) : (
-                                        <Badge variant="success">
-                                            Published
-                                        </Badge>
-                                    )}
+                                    {register.classrooms.length}
                                 </td>
                                 <td className="text-center">
                                     <Link
-                                        classAtrributes="mr-3 btn btn-table btn-primary"
-                                        tootip={`Lessons of ${register.title}`}
+                                        classAtrributes="mr-3 btn btn-table btn-warning"
+                                        tootip={`Add new students to ${register.title}`}
                                         placement="top"
-                                        text="Lessons"
-                                        icon={<FiBookOpen />}
+                                        text={register.students.length}
+                                        icon={<FiUsers />}
                                         url={route(
-                                            "teacher-course-lesson",
+                                            "teacher-course-classroom",
                                             register.uuid
                                         )}
                                     />
-
-                                    {register.status == 0 ? (
-                                        <span className="mr-3 text-muted">
-                                            <FiXCircle />
-                                        </span>
-                                    ) : (
-                                        <Link
-                                            classAtrributes="mr-3"
-                                            tootip={`Edit ${register.title}`}
-                                            placement="top"
-                                            icon={<FiEdit2 />}
-                                            url={route("teacher-course-edit", {
-                                                uuid: register.uuid
-                                            })}
-                                        />
-                                    )}
-
+                                </td>
+                                <td className="text-center">
+                                    <Link
+                                        classAtrributes={
+                                            register.show == 0
+                                                ? "link btn btn-table btn-danger"
+                                                : "link btn btn-table btn-success"
+                                        }
+                                        tootip={
+                                            register.show == 0
+                                                ? `Show on landing page ${register.title}`
+                                                : `Hide on landing page ${register.title}`
+                                        }
+                                        placement="top"
+                                        icon={register.show == 0 ? "No" : "Yes"}
+                                        value={register}
+                                        handleFunction={handleShowLandingPage}
+                                    />
+                                </td>
+                                <td className="text-center">
                                     <Link
                                         classAtrributes={
                                             register.status == 0
-                                                ? "text-danger link mr-3"
-                                                : "text-success link mr-3"
+                                                ? "btn btn-table btn-danger mr-3"
+                                                : "btn btn-table btn-success mr-3"
                                         }
                                         tootip={
                                             register.status == 0
@@ -230,38 +216,43 @@ export default function Course({ courses, highlights }) {
                                         }
                                         placement="top"
                                         icon={
-                                            register.status == 0 ? (
-                                                <FiThumbsDown />
-                                            ) : (
-                                                <FiThumbsUp />
-                                            )
+                                            register.status == 0
+                                                ? "Draft"
+                                                : "Published"
                                         }
                                         value={register}
                                         handleFunction={handleConfirm}
                                     />
-
+                                </td>
+                                <td className="text-center">
                                     <Link
-                                        classAtrributes={
-                                            register.show == 0
-                                                ? "text-danger link"
-                                                : "text-success link"
-                                        }
-                                        tootip={
-                                            register.show == 0
-                                                ? `Show on landing page ${register.title}`
-                                                : `Hide on landing page ${register.title}`
-                                        }
+                                        classAtrributes="mr-3 btn btn-table btn-primary"
+                                        tootip={`Classrooms of ${register.title}`}
                                         placement="top"
-                                        icon={
-                                            register.show == 0 ? (
-                                                <FiFrown />
-                                            ) : (
-                                                <FiSmile />
-                                            )
-                                        }
-                                        value={register}
-                                        handleFunction={handleShowLandingPage}
+                                        text="Classrooms"
+                                        icon={<FiBookOpen />}
+                                        url={route(
+                                            "teacher-course-classroom",
+                                            register.uuid
+                                        )}
                                     />
+
+                                    {register.status == 0 ? (
+                                        <span className="btn btn-table btn-light cursor-default">
+                                            <FiXCircle /> Edit
+                                        </span>
+                                    ) : (
+                                        <Link
+                                            classAtrributes="btn btn-table btn-secondary"
+                                            tootip={`Edit ${register.title}`}
+                                            placement="top"
+                                            text="Edit"
+                                            icon={<FiEdit2 />}
+                                            url={route("teacher-course-edit", {
+                                                uuid: register.uuid
+                                            })}
+                                        />
+                                    )}
                                 </td>
                             </tr>
                         ))}
@@ -270,7 +261,7 @@ export default function Course({ courses, highlights }) {
                 {show && (
                     <Confirm
                         header="Confirmatiom"
-                        text="Are you sure you want to disable this course?"
+                        text="Are you sure you want to update status this course?"
                         label="Confirm"
                         showConfirm={show}
                         handleConfirm={handleConfirm}

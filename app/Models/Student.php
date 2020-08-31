@@ -38,4 +38,13 @@ class Student extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    public function teachers()
+    {
+        return $this->belongsToMany('App\Models\Teacher');
+    }
+    public function courses()
+    {
+        return $this->belongsToMany('App\Models\Course');
+    }
 }

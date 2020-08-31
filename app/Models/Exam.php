@@ -16,7 +16,7 @@ class Exam extends Model
      * @var array
      */
     protected $fillable = [
-        'lesson_id',
+        'classroom_id',
         'uuid',
         'title',
         'description',
@@ -24,9 +24,9 @@ class Exam extends Model
         'status',
     ];
 
-    public function lesson()
+    public function classroom()
     {
-        return $this->belongsTo('App\Models\Lesson');
+        return $this->belongsTo('App\Models\Classroom');
     }
     public function question()
     {

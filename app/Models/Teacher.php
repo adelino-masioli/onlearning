@@ -33,4 +33,14 @@ class Teacher extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    public function exame()
+    {
+        return $this->hasMany('App\Models\Exame');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany('App\Models\Student');
+    }
 }

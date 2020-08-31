@@ -14,7 +14,7 @@ use DB;
 use Str;
 use Image;
 use \App\Models\Material;
-use \App\Models\Lesson;
+use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
 
@@ -27,25 +27,25 @@ class MaterialController extends Controller
 
     public function index($uuid)
     {
-        $lesson = Lesson::with("course")->where("uuid", $uuid)->first();
+        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
         return Inertia::render('Material', [
-            "lesson" => $lesson,
-            "materials" => Material::with("lesson")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->where("materials.lesson_id", $lesson->id)->get(),
+            "classroom" => $classroom,
+            "materials" => Material::with("classroom")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->where("materials.classroom_id", $classroom->id)->get(),
             ]);
     }
 
     public function create($uuid)
     {
-        $lesson = Lesson::with("course")->where("uuid", $uuid)->first();
+        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
         return Inertia::render('Material/Create', [
-            "lesson" => $lesson,
+            "classroom" => $classroom,
         ]);
     }
 
     public function store(Request $request)
     {
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:materials,title,'.$request->input("lesson_id").',lesson_id',
+            'title'        => 'required|max:255|unique:materials,title,'.$request->input("classroom_id").',classroom_id',
             'description'  => 'required',
         ]);
 
@@ -55,13 +55,13 @@ class MaterialController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-material-edit', $material->uuid);
+        return Redirect::route('teacher-course-classroom-material-edit', $material->uuid);
     }
 
 
     public function edit($uuid)
     {
-        $material = Material::with("lesson")->where("uuid", $uuid)->first();
+        $material = Material::with("classroom")->where("uuid", $uuid)->first();
         return Inertia::render('Material/Edit', [
             'material' =>  $material
         ]);
@@ -70,9 +70,9 @@ class MaterialController extends Controller
 
     public function update(Request $request)
     {
-        $material = Material::with("lesson")->where('id', $request->input("id"))->first();
+        $material = Material::with("classroom")->where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:materials,title,'.$request->input("lesson_id").',lesson_id',
+            'title'        => 'required|max:255|unique:materials,title,'.$request->input("classroom_id").',classroom_id',
             'description'  => 'required'
         ]);
 
@@ -82,7 +82,7 @@ class MaterialController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-material-edit', $material->uuid);
+        return Redirect::route('teacher-course-classroom-material-edit', $material->uuid);
     }
 
 

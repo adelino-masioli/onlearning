@@ -16,7 +16,7 @@ use Image;
 use \App\Models\Exam;
 use \App\Models\ExamQuestion;
 use \App\Models\ExamQuestionAnswer;
-use \App\Models\Lesson;
+use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
 
@@ -57,7 +57,7 @@ class ExamQuestionAnswerController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-exam-question-answer-edit', $exam_question_answer->uuid);
+        return Redirect::route('teacher-course-classroom-exam-question-answer-edit', $exam_question_answer->uuid);
     }
 
 
@@ -85,7 +85,7 @@ class ExamQuestionAnswerController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-exam-question-answer-edit', $exam_question_answer->uuid);
+        return Redirect::route('teacher-course-classroom-exam-question-answer-edit', $exam_question_answer->uuid);
     }
 
 

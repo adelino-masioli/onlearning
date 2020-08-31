@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Lesson;
+namespace App\Http\Controllers\Classroom;
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -13,11 +13,11 @@ use Auth;
 use DB;
 use Str;
 use Image;
-use \App\Models\Lesson;
+use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
 
-class LessonController extends Controller
+class ClassroomController extends Controller
 {
     public function __construct()
     {
@@ -27,16 +27,16 @@ class LessonController extends Controller
     public function index($uuid)
     {
         $course = Course::where("uuid", $uuid)->first();
-        return Inertia::render('Lesson', [
+        return Inertia::render('Classroom', [
             "course" => $course,
-            "lessons" => Lesson::with("course")->select("lessons.*",  DB::raw("DATE_FORMAT(lessons.created_at, '%d/%m/%Y') as date"))->where("lessons.course_id", $course->id)->get(),
+            "classrooms" => Classroom::with("course")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("classrooms.course_id", $course->id)->get(),
             ]);
     }
 
     public function create($uuid)
     {
         $course = Course::where("uuid", $uuid)->first();
-        return Inertia::render('Lesson/Create', [
+        return Inertia::render('Classroom/Create', [
             "course" => $course,
         ]);
     }
@@ -44,44 +44,44 @@ class LessonController extends Controller
     public function store(Request $request)
     {
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:lessons,title,'.$request->input("course_id").',course_id',
+            'title'        => 'required|max:255|unique:classrooms,title,'.$request->input("course_id").',course_id',
             'description'  => 'required',
         ]);
 
         $data = $request->all();
 
-        $lesson = Lesson::create($data);
+        $classroom = Classroom::create($data);
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-edit', $lesson->uuid);
+        return Redirect::route('teacher-course-classroom-edit', $classroom->uuid);
     }
 
 
     public function edit($uuid)
     {
-        $lesson = Lesson::with("course")->where("uuid", $uuid)->first();
-        return Inertia::render('Lesson/Edit', [
-            'lesson' =>  $lesson
+        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
+        return Inertia::render('Classroom/Edit', [
+            'classroom' =>  $classroom
         ]);
     }
 
 
     public function update(Request $request)
     {
-        $lesson = Lesson::with("course")->where('id', $request->input("id"))->first();
+        $classroom = Classroom::with("course")->where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:lessons,title,'.$request->input("course_id").',course_id',
+            'title'        => 'required|max:255|unique:classrooms,title,'.$request->input("course_id").',course_id',
             'description'  => 'required'
         ]);
 
         $data = $request->all();
 
-        $lesson->update($data);
+        $classroom->update($data);
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-edit', $lesson->uuid);
+        return Redirect::route('teacher-course-classroom-edit', $classroom->uuid);
     }
 
 

@@ -12933,6 +12933,10 @@ table-sm th .link,
   padding-bottom: 0.6rem;
 }
 
+.template .cursor-default {
+  cursor: not-allowed !important;
+}
+
 .highlight {
   display: flex;
   flex-direction: column;
@@ -12952,8 +12956,22 @@ table-sm th .link,
   float: left;
 }
 
+.highlight ul > li .card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.highlight ul > li .card:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
 .highlight ul > li .card-title {
   font-weight: 400;
+  color: #3c3c3c;
+}
+
+.highlight ul > li .card-text {
+  color: #6c757d;
 }
 
 .highlight ul > li .image {

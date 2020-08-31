@@ -10,7 +10,7 @@ import FormData from "../Partials/form";
 export default function Create({ question }) {
     function handleSubmit(values) {
         Inertia.post(
-            route("teacher-course-lesson-exam-question-answer-store"),
+            route("teacher-course-classroom-exam-question-answer-store"),
             values
         );
     }
@@ -28,7 +28,7 @@ export default function Create({ question }) {
                     text="Back to answers"
                     icon={<FiChevronLeft />}
                     url={route(
-                        "teacher-course-lesson-question-exam-answer",
+                        "teacher-course-classroom-question-exam-answer",
                         question.uuid
                     )}
                 />

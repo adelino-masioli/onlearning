@@ -4,13 +4,15 @@ import { Inertia } from "@inertiajs/inertia";
 import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
+import { Col } from "react-bootstrap";
 
 import {
     FiThumbsDown,
     FiThumbsUp,
     FiXCircle,
     FiEdit2,
-    FiFrown
+    FiFrown,
+    FiPlus
 } from "react-icons/fi";
 
 import Template from "../../../components/Template";
@@ -55,6 +57,23 @@ export default function Student({ students }) {
     return (
         <>
             <Template title="My students" subtitle="Teacher">
+                <div className="highlight">
+                    <ul className="row">
+                        <Col>
+                            <Link
+                                classAtrributes="btn btn-secondary btn-new  mb-4"
+                                tootip="Create new student"
+                                placement="bottom"
+                                tootip="Create new student"
+                                text="Create new student"
+                                icon={<FiPlus />}
+                                url={route("teacher-student-create")}
+                            />
+                        </Col>
+                        <h1 className="col-md-12">Last of students</h1>
+                    </ul>
+                </div>
+
                 <Search
                     placeholder="Enter your search to filter"
                     handleFunction={handleFilter}

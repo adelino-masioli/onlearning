@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import ToastMessage from "../../../components/ToastMessage";
 import TextArea from "../../../components/TextArea";
 
-export default function Formdata({ data, lesson, handleForm }) {
+export default function Formdata({ data, classroom, handleForm }) {
     const { errors, flash } = usePage();
     const formRef = useRef();
 
@@ -19,7 +19,7 @@ export default function Formdata({ data, lesson, handleForm }) {
         description: data ? data.description : "",
         link: data && data.link ? data.link : "",
         status: data && data.status ? data.status : 0,
-        lesson_id: lesson.id
+        classroom_id: classroom.id
     });
 
     const [isSwitchOn, setIsSwitchOn] = useState(

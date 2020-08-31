@@ -12,13 +12,13 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function Lesson({ lessons, course }) {
-    const [listRegisters, setListRegisters] = useState(lessons);
+export default function classroom({ classrooms, course }) {
+    const [listRegisters, setListRegisters] = useState(classrooms);
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = lessons.filter(function(item) {
+        const results = classrooms.filter(function(item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
@@ -32,13 +32,13 @@ export default function Lesson({ lessons, course }) {
     }
 
     useEffect(() => {
-        setListRegisters(lessons);
-    }, [lessons]);
+        setListRegisters(classrooms);
+    }, [classrooms]);
 
     return (
         <>
             <Template
-                title={`Course Lessons <strong>${course.title}</strong>`}
+                title={`Course classrooms <strong>${course.title}</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
@@ -55,18 +55,18 @@ export default function Lesson({ lessons, course }) {
                             />
                             <Link
                                 classAtrributes="btn btn-primary btn-new  mb-4"
-                                tootip="Create new lesson"
+                                tootip="Create new classroom"
                                 placement="bottom"
-                                tootip="Create new lesson"
-                                text="Create new lesson"
+                                tootip="Create new classroom"
+                                text="Create new classroom"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-lesson-create",
+                                    "teacher-course-classroom-create",
                                     course.uuid
                                 )}
                             />
                         </Col>
-                        <h1 className="col-md-12">List of lessons</h1>
+                        <h1 className="col-md-12">List of classrooms</h1>
                     </ul>
                 </div>
 
@@ -90,7 +90,7 @@ export default function Lesson({ lessons, course }) {
                         <tr>
                             <th className="text-center">#</th>
                             <th className="text-center text-uppercase">
-                                Lesson
+                                Classroom
                             </th>
                             <th className="text-center text-uppercase">
                                 Course
@@ -100,12 +100,6 @@ export default function Lesson({ lessons, course }) {
                             </th>
                             <th className="text-center text-uppercase">
                                 Created At
-                            </th>
-                            <th className="text-center text-uppercase">
-                                Video
-                            </th>
-                            <th className="text-center text-uppercase">
-                                Download
                             </th>
                             <th className="text-center text-uppercase">
                                 Status
@@ -134,12 +128,6 @@ export default function Lesson({ lessons, course }) {
                                 <td>{register.course.level}</td>
                                 <td>{register.date}</td>
                                 <td className="text-center">
-                                    {register.video}
-                                </td>
-                                <td className="text-center">
-                                    {register.download}
-                                </td>
-                                <td className="text-center">
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>
                                     ) : (
@@ -153,10 +141,10 @@ export default function Lesson({ lessons, course }) {
                                         classAtrributes="text-success link"
                                         tootip={`Edit ${register.title}`}
                                         placement="top"
-                                        text="Edit lesson"
+                                        text="Edit classroom"
                                         icon={<FiBookOpen />}
                                         url={route(
-                                            "teacher-course-lesson-edit",
+                                            "teacher-course-classroom-edit",
                                             register.uuid
                                         )}
                                     />

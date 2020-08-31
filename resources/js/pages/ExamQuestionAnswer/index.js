@@ -52,7 +52,7 @@ export default function ExamQuestionAnswer({ answers, question }) {
                                 text="List all questions"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-lesson-exam-question",
+                                    "teacher-course-classroom-exam-question",
                                     question.exam.uuid
                                 )}
                             />
@@ -64,7 +64,7 @@ export default function ExamQuestionAnswer({ answers, question }) {
                                 text="Create new answer"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-lesson-exam-question-answer-create",
+                                    "teacher-course-classroom-exam-question-answer-create",
                                     question.uuid
                                 )}
                             />
@@ -155,7 +155,7 @@ export default function ExamQuestionAnswer({ answers, question }) {
                                         text="Edit answer"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-lesson-exam-question-answer-edit",
+                                            "teacher-course-classroom-exam-question-answer-edit",
                                             register.uuid
                                         )}
                                     />

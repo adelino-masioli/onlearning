@@ -40,7 +40,6 @@ Route::namespace('TeacherStudent')->group(function () {
     Route::post('/teacher/student/status', ["as" => "teacher-student-update-status", "uses" => "TeacherStudentController@status"]);
 });
 
-
 //Course
 Route::namespace('Course')->group(function () {
     Route::get('/teacher/courses', ["as" => "teacher-course", "uses" => "CourseController@index"]);
@@ -52,49 +51,49 @@ Route::namespace('Course')->group(function () {
     Route::post('/teacher/courses/show', ["as" => "teacher-course-update-show", "uses" => "CourseController@show"]);
 });
 
-//Lesson
-Route::namespace('Lesson')->group(function () {
-    Route::get('/teacher/courses/lessons/{courseuuid}', ["as" => "teacher-course-lesson", "uses" => "LessonController@index"]);
-    Route::get('/teacher/courses/lesson/create/{uuid}', ["as" => "teacher-course-lesson-create", "uses" => "LessonController@create"]);
-    Route::post('/teacher/courses/lesson/store', ["as" => "teacher-course-lesson-store", "uses" => "LessonController@store"]);
-    Route::get('/teacher/courses/lesson/edit/{uuid}', ["as" => "teacher-course-lesson-edit", "uses" => "LessonController@edit"]);
-    Route::post('/teacher/courses/lesson/update', ["as" => "teacher-course-lesson-update", "uses" => "LessonController@update"]);
+//Classroom
+Route::namespace('Classroom')->group(function () {
+    Route::get('/teacher/courses/classrooms/{courseuuid}', ["as" => "teacher-course-classroom", "uses" => "ClassroomController@index"]);
+    Route::get('/teacher/courses/classroom/create/{uuid}', ["as" => "teacher-course-classroom-create", "uses" => "ClassroomController@create"]);
+    Route::post('/teacher/courses/classroom/store', ["as" => "teacher-course-classroom-store", "uses" => "ClassroomController@store"]);
+    Route::get('/teacher/courses/classroom/edit/{uuid}', ["as" => "teacher-course-classroom-edit", "uses" => "ClassroomController@edit"]);
+    Route::post('/teacher/courses/classroom/update', ["as" => "teacher-course-classroom-update", "uses" => "ClassroomController@update"]);
 });
 
 //Material
 Route::namespace('Material')->group(function () {
-    Route::get('/teacher/courses/lessons/material/{lessonuuid}', ["as" => "teacher-course-lesson-material", "uses" => "MaterialController@index"]);
-    Route::get('/teacher/courses/lesson/material/create/{uuid}', ["as" => "teacher-course-lesson-material-create", "uses" => "MaterialController@create"]);
-    Route::post('/teacher/courses/lesson/material/store', ["as" => "teacher-course-lesson-material-store", "uses" => "MaterialController@store"]);
-    Route::get('/teacher/courses/lesson/material/edit/{uuid}', ["as" => "teacher-course-lesson-material-edit", "uses" => "MaterialController@edit"]);
-    Route::post('/teacher/courses/lesson/material/update', ["as" => "teacher-course-lesson-material-update", "uses" => "MaterialController@update"]);
+    Route::get('/teacher/courses/classrooms/material/{classroomuuid}', ["as" => "teacher-course-classroom-material", "uses" => "MaterialController@index"]);
+    Route::get('/teacher/courses/classroom/material/create/{uuid}', ["as" => "teacher-course-classroom-material-create", "uses" => "MaterialController@create"]);
+    Route::post('/teacher/courses/classroom/material/store', ["as" => "teacher-course-classroom-material-store", "uses" => "MaterialController@store"]);
+    Route::get('/teacher/courses/classroom/material/edit/{uuid}', ["as" => "teacher-course-classroom-material-edit", "uses" => "MaterialController@edit"]);
+    Route::post('/teacher/courses/classroom/material/update', ["as" => "teacher-course-classroom-material-update", "uses" => "MaterialController@update"]);
 });
 
 //Exam
 Route::namespace('Exam')->group(function () {
-    Route::get('/teacher/courses/lessons/exam/{lessonuuid}', ["as" => "teacher-course-lesson-exam", "uses" => "ExamController@index"]);
-    Route::get('/teacher/courses/lesson/exam/create/{uuid}', ["as" => "teacher-course-lesson-exam-create", "uses" => "ExamController@create"]);
-    Route::post('/teacher/courses/lesson/exam/store', ["as" => "teacher-course-lesson-exam-store", "uses" => "ExamController@store"]);
-    Route::get('/teacher/courses/lesson/exam/edit/{uuid}', ["as" => "teacher-course-lesson-exam-edit", "uses" => "ExamController@edit"]);
-    Route::post('/teacher/courses/lesson/exam/update', ["as" => "teacher-course-lesson-exam-update", "uses" => "ExamController@update"]);
+    Route::get('/teacher/courses/classrooms/exam/{classroomuuid}', ["as" => "teacher-course-classroom-exam", "uses" => "ExamController@index"]);
+    Route::get('/teacher/courses/classroom/exam/create/{uuid}', ["as" => "teacher-course-classroom-exam-create", "uses" => "ExamController@create"]);
+    Route::post('/teacher/courses/classroom/exam/store', ["as" => "teacher-course-classroom-exam-store", "uses" => "ExamController@store"]);
+    Route::get('/teacher/courses/classroom/exam/edit/{uuid}', ["as" => "teacher-course-classroom-exam-edit", "uses" => "ExamController@edit"]);
+    Route::post('/teacher/courses/classroom/exam/update', ["as" => "teacher-course-classroom-exam-update", "uses" => "ExamController@update"]);
 });
 
 //ExamQuestion
 Route::namespace('ExamQuestion')->group(function () {
-    Route::get('/teacher/courses/lessons/exam/question/{examuuid}', ["as" => "teacher-course-lesson-exam-question", "uses" => "ExamQuestionController@index"]);
-    Route::get('/teacher/courses/lesson/exam/create/question/{uuid}', ["as" => "teacher-course-lesson-exam-question-create", "uses" => "ExamQuestionController@create"]);
-    Route::post('/teacher/courses/lesson/exam/question/store', ["as" => "teacher-course-lesson-exam-question-store", "uses" => "ExamQuestionController@store"]);
-    Route::get('/teacher/courses/lesson/exam/edit/question/{uuid}', ["as" => "teacher-course-lesson-exam-question-edit", "uses" => "ExamQuestionController@edit"]);
-    Route::post('/teacher/courses/lesson/exam/update/question', ["as" => "teacher-course-lesson-exam-question-update", "uses" => "ExamQuestionController@update"]);
+    Route::get('/teacher/courses/classrooms/exam/question/{examuuid}', ["as" => "teacher-course-classroom-exam-question", "uses" => "ExamQuestionController@index"]);
+    Route::get('/teacher/courses/classroom/exam/create/question/{uuid}', ["as" => "teacher-course-classroom-exam-question-create", "uses" => "ExamQuestionController@create"]);
+    Route::post('/teacher/courses/classroom/exam/question/store', ["as" => "teacher-course-classroom-exam-question-store", "uses" => "ExamQuestionController@store"]);
+    Route::get('/teacher/courses/classroom/exam/edit/question/{uuid}', ["as" => "teacher-course-classroom-exam-question-edit", "uses" => "ExamQuestionController@edit"]);
+    Route::post('/teacher/courses/classroom/exam/update/question', ["as" => "teacher-course-classroom-exam-question-update", "uses" => "ExamQuestionController@update"]);
 });
 
 //ExamQuestionAnswer
 Route::namespace('ExamQuestionAnswer')->group(function () {
-    Route::get('/teacher/courses/lessons/exam/question/answer/{questionuuid}', ["as" => "teacher-course-lesson-question-exam-answer", "uses" => "ExamQuestionAnswerController@index"]);
-    Route::get('/teacher/courses/lesson/exam/create/question/answer/{uuid}', ["as" => "teacher-course-lesson-exam-question-answer-create", "uses" => "ExamQuestionAnswerController@create"]);
-    Route::post('/teacher/courses/lesson/exam/question/answer/store', ["as" => "teacher-course-lesson-exam-question-answer-store", "uses" => "ExamQuestionAnswerController@store"]);
-    Route::get('/teacher/courses/lesson/exam/edit/question/answer/{uuid}', ["as" => "teacher-course-lesson-exam-question-answer-edit", "uses" => "ExamQuestionAnswerController@edit"]);
-    Route::post('/teacher/courses/lesson/exam/update/question/answer', ["as" => "teacher-course-lesson-exam-question-answer-update", "uses" => "ExamQuestionAnswerController@update"]);
+    Route::get('/teacher/courses/classrooms/exam/question/answer/{questionuuid}', ["as" => "teacher-course-classroom-question-exam-answer", "uses" => "ExamQuestionAnswerController@index"]);
+    Route::get('/teacher/courses/classroom/exam/create/question/answer/{uuid}', ["as" => "teacher-course-classroom-exam-question-answer-create", "uses" => "ExamQuestionAnswerController@create"]);
+    Route::post('/teacher/courses/classroom/exam/question/answer/store', ["as" => "teacher-course-classroom-exam-question-answer-store", "uses" => "ExamQuestionAnswerController@store"]);
+    Route::get('/teacher/courses/classroom/exam/edit/question/answer/{uuid}', ["as" => "teacher-course-classroom-exam-question-answer-edit", "uses" => "ExamQuestionAnswerController@edit"]);
+    Route::post('/teacher/courses/classroom/exam/update/question/answer', ["as" => "teacher-course-classroom-exam-question-answer-update", "uses" => "ExamQuestionAnswerController@update"]);
 });
 
 

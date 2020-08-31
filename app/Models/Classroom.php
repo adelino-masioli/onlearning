@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Lesson extends Model
+class Classroom extends Model
 {
     use \App\Http\Traits\UsesUuid;
 

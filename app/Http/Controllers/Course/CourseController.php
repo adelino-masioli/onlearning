@@ -42,7 +42,7 @@ class CourseController extends Controller
         }
 
         return Inertia::render('Course', [
-            "courses" => Course::select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->get(),
+            "courses" => Course::with("classrooms")->with("students")->select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->get(),
             'highlights' => $highlights
             ]);
     }

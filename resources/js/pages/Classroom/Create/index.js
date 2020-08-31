@@ -9,22 +9,22 @@ import FormData from "../Partials/form";
 
 export default function Create({ course }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-lesson-store"), values);
+        Inertia.post(route("teacher-course-classroom-store"), values);
     }
     return (
         <>
             <Template
-                title={`Create new lesson <strong>${course.title}</strong>`}
+                title={`Create new classroom <strong>${course.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                    tootip="Back to lesson"
+                    tootip="Back to classrooms"
                     placement="bottom"
-                    tootip="Back to lesson"
-                    text="Back to lesson"
+                    tootip="Back to classrooms"
+                    text="Back to classrooms"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course-lesson", course.uuid)}
+                    url={route("teacher-course-classroom", course.uuid)}
                 />
                 <FormData course={course} handleForm={handleSubmit} />
             </Template>

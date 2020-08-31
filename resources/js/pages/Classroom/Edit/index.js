@@ -7,25 +7,28 @@ import Template from "../../../components/Template";
 import Link from "../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Edit({ lesson }) {
+export default function Edit({ classroom }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-lesson-update"), values);
+        Inertia.post(route("teacher-course-classroom-update"), values);
     }
 
     return (
         <>
             <Template
-                title={`Editing course <strong>${lesson.course.title}</strong>`}
+                title={`Editing course <strong>${classroom.course.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                    tootip="Back to lesson"
+                    tootip="Back to classrooms"
                     placement="bottom"
-                    tootip="Back to lesson"
-                    text="Back to lesson"
+                    tootip="Back to classrooms"
+                    text="Back to classrooms"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course-lesson", lesson.course.uuid)}
+                    url={route(
+                        "teacher-course-classroom",
+                        classroom.course.uuid
+                    )}
                 />
 
                 <Link
@@ -36,8 +39,8 @@ export default function Edit({ lesson }) {
                     text="Add new material"
                     icon={<FiPlus />}
                     url={route(
-                        "teacher-course-lesson-material-create",
-                        lesson.uuid
+                        "teacher-course-classroom-material-create",
+                        classroom.uuid
                     )}
                 />
 
@@ -49,13 +52,13 @@ export default function Edit({ lesson }) {
                     text="Create new exam"
                     icon={<FiPlus />}
                     url={route(
-                        "teacher-course-lesson-exam-create",
-                        lesson.uuid
+                        "teacher-course-classroom-exam-create",
+                        classroom.uuid
                     )}
                 />
                 <FormData
-                    data={lesson}
-                    course={lesson.course}
+                    data={classroom}
+                    course={classroom.course}
                     handleForm={handleSubmit}
                 />
             </Template>

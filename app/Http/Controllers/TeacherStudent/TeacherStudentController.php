@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Auth;
 use \App\Models\Student;
+use \App\Models\Teacher;
 use \App\User;
 
 class TeacherStudentController extends Controller
@@ -23,8 +24,9 @@ class TeacherStudentController extends Controller
 
     public function index()
     {
+        $students =  Teacher::find(Auth::user()->id)->students;
         return Inertia::render('Teacher/Student', [
-            'students' => Student::all()
+            'students' => $students
         ]);
     }
 
@@ -53,6 +55,9 @@ class TeacherStudentController extends Controller
         $data += ["user_id" => $user->id];
 
         $student = Student::create($data);
+
+        $teacher =  Teacher::find(Auth::user()->id);
+        $teacher->students()->attach(Student::latest()->first()->id);
 
         $request->session()->flash('message', 'Saved successfully!');
 

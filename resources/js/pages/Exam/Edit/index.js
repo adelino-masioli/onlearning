@@ -9,13 +9,13 @@ import FormData from "../Partials/form";
 
 export default function Edit({ exam }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-lesson-exam-update"), values);
+        Inertia.post(route("teacher-course-classroom-exam-update"), values);
     }
 
     return (
         <>
             <Template
-                title={`Editing exam <strong>${exam.lesson.title}</strong>`}
+                title={`Editing exam <strong>${exam.classroom.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
@@ -25,7 +25,10 @@ export default function Edit({ exam }) {
                     tootip="Back to exams"
                     text="Back to exams"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course-lesson-exam", exam.lesson.uuid)}
+                    url={route(
+                        "teacher-course-classroom-exam",
+                        exam.classroom.uuid
+                    )}
                 />
 
                 <Link
@@ -36,14 +39,14 @@ export default function Edit({ exam }) {
                     text="Add new question"
                     icon={<FiPlus />}
                     url={route(
-                        "teacher-course-lesson-exam-question-create",
+                        "teacher-course-classroom-exam-question-create",
                         exam.uuid
                     )}
                 />
 
                 <FormData
                     data={exam}
-                    lesson={exam.lesson}
+                    classroom={exam.classroom}
                     handleForm={handleSubmit}
                 />
             </Template>

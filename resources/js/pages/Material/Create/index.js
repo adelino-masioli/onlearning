@@ -7,14 +7,14 @@ import Template from "../../../components/Template";
 import Link from "../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Create({ lesson }) {
+export default function Create({ classroom }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-lesson-material-store"), values);
+        Inertia.post(route("teacher-course-classroom-material-store"), values);
     }
     return (
         <>
             <Template
-                title={`Create new material <strong>${lesson.title}</strong>`}
+                title={`Create new material <strong>${classroom.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
@@ -24,9 +24,12 @@ export default function Create({ lesson }) {
                     tootip="Back to materials"
                     text="Back to materials"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course-lesson-material", lesson.uuid)}
+                    url={route(
+                        "teacher-course-classroom-material",
+                        classroom.uuid
+                    )}
                 />
-                <FormData lesson={lesson} handleForm={handleSubmit} />
+                <FormData classroom={classroom} handleForm={handleSubmit} />
             </Template>
         </>
     );

@@ -30,10 +30,10 @@ export default function Edit({ course }) {
 
                 <Link
                     classAtrributes="btn btn-primary btn-new  mb-4"
-                    tootip="Create new lesson"
+                    tootip="Create new classroom"
                     placement="bottom"
-                    tootip="Create new lesson"
-                    text="Create new lesson"
+                    tootip="Create new classroom"
+                    text="Create new classroom"
                     icon={<FiBookOpen />}
                     url={route("teacher-course-create")}
                 />

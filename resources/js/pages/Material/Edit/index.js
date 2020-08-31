@@ -9,13 +9,13 @@ import FormData from "../Partials/form";
 
 export default function Edit({ material }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-lesson-material-update"), values);
+        Inertia.post(route("teacher-course-classroom-material-update"), values);
     }
 
     return (
         <>
             <Template
-                title={`Editing course <strong>${material.lesson.title}</strong>`}
+                title={`Editing course <strong>${material.classroom.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
@@ -26,14 +26,14 @@ export default function Edit({ material }) {
                     text="Back to materials"
                     icon={<FiChevronLeft />}
                     url={route(
-                        "teacher-course-lesson-material",
-                        material.lesson.uuid
+                        "teacher-course-classroom-material",
+                        material.classroom.uuid
                     )}
                 />
 
                 <FormData
                     data={material}
-                    lesson={material.lesson}
+                    classroom={material.classroom}
                     handleForm={handleSubmit}
                 />
             </Template>

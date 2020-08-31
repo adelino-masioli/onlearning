@@ -52,8 +52,8 @@ export default function ExamQuestion({ questions, exam }) {
                                 text="List all exams"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-lesson-exam",
-                                    exam.lesson.uuid
+                                    "teacher-course-classroom-exam",
+                                    exam.classroom.uuid
                                 )}
                             />
                             <Link
@@ -64,7 +64,7 @@ export default function ExamQuestion({ questions, exam }) {
                                 text="Create new question"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-lesson-exam-question-create",
+                                    "teacher-course-classroom-exam-question-create",
                                     exam.uuid
                                 )}
                             />
@@ -144,7 +144,7 @@ export default function ExamQuestion({ questions, exam }) {
                                         text="Edit question"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-lesson-exam-question-edit",
+                                            "teacher-course-classroom-exam-question-edit",
                                             register.uuid
                                         )}
                                     />

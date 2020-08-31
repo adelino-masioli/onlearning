@@ -15,7 +15,7 @@ use Str;
 use Image;
 use \App\Models\Exam;
 use \App\Models\ExamQuestion;
-use \App\Models\Lesson;
+use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
 
@@ -28,7 +28,7 @@ class ExamQuestionController extends Controller
 
     public function index($uuid)
     {
-        $exam = Exam::with("lesson")->where("uuid", $uuid)->first();
+        $exam = Exam::with("classroom")->where("uuid", $uuid)->first();
 
         return Inertia::render('ExamQuestion', [
             "exam" => $exam,
@@ -38,7 +38,7 @@ class ExamQuestionController extends Controller
 
     public function create($uuid)
     {
-        $exam = Exam::with("lesson")->where("uuid", $uuid)->first();
+        $exam = Exam::with("classroom")->where("uuid", $uuid)->first();
         return Inertia::render('ExamQuestion/Create', [
             "exam" => $exam,
         ]);
@@ -56,14 +56,14 @@ class ExamQuestionController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-exam-question-edit', $exam_question->uuid);
+        return Redirect::route('teacher-course-classroom-exam-question-edit', $exam_question->uuid);
     }
 
 
     public function edit($uuid)
     {
         $exam_question = ExamQuestion::where("uuid", $uuid)->first();
-        $exam = Exam::with("lesson")->where("id", $exam_question->exam_id)->first();
+        $exam = Exam::with("classroom")->where("id", $exam_question->exam_id)->first();
         return Inertia::render('ExamQuestion/Edit', [
             'exam_question' =>  $exam_question,
             'exam' =>  $exam,
@@ -84,7 +84,7 @@ class ExamQuestionController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-lesson-exam-question-edit', $exam_question->uuid);
+        return Redirect::route('teacher-course-classroom-exam-question-edit', $exam_question->uuid);
     }
 
 

@@ -30,8 +30,13 @@ class Course extends Model
     {
         return $this->hasOne('App\Models\Teacher');
     }
-    public function lessons()
+    public function classrooms()
     {
-        return $this->hasMany('App\Models\Lesson');
+        return $this->hasMany('App\Models\Classroom');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany('App\Models\Student');
     }
 }

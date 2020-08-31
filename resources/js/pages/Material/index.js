@@ -12,7 +12,7 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function Material({ materials, lesson }) {
+export default function Material({ materials, classroom }) {
     const [listRegisters, setListRegisters] = useState(materials);
 
     function handleFilter(search) {
@@ -38,7 +38,7 @@ export default function Material({ materials, lesson }) {
     return (
         <>
             <Template
-                title={`Lesson Material  <strong>${lesson.title}</strong>`}
+                title={`classroom Material  <strong>${classroom.title}</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
@@ -46,14 +46,14 @@ export default function Material({ materials, lesson }) {
                         <Col>
                             <Link
                                 classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                                tootip="List all lessons"
+                                tootip="List all classrooms"
                                 placement="bottom"
-                                tootip="List all lessons"
-                                text="List all lessons"
+                                tootip="List all classrooms"
+                                text="List all classrooms"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-lesson",
-                                    lesson.course.uuid
+                                    "teacher-course-classroom",
+                                    classroom.course.uuid
                                 )}
                             />
                             <Link
@@ -64,8 +64,8 @@ export default function Material({ materials, lesson }) {
                                 text="Create new material"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-lesson-material-create",
-                                    lesson.uuid
+                                    "teacher-course-classroom-material-create",
+                                    classroom.uuid
                                 )}
                             />
                         </Col>
@@ -96,7 +96,7 @@ export default function Material({ materials, lesson }) {
                                 Material
                             </th>
                             <th className="text-center text-uppercase">
-                                Lesson
+                                classroom
                             </th>
 
                             <th className="text-center text-uppercase">
@@ -126,7 +126,7 @@ export default function Material({ materials, lesson }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.lesson.title}</td>
+                                <td>{register.classroom.title}</td>
                                 <td>{register.date}</td>
                                 <td>{register.link}</td>
                                 <td className="text-center">
@@ -146,7 +146,7 @@ export default function Material({ materials, lesson }) {
                                         text="Edit material"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-lesson-material-edit",
+                                            "teacher-course-classroom-material-edit",
                                             register.uuid
                                         )}
                                     />
