@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
-
+import { usePage } from "@inertiajs/inertia-react";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 
-import {
-    FiFrown,
-    FiUsers,
-    FiChevronLeft,
-    FiThumbsDow,
-    FiThumbsUp
-} from "react-icons/fi";
+import { FiFrown, FiChevronLeft } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
 import Search from "../../components/Search";
+import ToastMessage from "../../components/ToastMessage";
 
 export default function CourseStudent({ course, students, classrooms }) {
+    const { flash } = usePage();
     const [listRegisters, setListRegisters] = useState(students);
+    const [showToast, setShowToast] = useState(false);
 
     function handleSubmit(values) {
         Inertia.post(route("teacher-course-student-store"), values);
@@ -39,12 +36,36 @@ export default function CourseStudent({ course, students, classrooms }) {
         setListRegisters(results);
     }
 
+    function handleIsBooked(register) {
+        const classroom = classrooms.map(classroom => {
+            const studentBooked = classroom.students.map(student => {
+                /*if (student.pivot.student_id == register.id) {
+                    return student.pivot.student_id == register.id
+                        ? "Booked"
+                        : "No booked";
+                }*/
+                return student.pivot.student_id;
+            });
+            return studentBooked;
+        });
+        return classroom.reduce(classroom);
+        if (classroom == register.id) {
+            return "Booked";
+        } else {
+            return "No booked";
+        }
+    }
+
     useEffect(() => {
         setListRegisters(students);
-    }, [students]);
+        setShowToast(flash.message ? true : false);
+    }, [students, flash]);
+
+    //console.log(classrooms[0].students);
 
     return (
         <>
+            <ToastMessage showToast={showToast} />
             <Template title="My courses" subtitle="Teacher">
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4"
@@ -53,9 +74,8 @@ export default function CourseStudent({ course, students, classrooms }) {
                     tootip="List all courses"
                     text="List all courses"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course-create")}
+                    url={route("teacher-course")}
                 />
-                <h1 className="col-md-12">List of students</h1>
 
                 <Search
                     placeholder="Enter your search to filter"
@@ -110,11 +130,10 @@ export default function CourseStudent({ course, students, classrooms }) {
                                     {classrooms.map(classroom => (
                                         <Link
                                             key={classroom.id}
-                                            classAtrributes="mr-3 btn btn-table btn-secondary"
+                                            classAtrributes={`mr-3 btn btn-table btn-success`}
                                             tootip={`Add new students to ${classroom.title}`}
                                             placement="top"
-                                            text="Booked"
-                                            icon={<FiThumbsUp />}
+                                            text={handleIsBooked(register.id)}
                                             handleFunction={() =>
                                                 handleSubmit({
                                                     course: course.uuid,

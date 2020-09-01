@@ -55,6 +55,7 @@ Route::namespace('Course')->group(function () {
 Route::namespace('CourseStudent')->group(function () {
     Route::get('/teacher/courses/students/{uuid}', ["as" => "teacher-course-student", "uses" => "CourseStudentController@index"]);
     Route::post('/teacher/courses/student/store', ["as" => "teacher-course-student-store", "uses" => "CourseStudentController@store"]);
+    Route::post('/teacher/courses/students/book', ["as" => "teacher-course-student-book", "uses" => "CourseStudentController@book"]);
 });
 
 //Classroom
