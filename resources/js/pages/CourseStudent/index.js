@@ -46,14 +46,15 @@ export default function CourseStudent({ course, students, classrooms }) {
                 }*/
                 return student.pivot.student_id;
             });
-            return studentBooked;
+            if (studentBooked == register.id) {
+                return "Booked";
+            } else {
+                return "No booked";
+            }
+            //return studentBooked;
         });
-        return classroom.reduce(classroom);
-        if (classroom == register.id) {
-            return "Booked";
-        } else {
-            return "No booked";
-        }
+        console.log(register);
+        return classroom;
     }
 
     useEffect(() => {

@@ -206,7 +206,7 @@ export default function Course({ courses, highlights }) {
                                     <Link
                                         classAtrributes={
                                             register.status == 0
-                                                ? "btn btn-table btn-danger mr-3"
+                                                ? "btn btn-table btn-secondary mr-3"
                                                 : "btn btn-table btn-success mr-3"
                                         }
                                         tootip={

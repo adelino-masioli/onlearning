@@ -71973,7 +71973,7 @@ function Course(_ref) {
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      classAtrributes: register.status == 0 ? "btn btn-table btn-danger mr-3" : "btn btn-table btn-success mr-3",
+      classAtrributes: register.status == 0 ? "btn btn-table btn-secondary mr-3" : "btn btn-table btn-success mr-3",
       tootip: register.status == 0 ? "Enable ".concat(register.title) : "Disable ".concat(register.title),
       placement: "top",
       icon: register.status == 0 ? "Draft" : "Published",
@@ -72105,15 +72105,16 @@ function CourseStudent(_ref) {
         }*/
         return student.pivot.student_id;
       });
-      return studentBooked;
-    });
-    return classroom.reduce(classroom);
 
-    if (classroom == register.id) {
-      return "Booked";
-    } else {
-      return "No booked";
-    }
+      if (studentBooked == register.id) {
+        return "Booked";
+      } else {
+        return "No booked";
+      } //return studentBooked;
+
+    });
+    console.log(register);
+    return classroom;
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {

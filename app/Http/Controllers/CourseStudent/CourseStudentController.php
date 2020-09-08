@@ -33,7 +33,6 @@ class CourseStudentController extends Controller
         $students =  Teacher::find(Auth::user()->id)->students;
 
 
-
         return Inertia::render('CourseStudent', [
             'course'     => $course,
             'students'   => $students,
