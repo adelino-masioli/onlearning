@@ -5,8 +5,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', ["as" => "user", "uses" => "UserController@index"]);
+
+Route::get('logout', function (){
+    Auth::logout();
+    return redirect('/');
+});
+
 
 Route::get('images/{filename}', function ($filename)
 {

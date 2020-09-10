@@ -93,13 +93,9 @@ export default function Template(props) {
                                     <FiUser /> {name}
                                 </InertiaLink>
 
-                                <InertiaLink
-                                    href="/logout"
-                                    method="POST"
-                                    className="nav-link"
-                                >
+                                <a href="/logout" className="nav-link">
                                     <FiLogOut /> Logout
-                                </InertiaLink>
+                                </a>
                             </Nav>
                         </Navbar>
                     </Container>

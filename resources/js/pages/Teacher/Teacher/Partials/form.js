@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
+import { useDropzone } from "react-dropzone";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import { FiUploadCloud } from "react-icons/fi";
+
 import ToastMessage from "../../../../components/ToastMessage";
+import TextArea from "../../../../components/TextArea";
 
 export default function FormData({ data }) {
     const { errors, flash } = usePage();
@@ -31,6 +36,21 @@ export default function FormData({ data }) {
     );
     const [showToast, setShowToast] = useState(false);
 
+    const [selectedFile, setSelectedFile] = useState();
+    const [selectedFileUrl, setSelectedFileUrl] = useState();
+
+    const onDrop = useCallback(acceptedFiles => {
+        const file = acceptedFiles[0];
+        const fileUrl = URL.createObjectURL(file);
+
+        setSelectedFile(file);
+        setSelectedFileUrl(fileUrl);
+    }, []);
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accept: "image/*"
+    });
+
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value;
@@ -49,6 +69,25 @@ export default function FormData({ data }) {
         setIsSwitchOn(!isSwitchOn);
     };
 
+    const handleTextAreaDescription = text => {
+        setValues(values => ({
+            ...values,
+            description: text
+        }));
+    };
+    const handleTextAreaDegree = text => {
+        setValues(values => ({
+            ...values,
+            degree: text
+        }));
+    };
+    const handleTextAreaQualification = text => {
+        setValues(values => ({
+            ...values,
+            qualification: text
+        }));
+    };
+
     useEffect(() => {
         setValues(values => ({
             ...values,
@@ -62,176 +101,235 @@ export default function FormData({ data }) {
             <ToastMessage showToast={showToast} />
 
             <Form onSubmit={handleSubmit} noValidate>
-                <Form.Row>
+                <Row>
                     <Col>
-                        <Form.Group controlId="name">
-                            <Form.Label>Full name</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="text"
-                                placeholder="Full name"
-                                value={values.name}
-                                onChange={handleChange}
-                                required
-                                isInvalid={!!errors.email}
+                        <Form.Row>
+                            <Col>
+                                <Form.Group controlId="name">
+                                    <Form.Label>Full name</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="text"
+                                        placeholder="Full name"
+                                        value={values.name}
+                                        onChange={handleChange}
+                                        required
+                                        isInvalid={!!errors.email}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.name}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="email">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="text"
+                                        placeholder="Enter email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        required
+                                        isInvalid={!!errors.email}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.email}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+                        <Form.Row>
+                            <Col>
+                                <Form.Group controlId="phone">
+                                    <Form.Label>Telephone</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="text"
+                                        placeholder="Telephone"
+                                        value={values.phone}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="instagram">
+                                    <Form.Label>Instagram</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="text"
+                                        placeholder="Instagram"
+                                        value={values.instagram}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="facebook">
+                                    <Form.Label>Facebook</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="text"
+                                        placeholder="Facebook"
+                                        value={values.facebook}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="youtube">
+                                    <Form.Label>Youtube</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="text"
+                                        placeholder="Youtube"
+                                        value={values.youtube}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="linkedin">
+                                    <Form.Label>Linkedin</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="text"
+                                        placeholder="Linkedin"
+                                        value={values.linkedin}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+
+                        <Form.Group controlId="description">
+                            <Form.Label>Description</Form.Label>
+
+                            <TextArea
+                                placeholder="Description"
+                                handleFunction={handleTextAreaDescription}
+                                value={values.description}
                             />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.name}
+                            <Form.Control.Feedback
+                                type="invalid"
+                                className="d-block"
+                            >
+                                {errors.description}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group controlId="degree">
+                            <Form.Label>Degree</Form.Label>
+
+                            <TextArea
+                                placeholder="Degree"
+                                handleFunction={handleTextAreaDegree}
+                                value={values.degree}
+                            />
+                            <Form.Control.Feedback
+                                type="invalid"
+                                className="d-block"
+                            >
+                                {errors.degree}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group controlId="qualification">
+                            <Form.Label>Qualifications</Form.Label>
+                            <TextArea
+                                placeholder="Qualifications"
+                                handleFunction={handleTextAreaQualification}
+                                value={values.qualification}
+                            />
+                            <Form.Control.Feedback
+                                type="invalid"
+                                className="d-block"
+                            >
+                                {errors.qualification}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Row>
+                            <Col>
+                                <Form.Group controlId="password">
+                                    <Form.Label>New password</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="password"
+                                        placeholder="Password"
+                                        value={values.password}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.password}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.password}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="confirmpassword">
+                                    <Form.Label>Confirm password</Form.Label>
+                                    <Form.Control
+                                        size="lg"
+                                        type="password"
+                                        placeholder="Confirm password"
+                                        value={values.confirmpassword}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.confirmpassword}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.confirmpassword}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+                    </Col>
+
+                    <Col xs={3}>
+                        <Form.Group controlId="image">
+                            <Form.Label>Profile picture</Form.Label>
+
+                            <div
+                                {...getRootProps()}
+                                className="dropzone dropzone_radius m-auto"
+                            >
+                                <Form.Control
+                                    {...getInputProps()}
+                                    accept="image/*"
+                                    name="image"
+                                    required
+                                    isInvalid={!!errors.image}
+                                />
+                                {selectedFileUrl || values.cover ? (
+                                    values.cover ? (
+                                        <img
+                                            src={values.cover}
+                                            alt="Selected file"
+                                        />
+                                    ) : (
+                                        <img
+                                            src={selectedFileUrl}
+                                            alt="Selected file"
+                                        />
+                                    )
+                                ) : (
+                                    <p>
+                                        <FiUploadCloud size={40} />
+                                        Drag 'n' drop some files here, or click
+                                        to select files
+                                    </p>
+                                )}
+                            </div>
+
+                            <Form.Control.Feedback
+                                type="invalid"
+                                className="d-block"
+                            >
+                                {errors.image}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    <Col>
-                        <Form.Group controlId="email">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="text"
-                                placeholder="Enter email"
-                                value={values.email}
-                                onChange={handleChange}
-                                required
-                                isInvalid={!!errors.email}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.email}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
-                <Form.Row>
-                    <Col>
-                        <Form.Group controlId="phone">
-                            <Form.Label>Telephone</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="text"
-                                placeholder="Telephone"
-                                value={values.phone}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="instagram">
-                            <Form.Label>Instagram</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="text"
-                                placeholder="Instagram"
-                                value={values.instagram}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="facebook">
-                            <Form.Label>Facebook</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="text"
-                                placeholder="Facebook"
-                                value={values.facebook}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="youtube">
-                            <Form.Label>Youtube</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="text"
-                                placeholder="Youtube"
-                                value={values.youtube}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="linkedin">
-                            <Form.Label>Linkedin</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="text"
-                                placeholder="Linkedin"
-                                value={values.linkedin}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
-
-                <Form.Group controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows="3"
-                        placeholder="Description"
-                        value={values.description}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="degree">
-                    <Form.Label>Degree</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows="3"
-                        placeholder="Degree"
-                        value={values.degree}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="qualification">
-                    <Form.Label>Qualifications</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows="3"
-                        placeholder="Qualifications"
-                        value={values.qualification}
-                        onChange={handleChange}
-                    />
-                    <Form.Text className="text-muted">
-                        Please enter one per line
-                    </Form.Text>
-                </Form.Group>
-
-                <Form.Row>
-                    <Col>
-                        <Form.Group controlId="password">
-                            <Form.Label>New password</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="password"
-                                placeholder="Password"
-                                value={values.password}
-                                onChange={handleChange}
-                                isInvalid={!!errors.password}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.password}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="confirmpassword">
-                            <Form.Label>Confirm password</Form.Label>
-                            <Form.Control
-                                size="lg"
-                                type="password"
-                                placeholder="Confirm password"
-                                value={values.confirmpassword}
-                                onChange={handleChange}
-                                isInvalid={!!errors.confirmpassword}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.confirmpassword}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Form.Row>
-
+                </Row>
                 <Form.Group controlId="seo">
                     <Form.Check
                         custom
