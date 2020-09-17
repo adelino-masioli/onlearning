@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use Auth;
 use \App\Models\Teacher;
 use \App\User;
+use Image;
 
 class TeacherController extends Controller
 {
@@ -28,8 +29,13 @@ class TeacherController extends Controller
 
     public function edit()
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+
         return Inertia::render('Teacher/Teacher/Edit', [
-            'teacher' => Teacher::where("user_id", Auth::user()->id)->first()
+            'teacher' => [
+                "register" => $teacher,
+                "avatar" => $teacher->avatar && $teacher->avatar != NULL ? url("uploads/teachers/avatars", $teacher->avatar) : NULL,
+            ]
         ]);
     }
 
@@ -46,11 +52,18 @@ class TeacherController extends Controller
             ]);
         }
 
+         //upload image
+        $image = Self::upload($request->file("image"));
+        $data_teacher = $request->all();
+        $data_teacher += ["avatar" => $image ? $image : NULL];
+
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
-        $teacher->update($request->all());
+        $teacher->update($data_teacher);
 
         $user = User::findOrFail(Auth::user()->id);
         $data = ["name" => $request->input("name")];
+        
+
         if($request->input('password') != ""){
             $data = ["password" => Hash::make($request->input('password'))];
         }
@@ -59,5 +72,27 @@ class TeacherController extends Controller
         $request->session()->flash('message', 'Saved successfully!');
 
         return Redirect::route('teacher-profile')->with('message', 'Saved successfully!');
+    }
+
+    public function upload($file)
+    {
+        if($file){
+            $imagename = time().'.'.$file->extension();
+            $destinationPath = public_path('/uploads/teachers/avatars/thumbnail');
+
+            //create thumb
+            $img = Image::make($file->path());
+            $img->resize(400, 400, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$imagename);
+
+            //create full image
+            $destinationPath = public_path('/uploads/teachers/avatars');
+            $file->move($destinationPath, $imagename);
+        }else{
+            $imagename = NULL;
+        }
+
+        return $imagename;
     }
 }

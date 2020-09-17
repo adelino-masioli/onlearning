@@ -12985,6 +12985,10 @@ table-sm th .link,
   outline: 0;
 }
 
+.dropzone_radius img {
+  border-radius: 50%;
+}
+
 .dropzone_radius p {
   width: calc(100% - 20px);
   height: calc(100% - 20px);
@@ -12995,7 +12999,7 @@ table-sm th .link,
   justify-content: center;
   align-items: center;
   color: #333;
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: center;
   font-size: 12px;
   padding: 12px;
@@ -13004,6 +13008,36 @@ table-sm th .link,
 .dropzone_radius p svg {
   color: #4ecb79;
   margin-bottom: 4px;
+}
+
+.photo-profile {
+  display: block;
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+
+.photo-profile .photo-profile-header {
+  width: 100%;
+  height: 200px;
+  position: absolute;
+  background-color: #e1e1e1;
+  z-index: 0;
+}
+
+.photo-profile .dropzone_radius {
+  top: 60px;
+  position: relative;
+  z-index: 99;
+}
+
+.photo-profile .photo-profile-name {
+  display: block;
+  margin-top: 70px;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .highlight {

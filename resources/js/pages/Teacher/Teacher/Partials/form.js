@@ -13,33 +13,54 @@ import { FiUploadCloud } from "react-icons/fi";
 import ToastMessage from "../../../../components/ToastMessage";
 import TextArea from "../../../../components/TextArea";
 
-export default function FormData({ data }) {
-    const { errors, flash } = usePage();
+export default function FormDatas({ datas }) {
+    const { errors, flash, csrf_token } = usePage();
 
     const [values, setValues] = useState({
-        name: data ? data.name : "",
-        email: data ? data.email : "",
-        phone: data ? data.phone : "",
-        instagram: data ? data.instagram : "",
-        facebook: data ? data.facebook : "",
-        youtube: data ? data.youtube : "",
-        linkedin: data ? data.linkedin : "",
-        description: data ? data.description : "",
-        degree: data ? data.degree : "",
-        qualification: data ? data.qualification : "",
-        seo: data ? data.seo : "",
+        name: datas ? datas.register.name : "",
+        email: datas ? datas.register.email : "",
+        phone:
+            datas && datas.register.phone != null ? datas.register.phone : "",
+        instagram:
+            datas && datas.register.instagram != null
+                ? datas.register.instagram
+                : "",
+        facebook:
+            datas && datas.register.facebook != null
+                ? datas.register.facebook
+                : "",
+        youtube:
+            datas && datas.register.youtube != null
+                ? datas.register.youtube
+                : "",
+        linkedin:
+            datas && datas.register.linkedin != null
+                ? datas.register.linkedin
+                : "",
+        description:
+            datas && datas.register.description != null
+                ? datas.register.description
+                : "",
+        degree:
+            datas && datas.register.degree != null ? datas.register.degree : "",
+        qualification:
+            datas && datas.register.qualification != null
+                ? datas.register.qualification
+                : "",
+        seo: datas && datas.register.seo != null ? datas.register.seo : "",
+        avatar: datas && datas.avatar != null ? datas.avatar : "",
         password: "",
-        confirmpassword: ""
+        confirmpassword: "",
     });
     const [isSwitchOn, setIsSwitchOn] = useState(
-        data && data.seo != 0 ? true : false
+        datas && datas.seo != 0 ? true : false
     );
     const [showToast, setShowToast] = useState(false);
 
     const [selectedFile, setSelectedFile] = useState();
     const [selectedFileUrl, setSelectedFileUrl] = useState();
 
-    const onDrop = useCallback(acceptedFiles => {
+    const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
         const fileUrl = URL.createObjectURL(file);
 
@@ -48,50 +69,71 @@ export default function FormData({ data }) {
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: "image/*"
+        accept: "image/*",
     });
 
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value;
-        setValues(values => ({
+        setValues((values) => ({
             ...values,
-            [key]: value
+            [key]: value,
         }));
         setShowToast(false);
     }
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.put("/teacher/update", values);
+
+        const data = new FormData();
+        data.append("name", values.name || "");
+        data.append("email", values.email || "");
+        data.append("phone", values.phone || "");
+        data.append("instagram", values.instagram || "");
+        data.append("facebook", values.facebook || "");
+        data.append("youtube", values.youtube || "");
+        data.append("linkedin", values.linkedin || "");
+        data.append("description", values.description || "");
+        data.append("degree", values.degree || "");
+        data.append("qualification", values.qualification || "");
+        data.append("seo", values.seo || "");
+        data.append("password", values.password || "");
+        data.append("confirmpassword", values.confirmpassword || "");
+        data.append("_token", csrf_token.token);
+
+        if (selectedFile) {
+            data.append("image", selectedFile);
+        }
+
+        Inertia.post("/teacher/update", data);
     }
 
     const onSwitchAction = () => {
         setIsSwitchOn(!isSwitchOn);
     };
 
-    const handleTextAreaDescription = text => {
-        setValues(values => ({
+    const handleTextAreaDescription = (text) => {
+        setValues((values) => ({
             ...values,
-            description: text
+            description: text,
         }));
     };
-    const handleTextAreaDegree = text => {
-        setValues(values => ({
+    const handleTextAreaDegree = (text) => {
+        setValues((values) => ({
             ...values,
-            degree: text
+            degree: text,
         }));
     };
-    const handleTextAreaQualification = text => {
-        setValues(values => ({
+    const handleTextAreaQualification = (text) => {
+        setValues((values) => ({
             ...values,
-            qualification: text
+            qualification: text,
         }));
     };
 
     useEffect(() => {
-        setValues(values => ({
+        setValues((values) => ({
             ...values,
-            seo: isSwitchOn
+            seo: isSwitchOn,
         }));
         setShowToast(flash.message ? true : false);
     }, [isSwitchOn, flash]);
@@ -114,7 +156,7 @@ export default function FormData({ data }) {
                                         value={values.name}
                                         onChange={handleChange}
                                         required
-                                        isInvalid={!!errors.email}
+                                        isInvalid={!!errors.name}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.name}
@@ -285,40 +327,46 @@ export default function FormData({ data }) {
                         </Form.Row>
                     </Col>
 
-                    <Col xs={3}>
+                    <Col xs={4}>
                         <Form.Group controlId="image">
-                            <Form.Label>Profile picture</Form.Label>
-
-                            <div
-                                {...getRootProps()}
-                                className="dropzone dropzone_radius m-auto"
-                            >
-                                <Form.Control
-                                    {...getInputProps()}
-                                    accept="image/*"
-                                    name="image"
-                                    required
-                                    isInvalid={!!errors.image}
-                                />
-                                {selectedFileUrl || values.cover ? (
-                                    values.cover ? (
-                                        <img
-                                            src={values.cover}
-                                            alt="Selected file"
-                                        />
+                            <div className="photo-profile">
+                                <div className="photo-profile-header"></div>
+                                <div
+                                    {...getRootProps()}
+                                    className="dropzone dropzone_radius m-auto"
+                                >
+                                    <Form.Control
+                                        {...getInputProps()}
+                                        accept="image/*"
+                                        name="image"
+                                        required
+                                        isInvalid={!!errors.image}
+                                    />
+                                    {selectedFileUrl ||
+                                    (datas && datas.avatar != null) ? (
+                                        selectedFileUrl ? (
+                                            <img
+                                                src={selectedFileUrl}
+                                                alt="Selected file"
+                                            />
+                                        ) : (
+                                            <img
+                                                src={datas.avatar}
+                                                alt="Selected file"
+                                            />
+                                        )
                                     ) : (
-                                        <img
-                                            src={selectedFileUrl}
-                                            alt="Selected file"
-                                        />
-                                    )
-                                ) : (
-                                    <p>
-                                        <FiUploadCloud size={40} />
-                                        Drag 'n' drop some files here, or click
-                                        to select files
-                                    </p>
-                                )}
+                                        <p>
+                                            <FiUploadCloud size={40} />
+                                            Drag 'n' drop some files here, or
+                                            click to select files
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="photo-profile-name">
+                                    {values.name}
+                                </div>
                             </div>
 
                             <Form.Control.Feedback

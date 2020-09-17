@@ -22,7 +22,7 @@ export default function Formdatas({ datas, handleForm }) {
         description: datas ? datas.register.description : "",
         image: datas ? datas.cover.cover : "",
         show: datas ? datas.register.show : 0,
-        status: datas ? datas.register.status : 0
+        status: datas ? datas.register.status : 0,
     });
     const [isSwitchOn, setIsSwitchOn] = useState(
         datas && datas.status != 0 ? true : false
@@ -34,7 +34,7 @@ export default function Formdatas({ datas, handleForm }) {
     const [selectedFile, setSelectedFile] = useState();
     const [selectedFileUrl, setSelectedFileUrl] = useState();
 
-    const onDrop = useCallback(acceptedFiles => {
+    const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
         const fileUrl = URL.createObjectURL(file);
 
@@ -43,15 +43,15 @@ export default function Formdatas({ datas, handleForm }) {
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: "image/*"
+        accept: "image/*",
     });
 
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value;
-        setValues(values => ({
+        setValues((values) => ({
             ...values,
-            [key]: value
+            [key]: value,
         }));
         setShowToast(false);
     }
@@ -83,10 +83,10 @@ export default function Formdatas({ datas, handleForm }) {
     };
 
     useEffect(() => {
-        setValues(values => ({
+        setValues((values) => ({
             ...values,
             status: isSwitchOn,
-            show: isSwitchOnLandingPage
+            show: isSwitchOnLandingPage,
         }));
         setShowToast(flash.message ? true : false);
     }, [isSwitchOn, isSwitchOnLandingPage, flash]);
@@ -187,14 +187,14 @@ export default function Formdatas({ datas, handleForm }) {
                             required
                             isInvalid={!!errors.image}
                         />
-                        {selectedFileUrl || datas ? (
-                            datas ? (
-                                <img src={datas.cover} alt="Selected file" />
-                            ) : (
+                        {selectedFileUrl || (datas && datas.cover != null) ? (
+                            selectedFileUrl ? (
                                 <img
                                     src={selectedFileUrl}
                                     alt="Selected file"
                                 />
+                            ) : (
+                                <img src={datas.cover} alt="Selected file" />
                             )
                         ) : (
                             <p>

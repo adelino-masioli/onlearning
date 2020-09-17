@@ -71739,11 +71739,11 @@ function Formdatas(_ref) {
     name: "image",
     required: true,
     isInvalid: !!errors.image
-  })), selectedFileUrl || datas ? datas ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: datas.cover,
+  })), selectedFileUrl || datas && datas.cover != null ? selectedFileUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: selectedFileUrl,
     alt: "Selected file"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: selectedFileUrl,
+    src: datas.cover,
     alt: "Selected file"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiUploadCloud"], {
     size: 30
@@ -71939,7 +71939,7 @@ function Course(_ref) {
   }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
   }, "Actions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    colSpan: "8",
+    colSpan: "9",
     className: "text-center text-muted"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiFrown"], {
     size: 20
@@ -71953,14 +71953,7 @@ function Course(_ref) {
       className: "text-center"
     }, register.classrooms.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      classAtrributes: "mr-3 btn btn-table btn-warning",
-      tootip: "Add new students to ".concat(register.title),
-      placement: "top",
-      text: register.students.length,
-      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiUsers"], null),
-      url: route("teacher-course-student", register.uuid)
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, register.students.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
       classAtrributes: register.show == 0 ? "link btn btn-table btn-danger" : "link btn btn-table btn-success",
@@ -74768,7 +74761,7 @@ function Show(_ref) {
     title: "Editing my profile",
     subtitle: "Teacher"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    data: teacher
+    datas: teacher
   })));
 }
 
@@ -74783,7 +74776,7 @@ function Show(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormDatas; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
@@ -74829,25 +74822,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function FormData(_ref) {
-  var data = _ref.data;
+function FormDatas(_ref) {
+  var datas = _ref.datas;
 
   var _usePage = Object(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__["usePage"])(),
       errors = _usePage.errors,
-      flash = _usePage.flash;
+      flash = _usePage.flash,
+      csrf_token = _usePage.csrf_token;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    name: data ? data.name : "",
-    email: data ? data.email : "",
-    phone: data ? data.phone : "",
-    instagram: data ? data.instagram : "",
-    facebook: data ? data.facebook : "",
-    youtube: data ? data.youtube : "",
-    linkedin: data ? data.linkedin : "",
-    description: data ? data.description : "",
-    degree: data ? data.degree : "",
-    qualification: data ? data.qualification : "",
-    seo: data ? data.seo : "",
+    name: datas ? datas.register.name : "",
+    email: datas ? datas.register.email : "",
+    phone: datas && datas.register.phone != null ? datas.register.phone : "",
+    instagram: datas && datas.register.instagram != null ? datas.register.instagram : "",
+    facebook: datas && datas.register.facebook != null ? datas.register.facebook : "",
+    youtube: datas && datas.register.youtube != null ? datas.register.youtube : "",
+    linkedin: datas && datas.register.linkedin != null ? datas.register.linkedin : "",
+    description: datas && datas.register.description != null ? datas.register.description : "",
+    degree: datas && datas.register.degree != null ? datas.register.degree : "",
+    qualification: datas && datas.register.qualification != null ? datas.register.qualification : "",
+    seo: datas && datas.register.seo != null ? datas.register.seo : "",
+    avatar: datas && datas.avatar != null ? datas.avatar : "",
     password: "",
     confirmpassword: ""
   }),
@@ -74855,7 +74850,7 @@ function FormData(_ref) {
       values = _useState2[0],
       setValues = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data && data.seo != 0 ? true : false),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(datas && datas.seo != 0 ? true : false),
       _useState4 = _slicedToArray(_useState3, 2),
       isSwitchOn = _useState4[0],
       setIsSwitchOn = _useState4[1];
@@ -74901,7 +74896,27 @@ function FormData(_ref) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].put("/teacher/update", values);
+    var data = new FormData();
+    data.append("name", values.name || "");
+    data.append("email", values.email || "");
+    data.append("phone", values.phone || "");
+    data.append("instagram", values.instagram || "");
+    data.append("facebook", values.facebook || "");
+    data.append("youtube", values.youtube || "");
+    data.append("linkedin", values.linkedin || "");
+    data.append("description", values.description || "");
+    data.append("degree", values.degree || "");
+    data.append("qualification", values.qualification || "");
+    data.append("seo", values.seo || "");
+    data.append("password", values.password || "");
+    data.append("confirmpassword", values.confirmpassword || "");
+    data.append("_token", csrf_token.token);
+
+    if (selectedFile) {
+      data.append("image", selectedFile);
+    }
+
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post("/teacher/update", data);
   }
 
   var onSwitchAction = function onSwitchAction() {
@@ -74954,7 +74969,7 @@ function FormData(_ref) {
     value: values.name,
     onChange: handleChange,
     required: true,
-    isInvalid: !!errors.email
+    isInvalid: !!errors.name
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Control.Feedback, {
     type: "invalid"
   }, errors.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Group, {
@@ -75059,25 +75074,31 @@ function FormData(_ref) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Control.Feedback, {
     type: "invalid"
   }, errors.confirmpassword))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    xs: 3
+    xs: 4
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Group, {
     controlId: "image"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Label, null, "Profile picture"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({}, getRootProps(), {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "photo-profile"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "photo-profile-header"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({}, getRootProps(), {
     className: "dropzone dropzone_radius m-auto"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Control, _extends({}, getInputProps(), {
     accept: "image/*",
     name: "image",
     required: true,
     isInvalid: !!errors.image
-  })), selectedFileUrl || values.cover ? values.cover ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: values.cover,
+  })), selectedFileUrl || datas && datas.avatar != null ? selectedFileUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: selectedFileUrl,
     alt: "Selected file"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: selectedFileUrl,
+    src: datas.avatar,
     alt: "Selected file"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiUploadCloud"], {
     size: 40
-  }), "Drag 'n' drop some files here, or click to select files")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Control.Feedback, {
+  }), "Drag 'n' drop some files here, or click to select files")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "photo-profile-name"
+  }, values.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Control.Feedback, {
     type: "invalid",
     className: "d-block"
   }, errors.image)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_4__["default"].Group, {
@@ -75140,8 +75161,8 @@ function Teacher() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/public/scoolook/scoolooklearning/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/public/scoolook/scoolooklearning/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/adelinomasioli/Projects/public/scoolook/onlearning/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/adelinomasioli/Projects/public/scoolook/onlearning/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

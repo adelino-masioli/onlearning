@@ -56,7 +56,7 @@
                             </div>
                         </div>
 
-                        <input type="text" name="profile" value="{{Hash::make('teacher')}}" >
+                        <input type="hidden" name="profile" value="{{Hash::make('teacher')}}" >
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12">

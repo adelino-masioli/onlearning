@@ -34,7 +34,7 @@ Route::get('images/{filename}', function ($filename)
 Route::namespace('Teacher')->group(function () {
     Route::get('/teacher', ["as" => "teacher", "uses" => "TeacherController@index"]);
     Route::get('/teacher/profile', ["as" => "teacher-profile", "uses" => "TeacherController@edit"]);
-    Route::put('/teacher/update', ["as" => "teacher-update", "uses" => "TeacherController@update"]);
+    Route::post('/teacher/update', ["as" => "teacher-update", "uses" => "TeacherController@update"]);
 });
 
 //TeacherStudent
@@ -43,7 +43,7 @@ Route::namespace('TeacherStudent')->group(function () {
     Route::get('/teacher/student/create', ["as" => "teacher-student-create", "uses" => "TeacherStudentController@create"]);
     Route::post('/teacher/student/store', ["as" => "teacher-student-store", "uses" => "TeacherStudentController@store"]);
     Route::get('/teacher/student/edit/{uuid}', ["as" => "teacher-student-edit", "uses" => "TeacherStudentController@edit"]);
-    Route::put('/teacher/student/update', ["as" => "teacher-student-update", "uses" => "TeacherStudentController@update"]);
+    Route::post('/teacher/student/update', ["as" => "teacher-student-update", "uses" => "TeacherStudentController@update"]);
     Route::post('/teacher/student/status', ["as" => "teacher-student-update-status", "uses" => "TeacherStudentController@status"]);
 });
 

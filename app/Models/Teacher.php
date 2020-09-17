@@ -26,6 +26,7 @@ class Teacher extends Model
         'degree',
         'qualification',
         'seo',
+        'avatar',
     ];
 
 

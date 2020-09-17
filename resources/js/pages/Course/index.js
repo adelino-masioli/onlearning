@@ -155,7 +155,7 @@ export default function Course({ courses, highlights }) {
                         {listRegisters.length == 0 && (
                             <tr>
                                 <td
-                                    colSpan="8"
+                                    colSpan="9"
                                     className="text-center text-muted"
                                 >
                                     <FiFrown size={20} /> No records found
@@ -172,17 +172,7 @@ export default function Course({ courses, highlights }) {
                                     {register.classrooms.length}
                                 </td>
                                 <td className="text-center">
-                                    <Link
-                                        classAtrributes="mr-3 btn btn-table btn-warning"
-                                        tootip={`Add new students to ${register.title}`}
-                                        placement="top"
-                                        text={register.students.length}
-                                        icon={<FiUsers />}
-                                        url={route(
-                                            "teacher-course-student",
-                                            register.uuid
-                                        )}
-                                    />
+                                    {register.students.length}
                                 </td>
                                 <td className="text-center">
                                     <Link

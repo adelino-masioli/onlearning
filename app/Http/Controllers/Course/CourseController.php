@@ -101,7 +101,7 @@ class CourseController extends Controller
         $image = Self::upload($request->file("image"));
 
         $data = $request->all();
-        $data += ["cover" => $image ? $image : NULL];
+        $data += ["cover" => $image ? $image : $course->cover];
 
         $course->update($data);
 
@@ -133,18 +133,23 @@ class CourseController extends Controller
 
     public function upload($file)
     {
-        $imagename = time().'.'.$file->extension();
-        $destinationPath = public_path('/uploads/teachers/covers/thumbnail');
+        if($file){
+            $imagename = time().'.'.$file->extension();
+            $destinationPath = public_path('/uploads/teachers/covers/thumbnail');
 
-        //create thumb
-        $img = Image::make($file->path());
-        $img->resize(400, 150, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$imagename);
+            //create thumb
+            $img = Image::make($file->path());
+            $img->resize(400, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$imagename);
 
-        //create full image
-        $destinationPath = public_path('/uploads/teachers/covers');
-        $file->move($destinationPath, $imagename);
+            //create full image
+            $destinationPath = public_path('/uploads/teachers/covers');
+            $file->move($destinationPath, $imagename);
+
+        }else{
+            $imagename = NULL;
+        }
 
         return $imagename;
     }
