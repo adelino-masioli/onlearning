@@ -24,7 +24,7 @@ class TeacherStudentController extends Controller
 
     public function index()
     {
-        $students =  Teacher::find(Auth::user()->id)->students;
+        $students = Teacher::where("user_id", Auth::user()->id)->first()->students;
         return Inertia::render('Teacher/Student', [
             'students' => $students
         ]);
@@ -56,7 +56,7 @@ class TeacherStudentController extends Controller
 
         $student = Student::create($data);
 
-        $teacher =  Teacher::find(Auth::user()->id);
+        $teacher =  Teacher::where("user_id", Auth::user()->id)->first();
         $teacher->students()->attach(Student::latest()->first()->id);
 
         $request->session()->flash('message', 'Saved successfully!');
