@@ -12,6 +12,7 @@ import { FiUploadCloud } from "react-icons/fi";
 
 import ToastMessage from "../../../../components/ToastMessage";
 import TextArea from "../../../../components/TextArea";
+import Loading from "../../../../components/Loading";
 
 export default function FormDatas({ datas }) {
     const { errors, flash, csrf_token } = usePage();
@@ -56,6 +57,7 @@ export default function FormDatas({ datas }) {
         datas && datas.seo != 0 ? true : false
     );
     const [showToast, setShowToast] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     const [selectedFile, setSelectedFile] = useState();
     const [selectedFileUrl, setSelectedFileUrl] = useState();
@@ -84,6 +86,8 @@ export default function FormDatas({ datas }) {
     function handleSubmit(e) {
         e.preventDefault();
 
+        setShowToast(false);
+
         const data = new FormData();
         data.append("name", values.name || "");
         data.append("email", values.email || "");
@@ -105,6 +109,7 @@ export default function FormDatas({ datas }) {
         }
 
         Inertia.post("/teacher/update", data);
+        setShowLoading(true);
     }
 
     const onSwitchAction = () => {
@@ -136,10 +141,17 @@ export default function FormDatas({ datas }) {
             seo: isSwitchOn,
         }));
         setShowToast(flash.message ? true : false);
+        setShowLoading(Object.keys(flash).length ? false : true);
     }, [isSwitchOn, flash]);
 
     return (
         <>
+            <Loading
+                message="Loading"
+                show={showLoading}
+                flash={showToast}
+                errors={!!errors}
+            />
             <ToastMessage showToast={showToast} />
 
             <Form onSubmit={handleSubmit} noValidate>

@@ -192,3 +192,33 @@
         font-weight: bold;
     }
 }
+
+.loading-component{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.6);
+
+    
+    div{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        flex-direction:column;
+        font-size: 14px;
+        font-weight: 300;
+    }
+}
+

@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import { FiUploadCloud } from "react-icons/fi";
 
 import ToastMessage from "../../../components/ToastMessage";
+import Loading from "../../../components/Loading";
 
 export default function Formdatas({ datas, handleForm }) {
     const { errors, flash, csrf_token } = usePage();
@@ -31,6 +32,8 @@ export default function Formdatas({ datas, handleForm }) {
         datas && datas.show != 0 ? true : false
     );
     const [showToast, setShowToast] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
+
     const [selectedFile, setSelectedFile] = useState();
     const [selectedFileUrl, setSelectedFileUrl] = useState();
 
@@ -59,6 +62,8 @@ export default function Formdatas({ datas, handleForm }) {
     function handleSubmit(e) {
         e.preventDefault();
 
+        setShowToast(false);
+
         const data = new FormData();
         data.append("id", values.id || "");
         data.append("title", values.title || "");
@@ -72,6 +77,8 @@ export default function Formdatas({ datas, handleForm }) {
             data.append("image", selectedFile);
         }
         handleForm(data);
+
+        setShowLoading(true);
     }
 
     const onSwitchAction = () => {
@@ -89,10 +96,17 @@ export default function Formdatas({ datas, handleForm }) {
             show: isSwitchOnLandingPage,
         }));
         setShowToast(flash.message ? true : false);
+        setShowLoading(Object.keys(flash).length ? false : true);
     }, [isSwitchOn, isSwitchOnLandingPage, flash]);
 
     return (
         <>
+            <Loading
+                message="Loading"
+                show={showLoading}
+                flash={showToast}
+                errors={errors}
+            />
             <ToastMessage showToast={showToast} />
 
             <Form onSubmit={handleSubmit} noValidate ref={formRef}>

@@ -15,6 +15,7 @@ use Str;
 use Image;
 use \App\Models\Student;
 use \App\Models\Course;
+use \App\Models\Teacher;
 
 class CourseController extends Controller
 {
@@ -25,8 +26,9 @@ class CourseController extends Controller
 
     public function index()
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $highlights = [];
-        $last = Course::take(4)->orderBy('updated_at', 'desc')->get();
+        $last = Course::take(4)->orderBy('updated_at', 'desc')->where("teacher_id", $teacher->id)->get();
         foreach ($last as $last) {
 
             $reg = [
@@ -42,7 +44,7 @@ class CourseController extends Controller
         }
 
         return Inertia::render('Course', [
-            "courses" => Course::with("classrooms")->with("students")->select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->get(),
+            "courses" => Course::with("classrooms")->with("students")->select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
             'highlights' => $highlights
             ]);
     }
@@ -54,8 +56,9 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:courses,title,'.Auth::user()->id.',teacher_id',
+            'title'        => 'required|max:255|unique:courses,title,'.$teacher->id.',teacher_id',
             'level'        => 'required',
             'description'  => 'required',
             'image'        => 'required'
@@ -65,7 +68,7 @@ class CourseController extends Controller
         $image = Self::upload($request->file("image"));
 
         $data = $request->all();
-        $data += ["teacher_id" => Auth::user()->id];
+        $data += ["teacher_id" => $teacher->id];
         $data += ["cover" => $image ? $image : NULL];
 
         $course = Course::create($data);
@@ -90,9 +93,10 @@ class CourseController extends Controller
 
     public function update(Request $request)
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $course = Course::where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:courses,title,'.Auth::user()->id.',teacher_id',
+            'title'        => 'required|max:255|unique:courses,title,'.$teacher->id.',teacher_id',
             'level'        => 'required',
             'description'  => 'required'
         ]);
