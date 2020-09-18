@@ -24,7 +24,7 @@ export default function FormData({ data }) {
         qualification: data ? data.qualification : null,
         seo: data ? data.seo : null,
         password: "",
-        confirmpassword: ""
+        confirmpassword: "",
     });
     const [isSwitchOn, setIsSwitchOn] = useState(
         data && data.seo == 0 ? false : true
@@ -34,15 +34,15 @@ export default function FormData({ data }) {
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value;
-        setValues(values => ({
+        setValues((values) => ({
             ...values,
-            [key]: value
+            [key]: value,
         }));
         setShowToast(false);
     }
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.put("/teacher/update", values);
+        Inertia.post("/teacher/update", values);
     }
 
     const onSwitchAction = () => {
@@ -50,9 +50,9 @@ export default function FormData({ data }) {
     };
 
     useEffect(() => {
-        setValues(values => ({
+        setValues((values) => ({
             ...values,
-            seo: isSwitchOn
+            seo: isSwitchOn,
         }));
         setShowToast(flash.message ? true : false);
     }, [isSwitchOn, flash]);

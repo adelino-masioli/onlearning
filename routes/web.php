@@ -118,5 +118,5 @@ Route::namespace('Student')->group(function () {
     Route::post('/student/store', ["as" => "student-store", "uses" => "StudentController@store"]);
     Route::get('/student/edit/{id}', ["as" => "student-edit", "uses" => "StudentController@edit"]);
     Route::get('/student/profile', ["as" => "student-profile", "uses" => "StudentController@profile"]);
-    Route::put('/student/update', ["as" => "student-update", "uses" => "StudentController@update"]);
+    Route::post('/student/update', ["as" => "student-update", "uses" => "StudentController@update"]);
 });

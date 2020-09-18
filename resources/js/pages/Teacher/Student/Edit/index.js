@@ -9,7 +9,7 @@ import FormData from "../Partials/form";
 
 export default function Edit({ student }) {
     function handleSubmit(values) {
-        Inertia.put(route("teacher-student-update"), values);
+        Inertia.post(route("teacher-student-update"), values);
     }
     return (
         <>
