@@ -6,10 +6,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 
-import ToastMessage from "../../../components/ToastMessage";
-import TextArea from "../../../components/TextArea";
+import ToastMessage from "../../../../components/ToastMessage";
+import TextArea from "../../../../components/TextArea";
 
-export default function Formdata({ data, courses, handleForm }) {
+export default function Formdata({ data, course, courses, handleForm }) {
     const { errors, flash } = usePage();
     const formRef = useRef();
 
@@ -20,7 +20,7 @@ export default function Formdata({ data, courses, handleForm }) {
         video: data && data.video ? data.video : "",
         download: data && data.download ? data.download : "",
         status: data && data.status ? data.status : 0,
-        course_id: data && data.course_id ? data.course_id : "",
+        course_id: course ? course.id : data.course_id,
     });
 
     const [isSwitchOn, setIsSwitchOn] = useState(
@@ -67,7 +67,6 @@ export default function Formdata({ data, courses, handleForm }) {
             setShowToast(flash.message ? true : false);
         }
         setListCourses(courses)
-
         return () => (mounted = false);
     }, [isSwitchOn, flash, courses]);
 
@@ -82,6 +81,7 @@ export default function Formdata({ data, courses, handleForm }) {
                     onChange={handleChange}
                     isInvalid={!!errors.id}
                 />
+
                 <Form.Row>
                     <Col>
                         <Form.Group controlId="title">
@@ -114,6 +114,7 @@ export default function Formdata({ data, courses, handleForm }) {
                                 required
                                 isInvalid={!!errors.course_id}
                                 className="shadow-sm"
+                                disabled
                             >
                                 <option value="">Select a course</option>
                                 {listCourses.map(course => (
@@ -126,14 +127,12 @@ export default function Formdata({ data, courses, handleForm }) {
                         </Form.Group>
                     </Col>
                 </Form.Row>
-
                 <Form.Group controlId="description">
                     <Form.Label>Description</Form.Label>
                     <TextArea
                         placeholder="Description"
                         handleFunction={handleTextArea}
                         value={values.description}
-                        className="shadow-sm"
                     />
                     <Form.Control.Feedback type="invalid" className="d-block">
                         {errors.description}
@@ -152,7 +151,6 @@ export default function Formdata({ data, courses, handleForm }) {
                                 onChange={handleChange}
                                 required
                                 isInvalid={!!errors.video}
-                                className="shadow-sm"
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.video}
@@ -171,7 +169,6 @@ export default function Formdata({ data, courses, handleForm }) {
                                 onChange={handleChange}
                                 required
                                 isInvalid={!!errors.download}
-                                className="shadow-sm"
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.download}

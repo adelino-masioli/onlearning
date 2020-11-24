@@ -75,7 +75,7 @@ class CourseController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-edit', $course->uuid);
+        return Redirect::route('courses-edit', $course->uuid);
     }
 
 
@@ -112,7 +112,7 @@ class CourseController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-edit', $course->uuid);
+        return Redirect::route('courses-edit', $course->uuid);
     }
 
     public function status(Request $request)
@@ -122,7 +122,7 @@ class CourseController extends Controller
         $status = $course->status == 0 ? 1 : 0;
         $course->update(["status" => $status]);
 
-        return Redirect::route('teacher-course');
+        return Redirect::route('courses');
     }
 
     public function show(Request $request)
@@ -132,7 +132,7 @@ class CourseController extends Controller
         $show = $course->show == 0 ? 1 : 0;
         $course->update(["show" => $show]);
 
-        return Redirect::route('teacher-course');
+        return Redirect::route('courses');
     }
 
     public function upload($file)

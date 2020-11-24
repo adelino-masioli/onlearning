@@ -16,6 +16,7 @@ use Image;
 use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
+use \App\Models\Teacher;
 
 class ClassroomController extends Controller
 {
@@ -24,27 +25,50 @@ class ClassroomController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($uuid)
+    public function index()
+    {
+        return Inertia::render('Classroom', [
+            "classrooms" => Classroom::with("course")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->get(),
+            ]);
+    }
+
+    public function classrooms_by_course($uuid)
     {
         $course = Course::where("uuid", $uuid)->first();
-        return Inertia::render('Classroom', [
+        return Inertia::render('Classroom/Course', [
             "course" => $course,
             "classrooms" => Classroom::with("course")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("classrooms.course_id", $course->id)->get(),
             ]);
     }
-
-    public function create($uuid)
+    
+    public function create()
     {
-        $course = Course::where("uuid", $uuid)->first();
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+        $courses = Course::orderBy('title', 'asc')->where("teacher_id", $teacher->id)->get();
+        
+
         return Inertia::render('Classroom/Create', [
+            "courses" => $courses,
+        ]);
+    }
+
+    public function create_by_course($uuid)
+    {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+        $courses = Course::orderBy('title', 'asc')->where("teacher_id", $teacher->id)->get();
+
+        $course = Course::where("uuid", $uuid)->first();
+        return Inertia::render('Classroom/Course/Create', [
             "course" => $course,
+            "courses" => $courses,
         ]);
     }
 
     public function store(Request $request)
     {
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:classrooms,title,'.$request->input("course_id").',course_id',
+            'course_id'    => 'required',
+            'title'        => 'required|max:255|unique:classrooms,title,'.(int)$request->input("course_id").',course_id',
             'description'  => 'required',
         ]);
 
@@ -54,15 +78,18 @@ class ClassroomController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-classroom-edit', $classroom->uuid);
+        return Redirect::route('classrooms-edit', $classroom->uuid);
     }
-
 
     public function edit($uuid)
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+        $courses = Course::orderBy('title', 'asc')->where("teacher_id", $teacher->id)->get();
+
         $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
         return Inertia::render('Classroom/Edit', [
-            'classroom' =>  $classroom
+            'classroom' =>  $classroom,
+            "courses" => $courses
         ]);
     }
 
@@ -71,7 +98,8 @@ class ClassroomController extends Controller
     {
         $classroom = Classroom::with("course")->where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:classrooms,title,'.$request->input("course_id").',course_id',
+            'course_id'    => 'required',
+            'title'        => 'required|max:255|unique:classrooms,title,'.(int)$request->input("course_id").',course_id',
             'description'  => 'required'
         ]);
 
@@ -81,7 +109,7 @@ class ClassroomController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-classroom-edit', $classroom->uuid);
+        return Redirect::route('classrooms-edit', $classroom->uuid);
     }
 
 

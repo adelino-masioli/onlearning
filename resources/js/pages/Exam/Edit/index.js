@@ -9,7 +9,7 @@ import FormData from "../Partials/form";
 
 export default function Edit({ exam }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-classroom-exam-update"), values);
+        Inertia.post(route("exams-update"), values);
     }
 
     return (
@@ -26,7 +26,7 @@ export default function Edit({ exam }) {
                     text="Back to exams"
                     icon={<FiChevronLeft />}
                     url={route(
-                        "teacher-course-classroom-exam",
+                        "exams",
                         exam.classroom.uuid
                     )}
                 />

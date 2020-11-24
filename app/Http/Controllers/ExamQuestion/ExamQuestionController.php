@@ -56,7 +56,7 @@ class ExamQuestionController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-classroom-exam-question-edit', $exam_question->uuid);
+        return Redirect::route('questions-edit', $exam_question->uuid);
     }
 
 
@@ -84,7 +84,7 @@ class ExamQuestionController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-classroom-exam-question-edit', $exam_question->uuid);
+        return Redirect::route('questions-edit', $exam_question->uuid);
     }
 
 

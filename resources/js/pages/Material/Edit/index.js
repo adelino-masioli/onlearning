@@ -9,7 +9,7 @@ import FormData from "../Partials/form";
 
 export default function Edit({ material }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-classroom-material-update"), values);
+        Inertia.post(route("materials-update"), values);
     }
 
     return (
@@ -26,7 +26,7 @@ export default function Edit({ material }) {
                     text="Back to materials"
                     icon={<FiChevronLeft />}
                     url={route(
-                        "teacher-course-classroom-material",
+                        "materials",
                         material.classroom.uuid
                     )}
                 />

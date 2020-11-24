@@ -32,25 +32,25 @@ export default function Course({ courses, highlights }) {
     };
     const handleInactive = value => {
         const data = { id: value.id };
-        Inertia.post(route("teacher-course-update-status"), data);
+        Inertia.post(route("courses-update-status"), data);
     };
 
     const handleShowLandingPage = (status, value) => {
         const data = { id: value.id };
-        Inertia.post(route("teacher-course-update-show"), data);
+        Inertia.post(route("courses-update-show"), data);
     };
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = courses.filter(function(item) {
+        const results = courses.filter(function (item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
                     : item[key]
-                          .toString()
-                          .toLowerCase()
-                          .includes(lowercasedValue)
+                        .toString()
+                        .toLowerCase()
+                        .includes(lowercasedValue)
             );
         });
         setListRegisters(results);
@@ -73,7 +73,17 @@ export default function Course({ courses, highlights }) {
                                 tootip="Create new course"
                                 text="Create new course"
                                 icon={<FiPlus />}
-                                url={route("teacher-course-create")}
+                                url={route("courses-create")}
+                            />
+
+                            <Link
+                                classAtrributes="btn btn-primary btn-new  ml-4 mb-4"
+                                tootip="Create new course"
+                                placement="bottom"
+                                tootip="Create new classroom"
+                                text="Create new classroom"
+                                icon={<FiBookOpen />}
+                                url={route("classrooms-create")}
                             />
                         </Col>
                         <h1 className="col-md-12">Last edited courses</h1>
@@ -87,7 +97,7 @@ export default function Course({ courses, highlights }) {
                                     title={highlight.title}
                                     description={highlight.description}
                                     cover={highlight.cover}
-                                    url={route("teacher-course-edit", {
+                                    url={route("courses-edit", {
                                         uuid: highlight.uuid
                                     })}
                                     status={
@@ -222,7 +232,7 @@ export default function Course({ courses, highlights }) {
                                         text="Classrooms"
                                         icon={<FiBookOpen />}
                                         url={route(
-                                            "teacher-course-classroom",
+                                            "classrooms-by-course",
                                             register.uuid
                                         )}
                                     />
@@ -232,17 +242,17 @@ export default function Course({ courses, highlights }) {
                                             <FiXCircle /> Edit
                                         </span>
                                     ) : (
-                                        <Link
-                                            classAtrributes="btn btn-table btn-secondary"
-                                            tootip={`Edit ${register.title}`}
-                                            placement="top"
-                                            text="Edit"
-                                            icon={<FiEdit2 />}
-                                            url={route("teacher-course-edit", {
-                                                uuid: register.uuid
-                                            })}
-                                        />
-                                    )}
+                                            <Link
+                                                classAtrributes="btn btn-table btn-secondary"
+                                                tootip={`Edit ${register.title}`}
+                                                placement="top"
+                                                text="Edit"
+                                                icon={<FiEdit2 />}
+                                                url={route("courses-edit", {
+                                                    uuid: register.uuid
+                                                })}
+                                            />
+                                        )}
                                 </td>
                             </tr>
                         ))}

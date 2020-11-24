@@ -3,19 +3,18 @@ import { Inertia } from "@inertiajs/inertia";
 
 import { FiChevronLeft } from "react-icons/fi";
 
-import Template from "../../../components/Template";
-import Link from "../../../components/Link";
+import Template from "../../../../components/Template";
+import Link from "../../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Create({ courses }) {
+export default function Create({ course, courses }) {
     function handleSubmit(values) {
         Inertia.post(route("classrooms-store"), values);
     }
-
     return (
         <>
             <Template
-                title={`Create new <strong>classroom</strong>`}
+                title={`Create new classroom <strong>${course.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
@@ -25,9 +24,12 @@ export default function Create({ courses }) {
                     tootip="Back to classrooms"
                     text="Back to classrooms"
                     icon={<FiChevronLeft />}
-                    url={route("classrooms")}
+                    url={route(
+                        "classrooms-by-course",
+                        course.uuid
+                    )}
                 />
-                <FormData courses={courses} handleForm={handleSubmit} />
+                <FormData course={course} courses={courses} handleForm={handleSubmit} />
             </Template>
         </>
     );

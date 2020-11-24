@@ -18,14 +18,14 @@ export default function ExamQuestion({ questions, exam }) {
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = questions.filter(function(item) {
+        const results = questions.filter(function (item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
                     : item[key]
-                          .toString()
-                          .toLowerCase()
-                          .includes(lowercasedValue)
+                        .toString()
+                        .toLowerCase()
+                        .includes(lowercasedValue)
             );
         });
         setListRegisters(results);
@@ -52,7 +52,7 @@ export default function ExamQuestion({ questions, exam }) {
                                 text="List all exams"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-classroom-exam",
+                                    "exams",
                                     exam.classroom.uuid
                                 )}
                             />
@@ -64,7 +64,7 @@ export default function ExamQuestion({ questions, exam }) {
                                 text="Create new question"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-classroom-exam-question-create",
+                                    "questions-create",
                                     exam.uuid
                                 )}
                             />
@@ -131,10 +131,10 @@ export default function ExamQuestion({ questions, exam }) {
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>
                                     ) : (
-                                        <Badge variant="success">
-                                            Published
-                                        </Badge>
-                                    )}
+                                            <Badge variant="success">
+                                                Published
+                                            </Badge>
+                                        )}
                                 </td>
                                 <td className="text-center">
                                     <Link
@@ -144,7 +144,7 @@ export default function ExamQuestion({ questions, exam }) {
                                         text="Edit question"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-classroom-exam-question-edit",
+                                            "questions-edit",
                                             register.uuid
                                         )}
                                     />

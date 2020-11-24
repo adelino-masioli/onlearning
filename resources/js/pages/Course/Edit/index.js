@@ -9,7 +9,7 @@ import FormData from "../Partials/form";
 
 export default function Edit({ course }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-update"), values);
+        Inertia.post(route("courses-update"), values);
     }
 
     return (
@@ -25,7 +25,7 @@ export default function Edit({ course }) {
                     tootip="Create new course"
                     text="Create new course"
                     icon={<FiPlus />}
-                    url={route("teacher-course-create")}
+                    url={route("courses-create")}
                 />
 
                 <Link
@@ -35,7 +35,7 @@ export default function Edit({ course }) {
                     tootip="Create new classroom"
                     text="Create new classroom"
                     icon={<FiBookOpen />}
-                    url={route("teacher-course-create")}
+                    url={route("courses-create")}
                 />
                 <FormData datas={course} handleForm={handleSubmit} />
             </Template>

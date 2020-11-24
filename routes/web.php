@@ -49,13 +49,13 @@ Route::namespace('TeacherStudent')->group(function () {
 
 //Course
 Route::namespace('Course')->group(function () {
-    Route::get('/teacher/courses', ["as" => "teacher-course", "uses" => "CourseController@index"]);
-    Route::get('/teacher/courses/create', ["as" => "teacher-course-create", "uses" => "CourseController@create"]);
-    Route::post('/teacher/courses/store', ["as" => "teacher-course-store", "uses" => "CourseController@store"]);
-    Route::get('/teacher/courses/edit/{uuid}', ["as" => "teacher-course-edit", "uses" => "CourseController@edit"]);
-    Route::post('/teacher/courses/update', ["as" => "teacher-course-update", "uses" => "CourseController@update"]);
-    Route::post('/teacher/courses/status', ["as" => "teacher-course-update-status", "uses" => "CourseController@status"]);
-    Route::post('/teacher/courses/show', ["as" => "teacher-course-update-show", "uses" => "CourseController@show"]);
+    Route::get('/courses', ["as" => "courses", "uses" => "CourseController@index"]);
+    Route::get('/courses/create', ["as" => "courses-create", "uses" => "CourseController@create"]);
+    Route::post('/courses/store', ["as" => "courses-store", "uses" => "CourseController@store"]);
+    Route::get('/courses/edit/{uuid}', ["as" => "courses-edit", "uses" => "CourseController@edit"]);
+    Route::post('/courses/update', ["as" => "courses-update", "uses" => "CourseController@update"]);
+    Route::post('/courses/status', ["as" => "courses-update-status", "uses" => "CourseController@status"]);
+    Route::post('/courses/show', ["as" => "courses-update-show", "uses" => "CourseController@show"]);
 });
 
 //CourseStudent
@@ -67,47 +67,49 @@ Route::namespace('CourseStudent')->group(function () {
 
 //Classroom
 Route::namespace('Classroom')->group(function () {
-    Route::get('/teacher/courses/classrooms/{courseuuid}', ["as" => "teacher-course-classroom", "uses" => "ClassroomController@index"]);
-    Route::get('/teacher/courses/classroom/create/{uuid}', ["as" => "teacher-course-classroom-create", "uses" => "ClassroomController@create"]);
-    Route::post('/teacher/courses/classroom/store', ["as" => "teacher-course-classroom-store", "uses" => "ClassroomController@store"]);
-    Route::get('/teacher/courses/classroom/edit/{uuid}', ["as" => "teacher-course-classroom-edit", "uses" => "ClassroomController@edit"]);
-    Route::post('/teacher/courses/classroom/update', ["as" => "teacher-course-classroom-update", "uses" => "ClassroomController@update"]);
+    Route::get('/classrooms', ["as" => "classrooms", "uses" => "ClassroomController@index"]);
+    Route::get('/classrooms/course/{courseuuid}', ["as" => "classrooms-by-course", "uses" => "ClassroomController@classrooms_by_course"]);
+    Route::get('/classrooms/create', ["as" => "classrooms-create", "uses" => "ClassroomController@create"]);
+    Route::get('/classrooms/create/course/{courseuuid}', ["as" => "classrooms-create-by-course", "uses" => "ClassroomController@create_by_course"]);
+    Route::post('/classrooms/store', ["as" => "classrooms-store", "uses" => "ClassroomController@store"]);
+    Route::get('/classrooms/edit/{uuid}', ["as" => "classrooms-edit", "uses" => "ClassroomController@edit"]);
+    Route::post('/classrooms/update', ["as" => "classrooms-update", "uses" => "ClassroomController@update"]);
 });
 
 //Material
 Route::namespace('Material')->group(function () {
-    Route::get('/teacher/courses/classrooms/material/{classroomuuid}', ["as" => "teacher-course-classroom-material", "uses" => "MaterialController@index"]);
-    Route::get('/teacher/courses/classroom/material/create/{uuid}', ["as" => "teacher-course-classroom-material-create", "uses" => "MaterialController@create"]);
-    Route::post('/teacher/courses/classroom/material/store', ["as" => "teacher-course-classroom-material-store", "uses" => "MaterialController@store"]);
-    Route::get('/teacher/courses/classroom/material/edit/{uuid}', ["as" => "teacher-course-classroom-material-edit", "uses" => "MaterialController@edit"]);
-    Route::post('/teacher/courses/classroom/material/update', ["as" => "teacher-course-classroom-material-update", "uses" => "MaterialController@update"]);
+    Route::get('/materials/{classroomuuid}', ["as" => "materials", "uses" => "MaterialController@index"]);
+    Route::get('/materials/create/{uuid}', ["as" => "materials-create", "uses" => "MaterialController@create"]);
+    Route::post('/materials/store', ["as" => "materials-store", "uses" => "MaterialController@store"]);
+    Route::get('/materials/edit/{uuid}', ["as" => "materials-edit", "uses" => "MaterialController@edit"]);
+    Route::post('/materials/update', ["as" => "materials-update", "uses" => "MaterialController@update"]);
 });
 
 //Exam
 Route::namespace('Exam')->group(function () {
-    Route::get('/teacher/courses/classrooms/exam/{classroomuuid}', ["as" => "teacher-course-classroom-exam", "uses" => "ExamController@index"]);
-    Route::get('/teacher/courses/classroom/exam/create/{uuid}', ["as" => "teacher-course-classroom-exam-create", "uses" => "ExamController@create"]);
-    Route::post('/teacher/courses/classroom/exam/store', ["as" => "teacher-course-classroom-exam-store", "uses" => "ExamController@store"]);
-    Route::get('/teacher/courses/classroom/exam/edit/{uuid}', ["as" => "teacher-course-classroom-exam-edit", "uses" => "ExamController@edit"]);
-    Route::post('/teacher/courses/classroom/exam/update', ["as" => "teacher-course-classroom-exam-update", "uses" => "ExamController@update"]);
+    Route::get('/exams/{classroomuuid}', ["as" => "exams", "uses" => "ExamController@index"]);
+    Route::get('/exams/create/{uuid}', ["as" => "exams-create", "uses" => "ExamController@create"]);
+    Route::post('/exams/store', ["as" => "exams-store", "uses" => "ExamController@store"]);
+    Route::get('/exams/edit/{uuid}', ["as" => "exams-edit", "uses" => "ExamController@edit"]);
+    Route::post('/exams/update', ["as" => "exams-update", "uses" => "ExamController@update"]);
 });
 
 //ExamQuestion
 Route::namespace('ExamQuestion')->group(function () {
-    Route::get('/teacher/courses/classrooms/exam/question/{examuuid}', ["as" => "teacher-course-classroom-exam-question", "uses" => "ExamQuestionController@index"]);
-    Route::get('/teacher/courses/classroom/exam/create/question/{uuid}', ["as" => "teacher-course-classroom-exam-question-create", "uses" => "ExamQuestionController@create"]);
-    Route::post('/teacher/courses/classroom/exam/question/store', ["as" => "teacher-course-classroom-exam-question-store", "uses" => "ExamQuestionController@store"]);
-    Route::get('/teacher/courses/classroom/exam/edit/question/{uuid}', ["as" => "teacher-course-classroom-exam-question-edit", "uses" => "ExamQuestionController@edit"]);
-    Route::post('/teacher/courses/classroom/exam/update/question', ["as" => "teacher-course-classroom-exam-question-update", "uses" => "ExamQuestionController@update"]);
+    Route::get('/questions/{examuuid}', ["as" => "questions", "uses" => "ExamQuestionController@index"]);
+    Route::get('/questions/create/{uuid}', ["as" => "questions-create", "uses" => "ExamQuestionController@create"]);
+    Route::post('/questions/store', ["as" => "questions-store", "uses" => "ExamQuestionController@store"]);
+    Route::get('/questions/edit/{uuid}', ["as" => "questions-edit", "uses" => "ExamQuestionController@edit"]);
+    Route::post('/questions/update', ["as" => "questions-update", "uses" => "ExamQuestionController@update"]);
 });
 
 //ExamQuestionAnswer
 Route::namespace('ExamQuestionAnswer')->group(function () {
-    Route::get('/teacher/courses/classrooms/exam/question/answer/{questionuuid}', ["as" => "teacher-course-classroom-question-exam-answer", "uses" => "ExamQuestionAnswerController@index"]);
-    Route::get('/teacher/courses/classroom/exam/create/question/answer/{uuid}', ["as" => "teacher-course-classroom-exam-question-answer-create", "uses" => "ExamQuestionAnswerController@create"]);
-    Route::post('/teacher/courses/classroom/exam/question/answer/store', ["as" => "teacher-course-classroom-exam-question-answer-store", "uses" => "ExamQuestionAnswerController@store"]);
-    Route::get('/teacher/courses/classroom/exam/edit/question/answer/{uuid}', ["as" => "teacher-course-classroom-exam-question-answer-edit", "uses" => "ExamQuestionAnswerController@edit"]);
-    Route::post('/teacher/courses/classroom/exam/update/question/answer', ["as" => "teacher-course-classroom-exam-question-answer-update", "uses" => "ExamQuestionAnswerController@update"]);
+    Route::get('/answers/{questionuuid}', ["as" => "answers", "uses" => "ExamQuestionAnswerController@index"]);
+    Route::get('/answers/create/{uuid}', ["as" => "answers-create", "uses" => "ExamQuestionAnswerController@create"]);
+    Route::post('/tanswers/store', ["as" => "answers-store", "uses" => "ExamQuestionAnswerController@store"]);
+    Route::get('/answers/edit/{uuid}', ["as" => "answers-edit", "uses" => "ExamQuestionAnswerController@edit"]);
+    Route::post('/answer/update', ["as" => "answers-update", "uses" => "ExamQuestionAnswerController@update"]);
 });
 
 

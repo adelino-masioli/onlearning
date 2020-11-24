@@ -9,7 +9,7 @@ import FormData from "../Partials/form";
 
 export default function Create({ classroom }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-classroom-exam-store"), values);
+        Inertia.post(route("exams-store"), values);
     }
     return (
         <>
@@ -24,7 +24,7 @@ export default function Create({ classroom }) {
                     tootip="Back to exams"
                     text="Back to exams"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course-classroom-exam", classroom.uuid)}
+                    url={route("exams", classroom.uuid)}
                 />
                 <FormData classroom={classroom} handleForm={handleSubmit} />
             </Template>

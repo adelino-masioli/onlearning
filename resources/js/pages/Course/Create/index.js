@@ -6,7 +6,7 @@ import FormData from "../Partials/form";
 
 export default function Create() {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-store"), values);
+        Inertia.post(route("courses-store"), values);
     }
     return (
         <>

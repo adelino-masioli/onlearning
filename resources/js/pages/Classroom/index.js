@@ -12,20 +12,20 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function classroom({ classrooms, course }) {
+export default function classroom({ classrooms }) {
     const [listRegisters, setListRegisters] = useState(classrooms);
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = classrooms.filter(function(item) {
+        const results = classrooms.filter(function (item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
                     : item[key]
-                          .toString()
-                          .toLowerCase()
-                          .includes(lowercasedValue)
+                        .toString()
+                        .toLowerCase()
+                        .includes(lowercasedValue)
             );
         });
         setListRegisters(results);
@@ -38,7 +38,7 @@ export default function classroom({ classrooms, course }) {
     return (
         <>
             <Template
-                title={`Course classrooms <strong>${course.title}</strong>`}
+                title={`Course classrooms <strong>classrooms</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
@@ -51,7 +51,7 @@ export default function classroom({ classrooms, course }) {
                                 tootip="List all courses"
                                 text="List all courses"
                                 icon={<FiChevronLeft />}
-                                url={route("teacher-course")}
+                                url={route("courses")}
                             />
                             <Link
                                 classAtrributes="btn btn-primary btn-new  mb-4"
@@ -60,10 +60,7 @@ export default function classroom({ classrooms, course }) {
                                 tootip="Create new classroom"
                                 text="Create new classroom"
                                 icon={<FiPlus />}
-                                url={route(
-                                    "teacher-course-classroom-create",
-                                    course.uuid
-                                )}
+                                url={route("classrooms-create")}
                             />
                         </Col>
                         <h1 className="col-md-12">List of classrooms</h1>
@@ -131,10 +128,10 @@ export default function classroom({ classrooms, course }) {
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>
                                     ) : (
-                                        <Badge variant="success">
-                                            Published
-                                        </Badge>
-                                    )}
+                                            <Badge variant="success">
+                                                Published
+                                            </Badge>
+                                        )}
                                 </td>
                                 <td className="text-center">
                                     <Link
@@ -144,7 +141,7 @@ export default function classroom({ classrooms, course }) {
                                         text="Edit classroom"
                                         icon={<FiBookOpen />}
                                         url={route(
-                                            "teacher-course-classroom-edit",
+                                            "classrooms-edit",
                                             register.uuid
                                         )}
                                     />

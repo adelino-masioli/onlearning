@@ -7,15 +7,15 @@ import Template from "../../../components/Template";
 import Link from "../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Edit({ classroom, courses }) {
+export default function Edit({ classroom }) {
     function handleSubmit(values) {
-        Inertia.post(route("classrooms-update"), values);
+        Inertia.post(route("teacher-course-classroom-update"), values);
     }
 
     return (
         <>
             <Template
-                title={`Editing classroom <strong>${classroom.title}</strong>`}
+                title={`Editing course <strong>${classroom.course.title}</strong>`}
                 subtitle="Teacher"
             >
                 <Link
@@ -25,7 +25,10 @@ export default function Edit({ classroom, courses }) {
                     tootip="Back to classrooms"
                     text="Back to classrooms"
                     icon={<FiChevronLeft />}
-                    url={route("classrooms")}
+                    url={route(
+                        "teacher-course-classroom",
+                        classroom.course.uuid
+                    )}
                 />
 
                 <Link
@@ -55,7 +58,6 @@ export default function Edit({ classroom, courses }) {
                 />
                 <FormData
                     data={classroom}
-                    courses={courses}
                     course={classroom.course}
                     handleForm={handleSubmit}
                 />

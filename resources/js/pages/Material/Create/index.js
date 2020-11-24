@@ -9,7 +9,7 @@ import FormData from "../Partials/form";
 
 export default function Create({ classroom }) {
     function handleSubmit(values) {
-        Inertia.post(route("teacher-course-classroom-material-store"), values);
+        Inertia.post(route("materials-store"), values);
     }
     return (
         <>
@@ -25,7 +25,7 @@ export default function Create({ classroom }) {
                     text="Back to materials"
                     icon={<FiChevronLeft />}
                     url={route(
-                        "teacher-course-classroom-material",
+                        "materials",
                         classroom.uuid
                     )}
                 />

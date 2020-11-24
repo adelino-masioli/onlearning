@@ -18,14 +18,14 @@ export default function ExamQuestionAnswer({ answers, question }) {
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = answers.filter(function(item) {
+        const results = answers.filter(function (item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
                     : item[key]
-                          .toString()
-                          .toLowerCase()
-                          .includes(lowercasedValue)
+                        .toString()
+                        .toLowerCase()
+                        .includes(lowercasedValue)
             );
         });
         setListRegisters(results);
@@ -52,7 +52,7 @@ export default function ExamQuestionAnswer({ answers, question }) {
                                 text="List all questions"
                                 icon={<FiChevronLeft />}
                                 url={route(
-                                    "teacher-course-classroom-exam-question",
+                                    "questions",
                                     question.exam.uuid
                                 )}
                             />
@@ -64,7 +64,7 @@ export default function ExamQuestionAnswer({ answers, question }) {
                                 text="Create new answer"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "teacher-course-classroom-exam-question-answer-create",
+                                    "answers-create",
                                     question.uuid
                                 )}
                             />
@@ -134,18 +134,18 @@ export default function ExamQuestionAnswer({ answers, question }) {
                                     {register.is_correct == 0 ? (
                                         <Badge variant="secondary">No</Badge>
                                     ) : (
-                                        <Badge variant="success">Yes</Badge>
-                                    )}
+                                            <Badge variant="success">Yes</Badge>
+                                        )}
                                 </td>
 
                                 <td className="text-center">
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>
                                     ) : (
-                                        <Badge variant="success">
-                                            Published
-                                        </Badge>
-                                    )}
+                                            <Badge variant="success">
+                                                Published
+                                            </Badge>
+                                        )}
                                 </td>
                                 <td className="text-center">
                                     <Link
@@ -155,7 +155,7 @@ export default function ExamQuestionAnswer({ answers, question }) {
                                         text="Edit answer"
                                         icon={<FiLink2 />}
                                         url={route(
-                                            "teacher-course-classroom-exam-question-answer-edit",
+                                            "answers-edit",
                                             register.uuid
                                         )}
                                     />

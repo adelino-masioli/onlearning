@@ -5,20 +5,20 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiChevronLeft, FiLink2 } from "react-icons/fi";
+import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen } from "react-icons/fi";
 
-import Template from "../../components/Template";
-import Link from "../../components/Link";
-import Search from "../../components/Search";
+import Template from "../../../components/Template";
+import Link from "../../../components/Link";
+import Search from "../../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function Material({ materials, classroom }) {
-    const [listRegisters, setListRegisters] = useState(materials);
+export default function classroom({ classrooms, course }) {
+    const [listRegisters, setListRegisters] = useState(classrooms);
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = materials.filter(function (item) {
+        const results = classrooms.filter(function (item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
@@ -32,13 +32,13 @@ export default function Material({ materials, classroom }) {
     }
 
     useEffect(() => {
-        setListRegisters(materials);
-    }, [materials]);
+        setListRegisters(classrooms);
+    }, [classrooms]);
 
     return (
         <>
             <Template
-                title={`classroom Material  <strong>${classroom.title}</strong>`}
+                title={`Course classrooms <strong>${course.title}</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
@@ -46,30 +46,27 @@ export default function Material({ materials, classroom }) {
                         <Col>
                             <Link
                                 classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                                tootip="List all classrooms"
+                                tootip="List all courses"
                                 placement="bottom"
-                                tootip="List all classrooms"
-                                text="List all classrooms"
+                                tootip="List all courses"
+                                text="List all courses"
                                 icon={<FiChevronLeft />}
-                                url={route(
-                                    "classrooms",
-                                    classroom.course.uuid
-                                )}
+                                url={route("courses")}
                             />
                             <Link
                                 classAtrributes="btn btn-primary btn-new  mb-4"
-                                tootip="Create new material"
+                                tootip="Create new classroom"
                                 placement="bottom"
-                                tootip="Create new material"
-                                text="Create new material"
+                                tootip="Create new classroom"
+                                text="Create new classroom"
                                 icon={<FiPlus />}
                                 url={route(
-                                    "materials-create",
-                                    classroom.uuid
+                                    "classrooms-create-by-course",
+                                    course.uuid
                                 )}
                             />
                         </Col>
-                        <h1 className="col-md-12">List of materials</h1>
+                        <h1 className="col-md-12">List of classrooms</h1>
                     </ul>
                 </div>
 
@@ -93,16 +90,17 @@ export default function Material({ materials, classroom }) {
                         <tr>
                             <th className="text-center">#</th>
                             <th className="text-center text-uppercase">
-                                Material
+                                Classroom
                             </th>
                             <th className="text-center text-uppercase">
-                                classroom
+                                Course
                             </th>
-
+                            <th className="text-center text-uppercase">
+                                Level
+                            </th>
                             <th className="text-center text-uppercase">
                                 Created At
                             </th>
-                            <th className="text-center text-uppercase">Link</th>
                             <th className="text-center text-uppercase">
                                 Status
                             </th>
@@ -126,9 +124,9 @@ export default function Material({ materials, classroom }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.classroom.title}</td>
+                                <td>{register.course.title}</td>
+                                <td>{register.course.level}</td>
                                 <td>{register.date}</td>
-                                <td>{register.link}</td>
                                 <td className="text-center">
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>
@@ -143,10 +141,10 @@ export default function Material({ materials, classroom }) {
                                         classAtrributes="text-success link"
                                         tootip={`Edit ${register.title}`}
                                         placement="top"
-                                        text="Edit material"
-                                        icon={<FiLink2 />}
+                                        text="Edit classroom"
+                                        icon={<FiBookOpen />}
                                         url={route(
-                                            "materials-edit",
+                                            "classrooms-edit",
                                             register.uuid
                                         )}
                                     />

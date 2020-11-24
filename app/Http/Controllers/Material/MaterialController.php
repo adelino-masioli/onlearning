@@ -55,7 +55,7 @@ class MaterialController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-classroom-material-edit', $material->uuid);
+        return Redirect::route('materials-edit', $material->uuid);
     }
 
 
@@ -82,7 +82,7 @@ class MaterialController extends Controller
 
         $request->session()->flash('message', 'Saved successfully!');
 
-        return Redirect::route('teacher-course-classroom-material-edit', $material->uuid);
+        return Redirect::route('materials-edit', $material->uuid);
     }
 
 
