@@ -71968,6 +71968,12 @@ function Template(props) {
       size: "20"
     })
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SidebarMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    text: "Classrooms",
+    url: "classrooms",
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiBookOpen"], {
+      size: "20"
+    })
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SidebarMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
     text: "Students",
     url: "teacher-student",
     icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiUsers"], {
@@ -73993,7 +73999,7 @@ function CourseStudent(_ref) {
     classAtrributes: "btn btn-secondary btn-new  mb-4",
     tootip: "List all courses",
     placement: "bottom"
-  }, _defineProperty(_React$createElement, "tootip", "List all courses"), _defineProperty(_React$createElement, "text", "List all courses"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("teacher-course")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, _defineProperty(_React$createElement, "tootip", "List all courses"), _defineProperty(_React$createElement, "text", "List all courses"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("courses")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
     placeholder: "Enter your search to filter",
     handleFunction: handleFilter
   }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {

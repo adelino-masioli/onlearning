@@ -23,14 +23,14 @@ export default function CourseStudent({ course, students, classrooms }) {
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = students.filter(function(item) {
+        const results = students.filter(function (item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
                     : item[key]
-                          .toString()
-                          .toLowerCase()
-                          .includes(lowercasedValue)
+                        .toString()
+                        .toLowerCase()
+                        .includes(lowercasedValue)
             );
         });
         setListRegisters(results);
@@ -75,7 +75,7 @@ export default function CourseStudent({ course, students, classrooms }) {
                     tootip="List all courses"
                     text="List all courses"
                     icon={<FiChevronLeft />}
-                    url={route("teacher-course")}
+                    url={route("courses")}
                 />
 
                 <Search

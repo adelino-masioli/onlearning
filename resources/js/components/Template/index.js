@@ -14,6 +14,7 @@ import {
     FiHome,
     FiFileText,
     FiUsers,
+    FiBookOpen,
     FiCommand
 } from "react-icons/fi";
 
@@ -54,6 +55,11 @@ export default function Template(props) {
                                         text="Courses"
                                         url="courses"
                                         icon={<FiFileText size="20" />}
+                                    />
+                                    <SidebarMenu
+                                        text="Classrooms"
+                                        url="classrooms"
+                                        icon={<FiBookOpen size="20" />}
                                     />
                                     <SidebarMenu
                                         text="Students"
