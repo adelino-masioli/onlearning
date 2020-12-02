@@ -61,7 +61,8 @@ class ClassroomStudentController extends Controller
         $student = Student::where('uuid', $request->input("student")["uuid"])->first();
         $classroom = Classroom::where('uuid', $request->input("classroom")["uuid"])->first();
 
-        if($student->classrooms->count() > 0 && $classroom->students->count() > 0){
+
+        if($classroom->students()->where('student_id', $student->id)->exists() > 0){
             $classroom->students()->detach($student->id);
         }else{
             $classroom->students()->attach($student->id);
