@@ -147,9 +147,7 @@ export default function Course({ courses, highlights }) {
                             <th className="text-center text-uppercase">
                                 Classrooms
                             </th>
-                            <th className="text-center text-uppercase">
-                                Students
-                            </th>
+
                             <th className="text-center text-uppercase">
                                 Show on landing page?
                             </th>
@@ -180,9 +178,6 @@ export default function Course({ courses, highlights }) {
                                 <td>{register.date}</td>
                                 <td className="text-center">
                                     {register.classrooms.length}
-                                </td>
-                                <td className="text-center">
-                                    {register.students.length}
                                 </td>
                                 <td className="text-center">
                                     <Link

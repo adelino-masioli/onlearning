@@ -72181,6 +72181,10 @@ var map = {
 	"./Classroom/Partials/form.js": "./resources/js/pages/Classroom/Partials/form.js",
 	"./Classroom/index": "./resources/js/pages/Classroom/index.js",
 	"./Classroom/index.js": "./resources/js/pages/Classroom/index.js",
+	"./ClassroomStudent": "./resources/js/pages/ClassroomStudent/index.js",
+	"./ClassroomStudent/": "./resources/js/pages/ClassroomStudent/index.js",
+	"./ClassroomStudent/index": "./resources/js/pages/ClassroomStudent/index.js",
+	"./ClassroomStudent/index.js": "./resources/js/pages/ClassroomStudent/index.js",
 	"./Course": "./resources/js/pages/Course/index.js",
 	"./Course/": "./resources/js/pages/Course/index.js",
 	"./Course/Create": "./resources/js/pages/Course/Create/index.js",
@@ -72195,10 +72199,6 @@ var map = {
 	"./Course/Partials/form.js": "./resources/js/pages/Course/Partials/form.js",
 	"./Course/index": "./resources/js/pages/Course/index.js",
 	"./Course/index.js": "./resources/js/pages/Course/index.js",
-	"./CourseStudent": "./resources/js/pages/CourseStudent/index.js",
-	"./CourseStudent/": "./resources/js/pages/CourseStudent/index.js",
-	"./CourseStudent/index": "./resources/js/pages/CourseStudent/index.js",
-	"./CourseStudent/index.js": "./resources/js/pages/CourseStudent/index.js",
 	"./Exam": "./resources/js/pages/Exam/index.js",
 	"./Exam/": "./resources/js/pages/Exam/index.js",
 	"./Exam/Create": "./resources/js/pages/Exam/Create/index.js",
@@ -73180,6 +73180,8 @@ function classroom(_ref) {
     className: "text-center text-uppercase"
   }, "Level"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
+  }, "Students"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase"
   }, "Created At"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
   }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -73195,7 +73197,22 @@ function classroom(_ref) {
       id: register.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
-    }, register.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.course.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.course.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, register.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.course.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.course.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      classAtrributes: register.students.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1",
+      tootip: "View students of ".concat(register.title),
+      placement: "top",
+      text: "View",
+      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiSearch"], null),
+      url: route("classroom-students", register.uuid)
+    }), register.students.length == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      pill: true,
+      variant: "secondary"
+    }, register.students.length) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      pill: true,
+      variant: "success"
+    }, register.students.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, register.status == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_3__["default"], {
       variant: "secondary"
@@ -73210,6 +73227,160 @@ function classroom(_ref) {
       text: "Edit classroom",
       icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiBookOpen"], null),
       url: route("classrooms-edit", register.uuid)
+    })));
+  })))));
+}
+
+/***/ }),
+
+/***/ "./resources/js/pages/ClassroomStudent/index.js":
+/*!******************************************************!*\
+  !*** ./resources/js/pages/ClassroomStudent/index.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ClassroomStudent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Table */ "./node_modules/react-bootstrap/esm/Table.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.esm.js");
+/* harmony import */ var _components_Template__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Template */ "./resources/js/components/Template/index.js");
+/* harmony import */ var _components_Link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/Link */ "./resources/js/components/Link/index.js");
+/* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/Search */ "./resources/js/components/Search/index.js");
+/* harmony import */ var _components_ToastMessage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/ToastMessage */ "./resources/js/components/ToastMessage/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+function ClassroomStudent(_ref) {
+  var _React$createElement;
+
+  var students = _ref.students,
+      classroom = _ref.classroom,
+      classroom_students = _ref.classroom_students;
+
+  var _usePage = Object(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__["usePage"])(),
+      flash = _usePage.flash;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(students),
+      _useState2 = _slicedToArray(_useState, 2),
+      listRegisters = _useState2[0],
+      setListRegisters = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      showToast = _useState4[0],
+      setShowToast = _useState4[1];
+
+  function handleSubmit(status, values) {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(route("classroom-students-store"), values);
+  }
+
+  function handleFilter(search) {
+    var excludeColumns = ["id"];
+    var lowercasedValue = search.toLowerCase().trim();
+    var results = students.filter(function (item) {
+      return Object.keys(item).some(function (key) {
+        return excludeColumns.includes(key) ? false : item[key].toString().toLowerCase().includes(lowercasedValue);
+      });
+    });
+    setListRegisters(results);
+  }
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setListRegisters(students);
+    setShowToast(flash.message ? true : false);
+  }, [students, flash]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ToastMessage__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    showToast: showToast
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Template__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    title: "My classroom students",
+    subtitle: "Teacher"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], (_React$createElement = {
+    classAtrributes: "btn btn-secondary btn-new  mb-4",
+    tootip: "List all classrooms",
+    placement: "bottom"
+  }, _defineProperty(_React$createElement, "tootip", "List all classrooms"), _defineProperty(_React$createElement, "text", "List all classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    placeholder: "Enter your search to filter",
+    handleFunction: handleFilter
+  }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "col mt-2 text-center text-muted"
+  }, "Showing ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, listRegisters.length), " of total ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, listRegisters.length), " ", "record(s)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    striped: true,
+    bordered: true,
+    hover: true,
+    responsive: "md",
+    size: "md"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center",
+    style: {
+      width: "3%"
+    }
+  }, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase",
+    style: {
+      width: "45%"
+    }
+  }, "Student name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase",
+    style: {
+      width: "30%"
+    }
+  }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase"
+  }, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase"
+  }, "Status"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    colSpan: "3",
+    className: "text-center text-muted"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiFrown"], {
+    size: 20
+  }), " No records found")), listRegisters.map(function (register) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      key: register.id,
+      id: register.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-center"
+    }, register.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      classAtrributes: register.status == 0 ? "btn btn-table btn-secondary mr-3" : "btn btn-table btn-success mr-3",
+      tootip: register.status == 0 ? "Enroll ".concat(register.name) : "Remove ".concat(register.name),
+      placement: "top",
+      icon: register.status == 0 ? "Enroll" : "Remove",
+      value: {
+        classroom: classroom,
+        student: register
+      },
+      handleFunction: handleSubmit
     })));
   })))));
 }
@@ -73745,8 +73916,6 @@ function Course(_ref) {
     className: "text-center text-uppercase"
   }, "Classrooms"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
-  }, "Students"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "text-center text-uppercase"
   }, "Show on landing page?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
   }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -73765,8 +73934,6 @@ function Course(_ref) {
     }, register.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, register.classrooms.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-      className: "text-center"
-    }, register.students.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
       classAtrributes: register.show == 0 ? "link btn btn-table btn-danger" : "link btn btn-table btn-success",
@@ -73814,181 +73981,6 @@ function Course(_ref) {
     handleFunction: handleInactive,
     value: user
   })));
-}
-
-/***/ }),
-
-/***/ "./resources/js/pages/CourseStudent/index.js":
-/*!***************************************************!*\
-  !*** ./resources/js/pages/CourseStudent/index.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CourseStudent; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
-/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Table */ "./node_modules/react-bootstrap/esm/Table.js");
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.esm.js");
-/* harmony import */ var _components_Template__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Template */ "./resources/js/components/Template/index.js");
-/* harmony import */ var _components_Link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/Link */ "./resources/js/components/Link/index.js");
-/* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/Search */ "./resources/js/components/Search/index.js");
-/* harmony import */ var _components_ToastMessage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/ToastMessage */ "./resources/js/components/ToastMessage/index.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-
-
-
-
-function CourseStudent(_ref) {
-  var _React$createElement;
-
-  var course = _ref.course,
-      students = _ref.students,
-      classrooms = _ref.classrooms;
-
-  var _usePage = Object(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__["usePage"])(),
-      flash = _usePage.flash;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(students),
-      _useState2 = _slicedToArray(_useState, 2),
-      listRegisters = _useState2[0],
-      setListRegisters = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      showToast = _useState4[0],
-      setShowToast = _useState4[1];
-
-  function handleSubmit(values) {
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(route("teacher-course-student-store"), values);
-  }
-
-  function handleFilter(search) {
-    var excludeColumns = ["id"];
-    var lowercasedValue = search.toLowerCase().trim();
-    var results = students.filter(function (item) {
-      return Object.keys(item).some(function (key) {
-        return excludeColumns.includes(key) ? false : item[key].toString().toLowerCase().includes(lowercasedValue);
-      });
-    });
-    setListRegisters(results);
-  }
-
-  function handleIsBooked(register) {
-    var classroom = classrooms.map(function (classroom) {
-      var studentBooked = classroom.students.map(function (student) {
-        /*if (student.pivot.student_id == register.id) {
-            return student.pivot.student_id == register.id
-                ? "Booked"
-                : "No booked";
-        }*/
-        return student.pivot.student_id;
-      });
-
-      if (studentBooked == register.id) {
-        return "Booked";
-      } else {
-        return "No booked";
-      } //return studentBooked;
-
-    });
-    console.log(register);
-    return classroom;
-  }
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    setListRegisters(students);
-    setShowToast(flash.message ? true : false);
-  }, [students, flash]); //console.log(classrooms[0].students);
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ToastMessage__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    showToast: showToast
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Template__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    title: "My courses",
-    subtitle: "Teacher"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], (_React$createElement = {
-    classAtrributes: "btn btn-secondary btn-new  mb-4",
-    tootip: "List all courses",
-    placement: "bottom"
-  }, _defineProperty(_React$createElement, "tootip", "List all courses"), _defineProperty(_React$createElement, "text", "List all courses"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("courses")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    placeholder: "Enter your search to filter",
-    handleFunction: handleFilter
-  }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "col mt-2 text-center text-muted"
-  }, "Showing ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, listRegisters.length), " of total ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, listRegisters.length), " ", "record(s)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    striped: true,
-    bordered: true,
-    hover: true,
-    responsive: "md",
-    size: "md"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "text-center",
-    style: {
-      width: "3%"
-    }
-  }, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "text-center text-uppercase",
-    style: {
-      width: "25%"
-    }
-  }, "Student"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-    className: "text-center text-uppercase"
-  }, "Classrooms"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    colSpan: "3",
-    className: "text-center text-muted"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiFrown"], {
-    size: 20
-  }), " No records found")), listRegisters.map(function (register) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-      key: register.id,
-      id: register.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-      className: "text-center"
-    }, register.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-      className: "text-center"
-    }, classrooms.map(function (classroom) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        key: classroom.id,
-        classAtrributes: "mr-3 btn btn-table btn-success",
-        tootip: "Add new students to ".concat(classroom.title),
-        placement: "top",
-        text: handleIsBooked(register.id),
-        handleFunction: function handleFunction() {
-          return handleSubmit({
-            course: course.uuid,
-            student: register.uuid,
-            classroom: classroom.uuid
-          });
-        }
-      });
-    })));
-  })))));
 }
 
 /***/ }),

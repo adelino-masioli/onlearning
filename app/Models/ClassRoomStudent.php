@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class ClassRoomStudent extends Model
+class ClassroomStudent extends Model
 {
 
     /**
@@ -16,8 +16,10 @@ class ClassRoomStudent extends Model
     protected $fillable = [
         'classroom_id',
         'student_id',
-        'status',
+        'status'
     ];
+
+
 
     public function classroom()
     {

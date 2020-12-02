@@ -58,12 +58,6 @@ Route::namespace('Course')->group(function () {
     Route::post('/courses/show', ["as" => "courses-update-show", "uses" => "CourseController@show"]);
 });
 
-//CourseStudent
-Route::namespace('CourseStudent')->group(function () {
-    Route::get('/teacher/courses/students/{uuid}', ["as" => "teacher-course-student", "uses" => "CourseStudentController@index"]);
-    Route::post('/teacher/courses/student/store', ["as" => "teacher-course-student-store", "uses" => "CourseStudentController@store"]);
-    Route::post('/teacher/courses/students/book', ["as" => "teacher-course-student-book", "uses" => "CourseStudentController@book"]);
-});
 
 //Classroom
 Route::namespace('Classroom')->group(function () {
@@ -74,6 +68,12 @@ Route::namespace('Classroom')->group(function () {
     Route::post('/classrooms/store', ["as" => "classrooms-store", "uses" => "ClassroomController@store"]);
     Route::get('/classrooms/edit/{uuid}', ["as" => "classrooms-edit", "uses" => "ClassroomController@edit"]);
     Route::post('/classrooms/update', ["as" => "classrooms-update", "uses" => "ClassroomController@update"]);
+});
+
+//CourseStudent
+Route::namespace('ClassroomStudent')->group(function () {
+    Route::get('/classroom-students/{uuid}', ["as" => "classroom-students", "uses" => "ClassroomStudentController@index"]);
+    Route::post('/classroom-students/store', ["as" => "classroom-students-store", "uses" => "ClassroomStudentController@store"]);
 });
 
 //Material

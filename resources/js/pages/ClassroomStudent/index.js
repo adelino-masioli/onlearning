@@ -11,14 +11,15 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import ToastMessage from "../../components/ToastMessage";
 
-export default function CourseStudent({ course, students, classrooms }) {
+export default function ClassroomStudent({ students, classroom, classroom_students }) {
     const { flash } = usePage();
     const [listRegisters, setListRegisters] = useState(students);
     const [showToast, setShowToast] = useState(false);
 
-    function handleSubmit(values) {
-        Inertia.post(route("teacher-course-student-store"), values);
+    function handleSubmit(status, values) {
+        Inertia.post(route("classroom-students-store"), values);
     }
+
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
@@ -36,46 +37,26 @@ export default function CourseStudent({ course, students, classrooms }) {
         setListRegisters(results);
     }
 
-    function handleIsBooked(register) {
-        const classroom = classrooms.map(classroom => {
-            const studentBooked = classroom.students.map(student => {
-                /*if (student.pivot.student_id == register.id) {
-                    return student.pivot.student_id == register.id
-                        ? "Booked"
-                        : "No booked";
-                }*/
-                return student.pivot.student_id;
-            });
-            if (studentBooked == register.id) {
-                return "Booked";
-            } else {
-                return "No booked";
-            }
-            //return studentBooked;
-        });
-        console.log(register);
-        return classroom;
-    }
+
 
     useEffect(() => {
         setListRegisters(students);
         setShowToast(flash.message ? true : false);
     }, [students, flash]);
 
-    //console.log(classrooms[0].students);
 
     return (
         <>
             <ToastMessage showToast={showToast} />
-            <Template title="My courses" subtitle="Teacher">
+            <Template title="My classroom students" subtitle="Teacher">
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4"
-                    tootip="List all courses"
+                    tootip="List all classrooms"
                     placement="bottom"
-                    tootip="List all courses"
-                    text="List all courses"
+                    tootip="List all classrooms"
+                    text="List all classrooms"
                     icon={<FiChevronLeft />}
-                    url={route("courses")}
+                    url={route("classrooms")}
                 />
 
                 <Search
@@ -101,13 +82,21 @@ export default function CourseStudent({ course, students, classrooms }) {
                             </th>
                             <th
                                 className="text-center text-uppercase"
-                                style={{ width: "25%" }}
+                                style={{ width: "45%" }}
                             >
-                                Student
+                                Student name
+                            </th>
+
+                            <th className="text-center text-uppercase" style={{ width: "30%" }}>
+                                Email
                             </th>
 
                             <th className="text-center text-uppercase">
-                                Classrooms
+                                Phone
+                            </th>
+
+                            <th className="text-center text-uppercase">
+                                Status
                             </th>
                         </tr>
                     </thead>
@@ -126,24 +115,29 @@ export default function CourseStudent({ course, students, classrooms }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.name}</td>
-
+                                <td>{register.email}</td>
+                                <td>{register.phone}</td>
                                 <td className="text-center">
-                                    {classrooms.map(classroom => (
-                                        <Link
-                                            key={classroom.id}
-                                            classAtrributes={`mr-3 btn btn-table btn-success`}
-                                            tootip={`Add new students to ${classroom.title}`}
-                                            placement="top"
-                                            text={handleIsBooked(register.id)}
-                                            handleFunction={() =>
-                                                handleSubmit({
-                                                    course: course.uuid,
-                                                    student: register.uuid,
-                                                    classroom: classroom.uuid
-                                                })
-                                            }
-                                        />
-                                    ))}
+                                    <Link
+                                        classAtrributes={
+                                            register.status == 0
+                                                ? "btn btn-table btn-secondary mr-3"
+                                                : "btn btn-table btn-success mr-3"
+                                        }
+                                        tootip={
+                                            register.status == 0
+                                                ? `Enroll ${register.name}`
+                                                : `Remove ${register.name}`
+                                        }
+                                        placement="top"
+                                        icon={
+                                            register.status == 0
+                                                ? "Enroll"
+                                                : "Remove"
+                                        }
+                                        value={{ classroom: classroom, student: register }}
+                                        handleFunction={handleSubmit}
+                                    />
                                 </td>
                             </tr>
                         ))}

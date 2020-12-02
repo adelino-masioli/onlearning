@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen } from "react-icons/fi";
+import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen, FiSearch } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
@@ -96,6 +96,9 @@ export default function classroom({ classrooms }) {
                                 Level
                             </th>
                             <th className="text-center text-uppercase">
+                                Students
+                            </th>
+                            <th className="text-center text-uppercase">
                                 Created At
                             </th>
                             <th className="text-center text-uppercase">
@@ -123,6 +126,28 @@ export default function classroom({ classrooms }) {
                                 <td>{register.title}</td>
                                 <td>{register.course.title}</td>
                                 <td>{register.course.level}</td>
+                                <td className="text-center">
+
+                                    <Link
+                                        classAtrributes={register.students.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1"}
+                                        tootip={`View students of ${register.title}`}
+                                        placement="top"
+                                        text="View"
+                                        icon={<FiSearch />}
+                                        url={route(
+                                            "classroom-students",
+                                            register.uuid
+                                        )}
+                                    />
+                                    {register.students.length == 0 ? (
+                                        <Badge pill variant="secondary">{register.students.length}</Badge>
+                                    ) : (
+                                            <Badge pill variant="success">
+                                                {register.students.length}
+                                            </Badge>
+                                        )}
+
+                                </td>
                                 <td>{register.date}</td>
                                 <td className="text-center">
                                     {register.status == 0 ? (

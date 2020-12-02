@@ -29,7 +29,7 @@ class ClassroomController extends Controller
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         return Inertia::render('Classroom', [
-            "classrooms" => Classroom::with("course")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
+            "classrooms" => Classroom::with("course")->with("students")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
             ]);
     }
 
