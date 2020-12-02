@@ -27,8 +27,9 @@ class ClassroomController extends Controller
 
     public function index()
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         return Inertia::render('Classroom', [
-            "classrooms" => Classroom::with("course")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->get(),
+            "classrooms" => Classroom::with("course")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
             ]);
     }
 
@@ -46,7 +47,6 @@ class ClassroomController extends Controller
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $courses = Course::orderBy('title', 'asc')->where("teacher_id", $teacher->id)->get();
         
-
         return Inertia::render('Classroom/Create', [
             "courses" => $courses,
         ]);
@@ -66,13 +66,16 @@ class ClassroomController extends Controller
 
     public function store(Request $request)
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+
         $validation = $request->validate([
             'course_id'    => 'required',
-            'title'        => 'required|max:255|unique:classrooms,title,'.(int)$request->input("course_id").',course_id',
+            'title'        => 'required|max:255|unique:classrooms,title,'.$teacher->id.',teacher_id',
             'description'  => 'required',
         ]);
 
         $data = $request->all();
+        $data += ["teacher_id" => $teacher->id];
 
         $classroom = Classroom::create($data);
 
@@ -96,10 +99,11 @@ class ClassroomController extends Controller
 
     public function update(Request $request)
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $classroom = Classroom::with("course")->where('id', $request->input("id"))->first();
         $validation = $request->validate([
             'course_id'    => 'required',
-            'title'        => 'required|max:255|unique:classrooms,title,'.(int)$request->input("course_id").',course_id',
+            'title'        => 'required|max:255|unique:classrooms,title,'.$teacher->id.',teacher_id',
             'description'  => 'required'
         ]);
 

@@ -16,6 +16,7 @@ class Classroom extends Model
      * @var array
      */
     protected $fillable = [
+        'teacher_id',
         'course_id',
         'uuid',
         'title',
@@ -24,6 +25,16 @@ class Classroom extends Model
         'download',
         'status',
     ];
+
+    public function teacher()
+    {
+        return $this->hasOne('App\Models\Teacher');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course');
+    }
 
     public function material()
     {
@@ -35,10 +46,6 @@ class Classroom extends Model
         return $this->hasMany('App\Models\Exame');
     }
 
-    public function course()
-    {
-        return $this->belongsTo('App\Models\Course');
-    }
     public function students()
     {
         return $this->belongsToMany('App\Models\Student');

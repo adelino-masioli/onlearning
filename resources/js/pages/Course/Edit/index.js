@@ -35,7 +35,7 @@ export default function Edit({ course }) {
                     tootip="Create new classroom"
                     text="Create new classroom"
                     icon={<FiBookOpen />}
-                    url={route("courses-create")}
+                    url={route("classrooms-create")}
                 />
                 <FormData datas={course} handleForm={handleSubmit} />
             </Template>

@@ -72165,10 +72165,6 @@ var map = {
 	"./Classroom/Course/Create/": "./resources/js/pages/Classroom/Course/Create/index.js",
 	"./Classroom/Course/Create/index": "./resources/js/pages/Classroom/Course/Create/index.js",
 	"./Classroom/Course/Create/index.js": "./resources/js/pages/Classroom/Course/Create/index.js",
-	"./Classroom/Course/Edit": "./resources/js/pages/Classroom/Course/Edit/index.js",
-	"./Classroom/Course/Edit/": "./resources/js/pages/Classroom/Course/Edit/index.js",
-	"./Classroom/Course/Edit/index": "./resources/js/pages/Classroom/Course/Edit/index.js",
-	"./Classroom/Course/Edit/index.js": "./resources/js/pages/Classroom/Course/Edit/index.js",
 	"./Classroom/Course/Partials/form": "./resources/js/pages/Classroom/Course/Partials/form.js",
 	"./Classroom/Course/Partials/form.js": "./resources/js/pages/Classroom/Course/Partials/form.js",
 	"./Classroom/Course/index": "./resources/js/pages/Classroom/Course/index.js",
@@ -72363,65 +72359,6 @@ function Create(_ref) {
   }, _defineProperty(_React$createElement, "tootip", "Back to classrooms"), _defineProperty(_React$createElement, "text", "Back to classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms-by-course", course.uuid)), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_5__["default"], {
     course: course,
     courses: courses,
-    handleForm: handleSubmit
-  })));
-}
-
-/***/ }),
-
-/***/ "./resources/js/pages/Classroom/Course/Edit/index.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/pages/Classroom/Course/Edit/index.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Edit; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.esm.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../../components/Template'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../../components/Link'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _Partials_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Partials/form */ "./resources/js/pages/Classroom/Course/Partials/form.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-function Edit(_ref) {
-  var _React$createElement, _React$createElement2, _React$createElement3;
-
-  var classroom = _ref.classroom;
-
-  function handleSubmit(values) {
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(route("teacher-course-classroom-update"), values);
-  }
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../../components/Template'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
-    title: "Editing course <strong>".concat(classroom.course.title, "</strong>"),
-    subtitle: "Teacher"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../../components/Link'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), (_React$createElement = {
-    classAtrributes: "btn btn-secondary btn-new  mb-4 mr-2",
-    tootip: "Back to classrooms",
-    placement: "bottom"
-  }, _defineProperty(_React$createElement, "tootip", "Back to classrooms"), _defineProperty(_React$createElement, "text", "Back to classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("teacher-course-classroom", classroom.course.uuid)), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../../components/Link'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), (_React$createElement2 = {
-    classAtrributes: "btn btn-primary btn-new  mb-4 mr-2",
-    tootip: "Add new material",
-    placement: "bottom"
-  }, _defineProperty(_React$createElement2, "tootip", "Add new material"), _defineProperty(_React$createElement2, "text", "Add new material"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiPlus"], null)), _defineProperty(_React$createElement2, "url", route("materials-create", classroom.uuid)), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../../components/Link'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), (_React$createElement3 = {
-    classAtrributes: "btn btn-warning btn-new  mb-4",
-    tootip: "Create new exam",
-    placement: "bottom"
-  }, _defineProperty(_React$createElement3, "tootip", "Create new exam"), _defineProperty(_React$createElement3, "text", "Create new exam"), _defineProperty(_React$createElement3, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiPlus"], null)), _defineProperty(_React$createElement3, "url", route("exams-create", classroom.uuid)), _React$createElement3)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    data: classroom,
-    course: classroom.course,
     handleForm: handleSubmit
   })));
 }
@@ -73360,7 +73297,7 @@ function Edit(_ref) {
     classAtrributes: "btn btn-primary btn-new  mb-4",
     tootip: "Create new classroom",
     placement: "bottom"
-  }, _defineProperty(_React$createElement2, "tootip", "Create new classroom"), _defineProperty(_React$createElement2, "text", "Create new classroom"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiBookOpen"], null)), _defineProperty(_React$createElement2, "url", route("courses-create")), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, _defineProperty(_React$createElement2, "tootip", "Create new classroom"), _defineProperty(_React$createElement2, "text", "Create new classroom"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiBookOpen"], null)), _defineProperty(_React$createElement2, "url", route("classrooms-create")), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_5__["default"], {
     datas: course,
     handleForm: handleSubmit
   })));
