@@ -72812,7 +72812,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 function Edit(_ref) {
-  var _React$createElement, _React$createElement2, _React$createElement3;
+  var _React$createElement, _React$createElement2, _React$createElement3, _React$createElement4;
 
   var classroom = _ref.classroom,
       courses = _ref.courses;
@@ -72832,11 +72832,15 @@ function Edit(_ref) {
     classAtrributes: "btn btn-primary btn-new  mb-4 mr-2",
     tootip: "Add new material",
     placement: "bottom"
-  }, _defineProperty(_React$createElement2, "tootip", "Add new material"), _defineProperty(_React$createElement2, "text", "Add new material"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiPlus"], null)), _defineProperty(_React$createElement2, "url", route("materials-create", classroom.uuid)), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement3 = {
-    classAtrributes: "btn btn-warning btn-new  mb-4",
+  }, _defineProperty(_React$createElement2, "tootip", "Add new material"), _defineProperty(_React$createElement2, "text", "Add new material"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiDownload"], null)), _defineProperty(_React$createElement2, "url", route("materials-create", classroom.uuid)), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement3 = {
+    classAtrributes: "btn btn-warning btn-new  mb-4 mr-2",
     tootip: "Create new exam",
     placement: "bottom"
-  }, _defineProperty(_React$createElement3, "tootip", "Create new exam"), _defineProperty(_React$createElement3, "text", "Create new exam"), _defineProperty(_React$createElement3, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiPlus"], null)), _defineProperty(_React$createElement3, "url", route("exams-create", classroom.uuid)), _React$createElement3)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, _defineProperty(_React$createElement3, "tootip", "Create new exam"), _defineProperty(_React$createElement3, "text", "Create new exam"), _defineProperty(_React$createElement3, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiList"], null)), _defineProperty(_React$createElement3, "url", route("exams-create", classroom.uuid)), _React$createElement3)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement4 = {
+    classAtrributes: "btn btn-success btn-new  mb-4",
+    tootip: "Students",
+    placement: "bottom"
+  }, _defineProperty(_React$createElement4, "tootip", "Students"), _defineProperty(_React$createElement4, "text", "Students"), _defineProperty(_React$createElement4, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiUsers"], null)), _defineProperty(_React$createElement4, "url", route("classroom-students", classroom.uuid)), _React$createElement4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_form__WEBPACK_IMPORTED_MODULE_5__["default"], {
     data: classroom,
     courses: courses,
     course: classroom.course,
@@ -73201,10 +73205,10 @@ function classroom(_ref) {
       className: "text-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
       classAtrributes: register.students.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1",
-      tootip: "View students of ".concat(register.title),
+      tootip: "Students of ".concat(register.title),
       placement: "top",
-      text: "View",
-      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiSearch"], null),
+      text: "Students",
+      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiUsers"], null),
       url: route("classroom-students", register.uuid)
     }), register.students.length == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_3__["default"], {
       pill: true,

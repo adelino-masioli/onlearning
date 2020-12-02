@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen, FiSearch } from "react-icons/fi";
+import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen, FiUsers } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
@@ -130,10 +130,10 @@ export default function classroom({ classrooms }) {
 
                                     <Link
                                         classAtrributes={register.students.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1"}
-                                        tootip={`View students of ${register.title}`}
+                                        tootip={`Students of ${register.title}`}
                                         placement="top"
-                                        text="View"
-                                        icon={<FiSearch />}
+                                        text="Students"
+                                        icon={<FiUsers />}
                                         url={route(
                                             "classroom-students",
                                             register.uuid

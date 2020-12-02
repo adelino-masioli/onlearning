@@ -1,7 +1,7 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-import { FiChevronLeft, FiPlus } from "react-icons/fi";
+import { FiChevronLeft, FiDownload, FiList, FiUsers } from "react-icons/fi";
 
 import Template from "../../../components/Template";
 import Link from "../../../components/Link";
@@ -34,7 +34,7 @@ export default function Edit({ classroom, courses }) {
                     placement="bottom"
                     tootip="Add new material"
                     text="Add new material"
-                    icon={<FiPlus />}
+                    icon={<FiDownload />}
                     url={route(
                         "materials-create",
                         classroom.uuid
@@ -42,14 +42,27 @@ export default function Edit({ classroom, courses }) {
                 />
 
                 <Link
-                    classAtrributes="btn btn-warning btn-new  mb-4"
+                    classAtrributes="btn btn-warning btn-new  mb-4 mr-2"
                     tootip="Create new exam"
                     placement="bottom"
                     tootip="Create new exam"
                     text="Create new exam"
-                    icon={<FiPlus />}
+                    icon={<FiList />}
                     url={route(
                         "exams-create",
+                        classroom.uuid
+                    )}
+                />
+
+                <Link
+                    classAtrributes="btn btn-success btn-new  mb-4"
+                    tootip="Students"
+                    placement="bottom"
+                    tootip="Students"
+                    text="Students"
+                    icon={<FiUsers />}
+                    url={route(
+                        "classroom-students",
                         classroom.uuid
                     )}
                 />
