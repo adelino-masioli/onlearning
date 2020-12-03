@@ -15,7 +15,9 @@ import {
     FiFileText,
     FiUsers,
     FiBookOpen,
-    FiCommand
+    FiCommand,
+    FiDownload,
+    FiList
 } from "react-icons/fi";
 
 import TitlePage from "../../components/TitlePage";
@@ -60,6 +62,16 @@ export default function Template(props) {
                                         text="Classrooms"
                                         url="classrooms"
                                         icon={<FiBookOpen size="20" />}
+                                    />
+                                    <SidebarMenu
+                                        text="Materials"
+                                        url="classrooms"
+                                        icon={<FiDownload size="20" />}
+                                    />
+                                    <SidebarMenu
+                                        text="Exames"
+                                        url="classrooms"
+                                        icon={<FiList size="20" />}
                                     />
                                     <SidebarMenu
                                         text="Students"

@@ -104,7 +104,7 @@ export default function ClassroomStudent({ students, classroom, classroom_studen
                         {listRegisters.length == 0 && (
                             <tr>
                                 <td
-                                    colSpan="3"
+                                    colSpan="5"
                                     className="text-center text-muted"
                                 >
                                     <FiFrown size={20} /> No records found

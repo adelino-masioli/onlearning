@@ -27,26 +27,32 @@ class ClassroomStudentController extends Controller
     }
 
     public function index($uuid)
-    {   $classrooms = [];
+    {   
+        
+        $classrooms = [];
         $classroom_students = Classroom::where('uuid', $uuid)->first()->students;
         foreach ($classroom_students as $classroom_student) {
             $classrooms[] = $classroom_student->pivot->student_id;
         }
 
         $students = [];
-        $teacher_students = Teacher::find(Auth::user()->id)->students;
-        foreach ($teacher_students as $student) {
-            $reg = [
-                'uuid'     => $student->uuid,
-                'id'       => $student->id,
-                'name'     => $student->name,
-                'email'    => $student->email,
-                'phone'    => $student->phone,
-                'status'   => in_array($student->id, $classrooms) ? 1 : 0,
-            ];
-            $students[] = $reg;
-        }
 
+
+        if(Teacher::where("user_id", Auth::user()->id)->first()->students()->exists()){
+            $teacher_students = Teacher::where("user_id", Auth::user()->id)->first()->students;
+            foreach ($teacher_students as $student) {
+                $reg = [
+                    'uuid'     => $student->uuid,
+                    'id'       => $student->id,
+                    'name'     => $student->name,
+                    'email'    => $student->email,
+                    'phone'    => $student->phone,
+                    'status'   => in_array($student->id, $classrooms) ? 1 : 0,
+                ];
+                $students[] = $reg;
+            }
+        }
+   
 
         return Inertia::render('ClassroomStudent', [
             'students'   => $students,

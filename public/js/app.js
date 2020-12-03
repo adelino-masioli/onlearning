@@ -71974,6 +71974,18 @@ function Template(props) {
       size: "20"
     })
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SidebarMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    text: "Materials",
+    url: "classrooms",
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiDownload"], {
+      size: "20"
+    })
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SidebarMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    text: "Exames",
+    url: "classrooms",
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiList"], {
+      size: "20"
+    })
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SidebarMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
     text: "Students",
     url: "teacher-student",
     icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiUsers"], {
@@ -73363,7 +73375,7 @@ function ClassroomStudent(_ref) {
   }, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
   }, "Status"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    colSpan: "3",
+    colSpan: "5",
     className: "text-center text-muted"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiFrown"], {
     size: 20
