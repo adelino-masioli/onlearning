@@ -19,6 +19,7 @@ export default function Formdata({ data, courses, handleForm }) {
         description: data ? data.description : "",
         video: data && data.video ? data.video : "",
         download: data && data.download ? data.download : "",
+        meet: data && data.meet ? data.meet : "",
         status: data && data.status ? data.status : 0,
         course_id: data && data.course_id ? data.course_id : "",
     });
@@ -122,6 +123,25 @@ export default function Formdata({ data, courses, handleForm }) {
                             </Form.Control>
                             <Form.Control.Feedback type="invalid">
                                 {errors.course_id}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+
+                    <Col>
+                        <Form.Group controlId="meet">
+                            <Form.Label>Meet ID</Form.Label>
+                            <Form.Control
+                                size="lg"
+                                type="text"
+                                placeholder="Meet ID"
+                                value={values.meet}
+                                onChange={handleChange}
+                                required
+                                isInvalid={!!errors.meet}
+                                className="shadow-sm"
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.meet}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>

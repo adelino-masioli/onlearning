@@ -15,8 +15,8 @@ export default function Edit({ exam }) {
     return (
         <>
             <Template
-                title={`Editing exam <strong>${exam.classroom.title}</strong>`}
-                subtitle="Teacher"
+                title={`Editing exam <strong>${exam.title}</strong>`}
+                subtitle={`Teacher <strong>${exam.teacher.name}</strong>`}
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
@@ -25,10 +25,7 @@ export default function Edit({ exam }) {
                     tootip="Back to exams"
                     text="Back to exams"
                     icon={<FiChevronLeft />}
-                    url={route(
-                        "exams",
-                        exam.classroom.uuid
-                    )}
+                    url={route("exams")}
                 />
 
                 <Link
@@ -39,14 +36,13 @@ export default function Edit({ exam }) {
                     text="Add new question"
                     icon={<FiPlus />}
                     url={route(
-                        "teacher-course-classroom-exam-question-create",
+                        "questions-create",
                         exam.uuid
                     )}
                 />
 
                 <FormData
                     data={exam}
-                    classroom={exam.classroom}
                     handleForm={handleSubmit}
                 />
             </Template>

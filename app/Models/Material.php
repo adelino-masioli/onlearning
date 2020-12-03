@@ -16,16 +16,22 @@ class Material extends Model
      * @var array
      */
     protected $fillable = [
-        'classroom_id',
         'uuid',
+        'teacher_id',
         'title',
         'description',
         'link',
         'status',
     ];
+    
 
-    public function classroom()
+    public function teacher()
     {
-        return $this->belongsTo('App\Models\Classroom');
+        return $this->hasOne('App\Models\Teacher',  'id', 'teacher_id');
     }
+    public function classrooms()
+    {
+        return $this->belongsToMany('App\Models\Classroom');
+    }
+    
 }

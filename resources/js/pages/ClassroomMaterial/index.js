@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
-
+import { usePage } from "@inertiajs/inertia-react";
 import Table from "react-bootstrap/Table";
-import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiChevronLeft, FiLink2 } from "react-icons/fi";
+import { FiFrown, FiChevronLeft } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
 import Search from "../../components/Search";
-import { Col } from "react-bootstrap";
+import ToastMessage from "../../components/ToastMessage";
 
-export default function Material({ materials, classroom }) {
+export default function ClassroomMaterial({ materials, classroom }) {
+    const { flash } = usePage();
     const [listRegisters, setListRegisters] = useState(materials);
+    const [showToast, setShowToast] = useState(false);
+
+    function handleSubmit(status, values) {
+        Inertia.post(route("classroom-materials-store"), values);
+    }
+
 
     function handleFilter(search) {
         const excludeColumns = ["id"];
@@ -31,32 +37,27 @@ export default function Material({ materials, classroom }) {
         setListRegisters(results);
     }
 
+
+
     useEffect(() => {
         setListRegisters(materials);
-    }, [materials]);
+        setShowToast(flash.message ? true : false);
+    }, [materials, flash]);
+
 
     return (
         <>
-            <Template
-                title={`Materials`}
-                subtitle="Teacher"
-            >
-                <div className="highlight">
-                    <ul className="row">
-                        <Col>
-                            <Link
-                                classAtrributes="btn btn-primary btn-new  mb-4"
-                                tootip="Create new material"
-                                placement="bottom"
-                                tootip="Create new material"
-                                text="Create new material"
-                                icon={<FiPlus />}
-                                url={route("materials-create")}
-                            />
-                        </Col>
-                        <h1 className="col-md-12">List of materials</h1>
-                    </ul>
-                </div>
+            <ToastMessage showToast={showToast} />
+            <Template title="My classroom materials" subtitle="Teacher">
+                <Link
+                    classAtrributes="btn btn-secondary btn-new  mb-4"
+                    tootip="List all classrooms"
+                    placement="bottom"
+                    tootip="List all classrooms"
+                    text="List all classrooms"
+                    icon={<FiChevronLeft />}
+                    url={route("classrooms")}
+                />
 
                 <Search
                     placeholder="Enter your search to filter"
@@ -76,23 +77,22 @@ export default function Material({ materials, classroom }) {
                 <Table striped bordered hover responsive="md" size="md">
                     <thead>
                         <tr>
-                            <th className="text-center">#</th>
-                            <th className="text-center text-uppercase">
-                                Material
+                            <th className="text-center" style={{ width: "3%" }}>
+                                #
                             </th>
-                            <th className="text-center text-uppercase">
-                                Teacher
+                            <th
+                                className="text-center text-uppercase"
+                                style={{ width: "45%" }}
+                            >
+                                Description
+                            </th>
+
+                            <th className="text-center text-uppercase" style={{ width: "40%" }}>
+                                Link
                             </th>
 
                             <th className="text-center text-uppercase">
-                                Created At
-                            </th>
-                            <th className="text-center text-uppercase">Link</th>
-                            <th className="text-center text-uppercase">
                                 Status
-                            </th>
-                            <th className="text-center text-uppercase">
-                                Actions
                             </th>
                         </tr>
                     </thead>
@@ -100,7 +100,7 @@ export default function Material({ materials, classroom }) {
                         {listRegisters.length == 0 && (
                             <tr>
                                 <td
-                                    colSpan="8"
+                                    colSpan="5"
                                     className="text-center text-muted"
                                 >
                                     <FiFrown size={20} /> No records found
@@ -111,29 +111,27 @@ export default function Material({ materials, classroom }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.teacher.name}</td>
-                                <td>{register.date}</td>
                                 <td>{register.link}</td>
                                 <td className="text-center">
-                                    {register.status == 0 ? (
-                                        <Badge variant="secondary">Draft</Badge>
-                                    ) : (
-                                            <Badge variant="success">
-                                                Published
-                                            </Badge>
-                                        )}
-                                </td>
-                                <td className="text-center">
                                     <Link
-                                        classAtrributes="text-success link"
-                                        tootip={`Edit ${register.title}`}
+                                        classAtrributes={
+                                            register.status == 0
+                                                ? "btn btn-table btn-secondary mr-3"
+                                                : "btn btn-table btn-success mr-3"
+                                        }
+                                        tootip={
+                                            register.status == 0
+                                                ? `Add ${register.title}`
+                                                : `Remove ${register.title}`
+                                        }
                                         placement="top"
-                                        text="Edit material"
-                                        icon={<FiLink2 />}
-                                        url={route(
-                                            "materials-edit",
-                                            register.uuid
-                                        )}
+                                        icon={
+                                            register.status == 0
+                                                ? "Add"
+                                                : "Remove"
+                                        }
+                                        value={{ classroom: classroom, material: register }}
+                                        handleFunction={handleSubmit}
                                     />
                                 </td>
                             </tr>

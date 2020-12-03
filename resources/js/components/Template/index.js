@@ -65,12 +65,12 @@ export default function Template(props) {
                                     />
                                     <SidebarMenu
                                         text="Materials"
-                                        url="classrooms"
+                                        url="materials"
                                         icon={<FiDownload size="20" />}
                                     />
                                     <SidebarMenu
-                                        text="Exames"
-                                        url="classrooms"
+                                        text="Exams"
+                                        url="exams"
                                         icon={<FiList size="20" />}
                                     />
                                     <SidebarMenu

@@ -15,8 +15,8 @@ export default function Edit({ material }) {
     return (
         <>
             <Template
-                title={`Editing course <strong>${material.classroom.title}</strong>`}
-                subtitle="Teacher"
+                title={`Editing material <strong>${material.title}</strong>`}
+                subtitle={`Teacher <strong>${material.teacher.name}</strong>`}
             >
                 <Link
                     classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
@@ -25,15 +25,11 @@ export default function Edit({ material }) {
                     tootip="Back to materials"
                     text="Back to materials"
                     icon={<FiChevronLeft />}
-                    url={route(
-                        "materials",
-                        material.classroom.uuid
-                    )}
+                    url={route("materials")}
                 />
 
                 <FormData
                     data={material}
-                    classroom={material.classroom}
                     handleForm={handleSubmit}
                 />
             </Template>

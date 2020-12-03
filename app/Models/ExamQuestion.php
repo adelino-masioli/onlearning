@@ -27,7 +27,7 @@ class ExamQuestion extends Model
     {
         return $this->belongsTo('App\Models\Exam');
     }
-    public function answer()
+    public function answers()
     {
         return $this->hasMany('App\Models\ExamQuestionAnswer');
     }

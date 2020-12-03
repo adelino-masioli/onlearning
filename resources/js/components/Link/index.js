@@ -32,10 +32,10 @@ export default function Link({
                         {icon} {text}
                     </span>
                 ) : (
-                    <InertiaLink className={classAtrributes} href={url}>
-                        {icon} {text}
-                    </InertiaLink>
-                )}
+                        <InertiaLink className={classAtrributes} href={url}>
+                            {icon} {text}
+                        </InertiaLink>
+                    )}
             </OverlayTrigger>
         </>
     );

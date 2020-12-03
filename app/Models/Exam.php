@@ -16,20 +16,25 @@ class Exam extends Model
      * @var array
      */
     protected $fillable = [
-        'classroom_id',
         'uuid',
+        'teacher_id',
         'title',
         'description',
         'average',
         'status',
     ];
 
-    public function classroom()
+    public function teacher()
     {
-        return $this->belongsTo('App\Models\Classroom');
+        return $this->hasOne('App\Models\Teacher',  'id', 'teacher_id');
     }
-    public function question()
+
+    public function questions()
     {
         return $this->hasMany('App\Models\ExamQuestion');
+    }
+    public function classrooms()
+    {
+        return $this->belongsToMany('App\Models\Classroom');
     }
 }

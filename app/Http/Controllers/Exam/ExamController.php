@@ -14,9 +14,9 @@ use DB;
 use Str;
 use Image;
 use \App\Models\Exam;
-use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
+use \App\Models\Teacher;
 
 class ExamController extends Controller
 {
@@ -25,31 +25,28 @@ class ExamController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($uuid)
+    public function index()
     {
-        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
         return Inertia::render('Exam', [
-            "classroom" => $classroom,
-            "exams" => Exam::with("classroom")->select("exams.*",  DB::raw("DATE_FORMAT(exams.created_at, '%d/%m/%Y') as date"))->where("exams.classroom_id", $classroom->id)->get(),
+            "exams" => Exam::with("teacher")->with("questions")->select("exams.*",  DB::raw("DATE_FORMAT(exams.created_at, '%d/%m/%Y') as date"))->get(),
             ]);
     }
 
-    public function create($uuid)
+    public function create()
     {
-        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
-        return Inertia::render('Exam/Create', [
-            "classroom" => $classroom,
-        ]);
+        return Inertia::render('Exam/Create');
     }
 
     public function store(Request $request)
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:exams,title,'.$request->input("classroom_id").',classroom_id',
+            'title'        => 'required|max:255|unique:exams,title,'.$teacher->id.',teacher_id',
             'description'  => 'required',
         ]);
 
         $data = $request->all();
+        $data += ["teacher_id" => $teacher->id];
 
         $exam = Exam::create($data);
 
@@ -61,7 +58,7 @@ class ExamController extends Controller
 
     public function edit($uuid)
     {
-        $exam = Exam::with("classroom")->where("uuid", $uuid)->first();
+        $exam = Exam::with("teacher")->where("uuid", $uuid)->first();
         return Inertia::render('Exam/Edit', [
             'exam' =>  $exam
         ]);
@@ -70,9 +67,10 @@ class ExamController extends Controller
 
     public function update(Request $request)
     {
-        $exam = Exam::with("classroom")->where('id', $request->input("id"))->first();
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+        $exam = Exam::where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:exams,title,'.$request->input("classroom_id").',classroom_id',
+            'title'        => 'required|max:255|unique:exams,title,'.$teacher->id.',teacher_id',
             'description'  => 'required'
         ]);
 

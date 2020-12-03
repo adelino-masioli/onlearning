@@ -5,14 +5,14 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiChevronLeft, FiLink2 } from "react-icons/fi";
+import { FiFrown, FiPlus, FiLink2, FiList } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function Exame({ exams, classroom }) {
+export default function Exame({ exams }) {
     const [listRegisters, setListRegisters] = useState(exams);
 
     function handleFilter(search) {
@@ -38,24 +38,12 @@ export default function Exame({ exams, classroom }) {
     return (
         <>
             <Template
-                title={`classroom Exame  <strong>${classroom.title}</strong>`}
+                title={`Exams</strong>`}
                 subtitle="Teacher"
             >
                 <div className="highlight">
                     <ul className="row">
                         <Col>
-                            <Link
-                                classAtrributes="btn btn-secondary btn-new  mb-4 mr-2"
-                                tootip="List all classrooms"
-                                placement="bottom"
-                                tootip="List all classrooms"
-                                text="List all classrooms"
-                                icon={<FiChevronLeft />}
-                                url={route(
-                                    "classrooms",
-                                    classroom.course.uuid
-                                )}
-                            />
                             <Link
                                 classAtrributes="btn btn-primary btn-new  mb-4"
                                 tootip="Create new exam"
@@ -63,10 +51,7 @@ export default function Exame({ exams, classroom }) {
                                 tootip="Create new exam"
                                 text="Create new exam"
                                 icon={<FiPlus />}
-                                url={route(
-                                    "exams-create",
-                                    classroom.uuid
-                                )}
+                                url={route("exams-create")}
                             />
                         </Col>
                         <h1 className="col-md-12">List of exams</h1>
@@ -96,14 +81,16 @@ export default function Exame({ exams, classroom }) {
                                 Material
                             </th>
                             <th className="text-center text-uppercase">
-                                classroom
-                            </th>
-
-                            <th className="text-center text-uppercase">
-                                Created At
+                                Teacher
                             </th>
                             <th className="text-center text-uppercase">
                                 Average
+                            </th>
+                            <th className="text-center text-uppercase">
+                                Questions
+                            </th>
+                            <th className="text-center text-uppercase">
+                                Created At
                             </th>
                             <th className="text-center text-uppercase">
                                 Status
@@ -128,9 +115,30 @@ export default function Exame({ exams, classroom }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.classroom.title}</td>
+                                <td>{register.teacher.name}</td>
+                                <td className="text-center">{register.average}</td>
+                                <td className="text-center">
+                                    <Link
+                                        classAtrributes={register.questions.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1"}
+                                        tootip={`Questions of ${register.title}`}
+                                        placement="top"
+                                        text="Questions"
+                                        icon={<FiList />}
+                                        url={route(
+                                            "questions",
+                                            register.uuid
+                                        )}
+                                    />
+                                    {register.questions.length == 0 ? (
+                                        <Badge pill variant="secondary">{register.questions.length}</Badge>
+                                    ) : (
+                                            <Badge pill variant="success">
+                                                {register.questions.length}
+                                            </Badge>
+                                        )}
+
+                                </td>
                                 <td>{register.date}</td>
-                                <td>{register.average}</td>
                                 <td className="text-center">
                                     {register.status == 0 ? (
                                         <Badge variant="secondary">Draft</Badge>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 
+
 use Inertia\Inertia;
 use Auth;
 use DB;
@@ -29,7 +30,7 @@ class ClassroomController extends Controller
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         return Inertia::render('Classroom', [
-            "classrooms" => Classroom::with("course")->with("students")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
+            "classrooms" => Classroom::with("course")->with("students")->with("materials")->with("exams")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
             ]);
     }
 
@@ -38,7 +39,7 @@ class ClassroomController extends Controller
         $course = Course::where("uuid", $uuid)->first();
         return Inertia::render('Classroom/Course', [
             "course" => $course,
-            "classrooms" => Classroom::with("course")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("classrooms.course_id", $course->id)->get(),
+            "classrooms" => Classroom::with("course")->with("students")->with("materials")->with("exams")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("classrooms.course_id", $course->id)->get(),
             ]);
     }
     
@@ -71,12 +72,14 @@ class ClassroomController extends Controller
         $validation = $request->validate([
             'course_id'    => 'required',
             'title'        => 'required|max:255|unique:classrooms,title,'.$teacher->id.',teacher_id',
+            'meet'         => 'required|max:255|unique:classrooms,meet',
             'description'  => 'required',
         ]);
 
         $data = $request->all();
-        $data += ["teacher_id" => $teacher->id];
-
+        $data["teacher_id"] = $teacher->id;
+        $data["meet"] = Str::of($request->meet)->slug('-');
+    
         $classroom = Classroom::create($data);
 
         $request->session()->flash('message', 'Saved successfully!');
@@ -96,6 +99,18 @@ class ClassroomController extends Controller
         ]);
     }
 
+    public function room($uuid)
+    {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+        $courses = Course::orderBy('title', 'asc')->where("teacher_id", $teacher->id)->get();
+
+        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
+        return Inertia::render('Classroom/Room', [
+            'classroom' =>  $classroom,
+            "courses" => $courses
+        ]);
+    }
+
 
     public function update(Request $request)
     {
@@ -104,10 +119,12 @@ class ClassroomController extends Controller
         $validation = $request->validate([
             'course_id'    => 'required',
             'title'        => 'required|max:255|unique:classrooms,title,'.$teacher->id.',teacher_id',
+            'meet'         => 'required|max:255|unique:classrooms,meet,'.$classroom->id.',id',
             'description'  => 'required'
         ]);
 
         $data = $request->all();
+        $data["meet"] = Str::of($request->meet)->slug('-');
 
         $classroom->update($data);
 

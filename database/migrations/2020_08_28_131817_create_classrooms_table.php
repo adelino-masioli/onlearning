@@ -24,6 +24,7 @@ class CreateClassroomsTable extends Migration
             $table->longText('description');
             $table->string('video')->nullable();
             $table->string('download')->nullable();
+            $table->string('meet')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

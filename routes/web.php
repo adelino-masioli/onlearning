@@ -67,19 +67,31 @@ Route::namespace('Classroom')->group(function () {
     Route::get('/classrooms/create/course/{courseuuid}', ["as" => "classrooms-create-by-course", "uses" => "ClassroomController@create_by_course"]);
     Route::post('/classrooms/store', ["as" => "classrooms-store", "uses" => "ClassroomController@store"]);
     Route::get('/classrooms/edit/{uuid}', ["as" => "classrooms-edit", "uses" => "ClassroomController@edit"]);
+    Route::get('/classrooms/room/{uuid}', ["as" => "classrooms-room", "uses" => "ClassroomController@room"]);
     Route::post('/classrooms/update', ["as" => "classrooms-update", "uses" => "ClassroomController@update"]);
 });
 
-//CourseStudent
+//ClassroomStudent
 Route::namespace('ClassroomStudent')->group(function () {
     Route::get('/classroom-students/{uuid}', ["as" => "classroom-students", "uses" => "ClassroomStudentController@index"]);
     Route::post('/classroom-students/store', ["as" => "classroom-students-store", "uses" => "ClassroomStudentController@store"]);
 });
 
+//ClassroomMaterial
+Route::namespace('ClassroomMaterial')->group(function () {
+    Route::get('/classroom-materials/{uuid}', ["as" => "classroom-materials", "uses" => "ClassroomMaterialController@index"]);
+    Route::post('/classroom-materials/store', ["as" => "classroom-materials-store", "uses" => "ClassroomMaterialController@store"]);
+});
+//ClassroomExam
+Route::namespace('ClassroomExam')->group(function () {
+    Route::get('/classroom-exams/{uuid}', ["as" => "classroom-exams", "uses" => "ClassroomExamController@index"]);
+    Route::post('/classroom-exams/store', ["as" => "classroom-exams-store", "uses" => "ClassroomExamController@store"]);
+});
+
 //Material
 Route::namespace('Material')->group(function () {
-    Route::get('/materials/{classroomuuid}', ["as" => "materials", "uses" => "MaterialController@index"]);
-    Route::get('/materials/create/{uuid}', ["as" => "materials-create", "uses" => "MaterialController@create"]);
+    Route::get('/materials', ["as" => "materials", "uses" => "MaterialController@index"]);
+    Route::get('/materials/create', ["as" => "materials-create", "uses" => "MaterialController@create"]);
     Route::post('/materials/store', ["as" => "materials-store", "uses" => "MaterialController@store"]);
     Route::get('/materials/edit/{uuid}', ["as" => "materials-edit", "uses" => "MaterialController@edit"]);
     Route::post('/materials/update', ["as" => "materials-update", "uses" => "MaterialController@update"]);
@@ -87,8 +99,8 @@ Route::namespace('Material')->group(function () {
 
 //Exam
 Route::namespace('Exam')->group(function () {
-    Route::get('/exams/{classroomuuid}', ["as" => "exams", "uses" => "ExamController@index"]);
-    Route::get('/exams/create/{uuid}', ["as" => "exams-create", "uses" => "ExamController@create"]);
+    Route::get('/exams', ["as" => "exams", "uses" => "ExamController@index"]);
+    Route::get('/exams/create', ["as" => "exams-create", "uses" => "ExamController@create"]);
     Route::post('/exams/store', ["as" => "exams-store", "uses" => "ExamController@store"]);
     Route::get('/exams/edit/{uuid}', ["as" => "exams-edit", "uses" => "ExamController@edit"]);
     Route::post('/exams/update', ["as" => "exams-update", "uses" => "ExamController@update"]);
@@ -96,7 +108,7 @@ Route::namespace('Exam')->group(function () {
 
 //ExamQuestion
 Route::namespace('ExamQuestion')->group(function () {
-    Route::get('/questions/{examuuid}', ["as" => "questions", "uses" => "ExamQuestionController@index"]);
+    Route::get('/questions/{uuid}', ["as" => "questions", "uses" => "ExamQuestionController@index"]);
     Route::get('/questions/create/{uuid}', ["as" => "questions-create", "uses" => "ExamQuestionController@create"]);
     Route::post('/questions/store', ["as" => "questions-store", "uses" => "ExamQuestionController@store"]);
     Route::get('/questions/edit/{uuid}', ["as" => "questions-edit", "uses" => "ExamQuestionController@edit"]);

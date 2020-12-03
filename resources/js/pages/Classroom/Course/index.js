@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiChevronLeft, FiBookOpen } from "react-icons/fi";
+import { FiFrown, FiPlus, FiEdit2, FiChevronLeft, FiBookOpen, FiUsers, FiDownload, FiList, FiVideo } from "react-icons/fi";
 
 import Template from "../../../components/Template";
 import Link from "../../../components/Link";
@@ -99,6 +99,15 @@ export default function classroom({ classrooms, course }) {
                                 Level
                             </th>
                             <th className="text-center text-uppercase">
+                                Materials
+                            </th>
+                            <th className="text-center text-uppercase">
+                                Exams
+                            </th>
+                            <th className="text-center text-uppercase">
+                                Students
+                            </th>
+                            <th className="text-center text-uppercase">
                                 Created At
                             </th>
                             <th className="text-center text-uppercase">
@@ -126,6 +135,72 @@ export default function classroom({ classrooms, course }) {
                                 <td>{register.title}</td>
                                 <td>{register.course.title}</td>
                                 <td>{register.course.level}</td>
+                                <td className="text-center">
+
+                                    <Link
+                                        classAtrributes={register.materials.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1"}
+                                        tootip={`Materials of ${register.title}`}
+                                        placement="top"
+                                        text="Materials"
+                                        icon={<FiDownload />}
+                                        url={route(
+                                            "classroom-materials",
+                                            register.uuid
+                                        )}
+                                    />
+                                    {register.materials.length == 0 ? (
+                                        <Badge pill variant="secondary">{register.materials.length}</Badge>
+                                    ) : (
+                                            <Badge pill variant="success">
+                                                {register.materials.length}
+                                            </Badge>
+                                        )}
+
+                                </td>
+                                <td className="text-center">
+
+                                    <Link
+                                        classAtrributes={register.exams.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1"}
+                                        tootip={`Exams of ${register.title}`}
+                                        placement="top"
+                                        text="Exams"
+                                        icon={<FiList />}
+                                        url={route(
+                                            "classroom-exams",
+                                            register.uuid
+                                        )}
+                                    />
+                                    {register.exams.length == 0 ? (
+                                        <Badge pill variant="secondary">{register.exams.length}</Badge>
+                                    ) : (
+                                            <Badge pill variant="success">
+                                                {register.exams.length}
+                                            </Badge>
+                                        )}
+
+                                </td>
+                                <td className="text-center">
+
+                                    <Link
+                                        classAtrributes={register.students.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1"}
+                                        tootip={`Students of ${register.title}`}
+                                        placement="top"
+                                        text="Students"
+                                        icon={<FiUsers />}
+                                        url={route(
+                                            "classroom-students",
+                                            register.uuid
+                                        )}
+                                    />
+                                    {register.students.length == 0 ? (
+                                        <Badge pill variant="secondary">{register.students.length}</Badge>
+                                    ) : (
+                                            <Badge pill variant="success">
+                                                {register.students.length}
+                                            </Badge>
+                                        )}
+
+                                </td>
                                 <td>{register.date}</td>
                                 <td className="text-center">
                                     {register.status == 0 ? (
@@ -138,11 +213,22 @@ export default function classroom({ classrooms, course }) {
                                 </td>
                                 <td className="text-center">
                                     <Link
+                                        classAtrributes="text-danger link mr-2"
+                                        tootip={`Open room ${register.title}`}
+                                        placement="top"
+                                        text="Room"
+                                        icon={<FiVideo />}
+                                        url={route(
+                                            "classrooms-room",
+                                            register.uuid
+                                        )}
+                                    />
+                                    <Link
                                         classAtrributes="text-success link"
                                         tootip={`Edit ${register.title}`}
                                         placement="top"
-                                        text="Edit classroom"
-                                        icon={<FiBookOpen />}
+                                        text="Edit"
+                                        icon={<FiEdit2 />}
                                         url={route(
                                             "classrooms-edit",
                                             register.uuid

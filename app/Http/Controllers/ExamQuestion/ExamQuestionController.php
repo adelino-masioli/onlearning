@@ -15,7 +15,6 @@ use Str;
 use Image;
 use \App\Models\Exam;
 use \App\Models\ExamQuestion;
-use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
 
@@ -28,17 +27,17 @@ class ExamQuestionController extends Controller
 
     public function index($uuid)
     {
-        $exam = Exam::with("classroom")->where("uuid", $uuid)->first();
+        $exam = Exam::with("teacher")->where("uuid", $uuid)->first();
 
         return Inertia::render('ExamQuestion', [
             "exam" => $exam,
-            "questions" => ExamQuestion::with("exam")->select("exam_questions.*",  DB::raw("DATE_FORMAT(exam_questions.created_at, '%d/%m/%Y') as date"))->where("exam_questions.exam_id", $exam->id)->get(),
+            "questions" => ExamQuestion::with("exam")->with("answers")->select("exam_questions.*",  DB::raw("DATE_FORMAT(exam_questions.created_at, '%d/%m/%Y') as date"))->where("exam_questions.exam_id", $exam->id)->get(),
             ]);
     }
 
     public function create($uuid)
     {
-        $exam = Exam::with("classroom")->where("uuid", $uuid)->first();
+        $exam = Exam::with("teacher")->where("uuid", $uuid)->first();
         return Inertia::render('ExamQuestion/Create', [
             "exam" => $exam,
         ]);
@@ -63,7 +62,7 @@ class ExamQuestionController extends Controller
     public function edit($uuid)
     {
         $exam_question = ExamQuestion::where("uuid", $uuid)->first();
-        $exam = Exam::with("classroom")->where("id", $exam_question->exam_id)->first();
+        $exam = Exam::with("teacher")->where("id", $exam_question->exam_id)->first();
         return Inertia::render('ExamQuestion/Edit', [
             'exam_question' =>  $exam_question,
             'exam' =>  $exam,

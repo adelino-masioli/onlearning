@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Str;
 
 class Classroom extends Model
 {
@@ -23,6 +23,7 @@ class Classroom extends Model
         'description',
         'video',
         'download',
+        'meet',
         'status',
     ];
 
@@ -36,18 +37,18 @@ class Classroom extends Model
         return $this->belongsTo('App\Models\Course');
     }
 
-    public function material()
-    {
-        return $this->hasMany('App\Models\Material');
-    }
-
-    public function exame()
-    {
-        return $this->hasMany('App\Models\Exame');
-    }
-
     public function students()
     {
         return $this->belongsToMany('App\Models\Student');
+    }
+
+    public function materials()
+    {
+        return $this->belongsToMany('App\Models\Material');
+    }
+
+    public function exams()
+    {
+        return $this->belongsToMany('App\Models\Exam');
     }
 }

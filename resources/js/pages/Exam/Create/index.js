@@ -7,14 +7,14 @@ import Template from "../../../components/Template";
 import Link from "../../../components/Link";
 import FormData from "../Partials/form";
 
-export default function Create({ classroom }) {
+export default function Create() {
     function handleSubmit(values) {
         Inertia.post(route("exams-store"), values);
     }
     return (
         <>
             <Template
-                title={`Create new exam <strong>${classroom.title}</strong>`}
+                title={`Create new exam`}
                 subtitle="Teacher"
             >
                 <Link
@@ -24,9 +24,9 @@ export default function Create({ classroom }) {
                     tootip="Back to exams"
                     text="Back to exams"
                     icon={<FiChevronLeft />}
-                    url={route("exams", classroom.uuid)}
+                    url={route("exams")}
                 />
-                <FormData classroom={classroom} handleForm={handleSubmit} />
+                <FormData handleForm={handleSubmit} />
             </Template>
         </>
     );

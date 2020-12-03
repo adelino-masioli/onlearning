@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiChevronLeft, FiLink2 } from "react-icons/fi";
+import { FiFrown, FiPlus, FiChevronLeft, FiLink2, FiList } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
@@ -53,7 +53,7 @@ export default function ExamQuestion({ questions, exam }) {
                                 icon={<FiChevronLeft />}
                                 url={route(
                                     "exams",
-                                    exam.classroom.uuid
+                                    exam.teacher.uuid
                                 )}
                             />
                             <Link
@@ -97,6 +97,8 @@ export default function ExamQuestion({ questions, exam }) {
                             </th>
                             <th className="text-center text-uppercase">Exam</th>
 
+                            <th className="text-center text-uppercase">Answers</th>
+
                             <th className="text-center text-uppercase">
                                 Created At
                             </th>
@@ -125,6 +127,29 @@ export default function ExamQuestion({ questions, exam }) {
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.question}</td>
                                 <td>{register.exam.title}</td>
+
+                                <td className="text-center">
+                                    <Link
+                                        classAtrributes={register.answers.length == 0 ? "text-secondary link mr-1" : "text-success link mr-1"}
+                                        tootip={`Answers of ${register.title}`}
+                                        placement="top"
+                                        text="Answers"
+                                        icon={<FiList />}
+                                        url={route(
+                                            "answers",
+                                            register.uuid
+                                        )}
+                                    />
+                                    {register.answers.length == 0 ? (
+                                        <Badge pill variant="secondary">{register.answers.length}</Badge>
+                                    ) : (
+                                            <Badge pill variant="success">
+                                                {register.answers.length}
+                                            </Badge>
+                                        )}
+
+                                </td>
+
                                 <td>{register.date}</td>
                                 <td className="text-center">{register.time}</td>
                                 <td className="text-center">

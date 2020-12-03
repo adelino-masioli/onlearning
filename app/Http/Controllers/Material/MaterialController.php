@@ -14,9 +14,9 @@ use DB;
 use Str;
 use Image;
 use \App\Models\Material;
-use \App\Models\Classroom;
 use \App\Models\Student;
 use \App\Models\Course;
+use \App\Models\Teacher;
 
 class MaterialController extends Controller
 {
@@ -25,31 +25,28 @@ class MaterialController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($uuid)
+    public function index()
     {
-        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
         return Inertia::render('Material', [
-            "classroom" => $classroom,
-            "materials" => Material::with("classroom")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->where("materials.classroom_id", $classroom->id)->get(),
+            "materials" => Material::with("teacher")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->get(),
             ]);
     }
 
-    public function create($uuid)
+    public function create()
     {
-        $classroom = Classroom::with("course")->where("uuid", $uuid)->first();
-        return Inertia::render('Material/Create', [
-            "classroom" => $classroom,
-        ]);
+        return Inertia::render('Material/Create');
     }
 
     public function store(Request $request)
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:materials,title,'.$request->input("classroom_id").',classroom_id',
+            'title'        => 'required|max:255|unique:materials,title,'.$teacher->id.',teacher_id',
             'description'  => 'required',
         ]);
 
         $data = $request->all();
+        $data += ["teacher_id" => $teacher->id];
 
         $material = Material::create($data);
 
@@ -61,7 +58,7 @@ class MaterialController extends Controller
 
     public function edit($uuid)
     {
-        $material = Material::with("classroom")->where("uuid", $uuid)->first();
+        $material = Material::with("teacher")->where("uuid", $uuid)->first();
         return Inertia::render('Material/Edit', [
             'material' =>  $material
         ]);
@@ -70,9 +67,9 @@ class MaterialController extends Controller
 
     public function update(Request $request)
     {
-        $material = Material::with("classroom")->where('id', $request->input("id"))->first();
+        $material = Material::with("teacher")->where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:materials,title,'.$request->input("classroom_id").',classroom_id',
+            'title'        => 'required|max:255|unique:materials,title,'.$request->input("id").',id',
             'description'  => 'required'
         ]);
 
