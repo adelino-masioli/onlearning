@@ -31,6 +31,10 @@ export default function classroom({ classrooms }) {
         setListRegisters(results);
     }
 
+    const handleOpenRoom = (status, value) => {
+        window.open(value, '_blank');
+    };
+
     useEffect(() => {
         setListRegisters(classrooms);
     }, [classrooms]);
@@ -119,7 +123,7 @@ export default function classroom({ classrooms }) {
                         {listRegisters.length == 0 && (
                             <tr>
                                 <td
-                                    colSpan="8"
+                                    colSpan="10"
                                     className="text-center text-muted"
                                 >
                                     <FiFrown size={20} /> No records found
@@ -216,10 +220,8 @@ export default function classroom({ classrooms }) {
                                         placement="top"
                                         text="Room"
                                         icon={<FiVideo />}
-                                        url={route(
-                                            "classrooms-room",
-                                            register.uuid
-                                        )}
+                                        value={`https://meet.jit.si/${register.meet}`}
+                                        handleFunction={handleOpenRoom}
                                     />
                                     <Link
                                         classAtrributes="text-success link"

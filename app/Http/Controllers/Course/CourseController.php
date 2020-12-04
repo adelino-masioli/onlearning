@@ -60,6 +60,12 @@ class CourseController extends Controller
         $validation = $request->validate([
             'title'        => 'required|max:255|unique:courses,title,'.$teacher->id.',teacher_id',
             'level'        => 'required',
+            'price'        => 'required',
+            'weeks'        => 'required',
+            'hours'        => 'required',
+            'timetable'    => 'required',
+            'age'          => 'required',
+            'size'         => 'required',
             'description'  => 'required',
             'image'        => 'required'
         ]);

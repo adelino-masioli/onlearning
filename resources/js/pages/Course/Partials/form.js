@@ -20,6 +20,12 @@ export default function Formdatas({ datas, handleForm }) {
         id: datas ? datas.register.id : "",
         title: datas ? datas.register.title : "",
         level: datas ? datas.register.level : "",
+        price: datas ? datas.register.price : "",
+        weeks: datas ? datas.register.weeks : "",
+        hours: datas ? datas.register.hours : "",
+        timetable: datas ? datas.register.timetable : "",
+        age: datas ? datas.register.age : "",
+        size: datas ? datas.register.size : "",
         description: datas ? datas.register.description : "",
         image: datas ? datas.cover.cover : "",
         show: datas ? datas.register.show : 0,
@@ -68,6 +74,12 @@ export default function Formdatas({ datas, handleForm }) {
         data.append("id", values.id || "");
         data.append("title", values.title || "");
         data.append("level", values.level || "");
+        data.append("price", values.price || "");
+        data.append("weeks", values.weeks || "");
+        data.append("hours", values.hours || "");
+        data.append("timetable", values.timetable || "");
+        data.append("age", values.age || "");
+        data.append("size", values.size || "");
         data.append("description", values.description || "");
         data.append("show", values.show || 0);
         data.append("status", values.status || 0);
@@ -118,7 +130,7 @@ export default function Formdatas({ datas, handleForm }) {
                 />
 
                 <Form.Row>
-                    <Col>
+                    <Col md={5}>
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control
@@ -136,7 +148,7 @@ export default function Formdatas({ datas, handleForm }) {
                         </Form.Group>
                     </Col>
 
-                    <Col>
+                    <Col md={5}>
                         <Form.Group controlId="level">
                             <Form.Label>Level</Form.Label>
                             <Form.Control
@@ -172,6 +184,118 @@ export default function Formdatas({ datas, handleForm }) {
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
+
+                    <Col md={2}>
+                        <Form.Group controlId="price">
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control
+                                size="lg"
+                                type="text"
+                                placeholder="Price"
+                                value={values.price}
+                                onChange={handleChange}
+                                required
+                                isInvalid={!!errors.price}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.price}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+                </Form.Row>
+
+                <Form.Row>
+                    <Col sm={1}>
+                        <Form.Group controlId="weeks">
+                            <Form.Label>Weeks</Form.Label>
+                            <Form.Control
+                                size="lg"
+                                type="text"
+                                placeholder="Weeks"
+                                value={values.weeks}
+                                onChange={handleChange}
+                                required
+                                isInvalid={!!errors.weeks}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.weeks}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+                    <Col sm={2}>
+                        <Form.Group controlId="hours">
+                            <Form.Label>Hours per week</Form.Label>
+                            <Form.Control
+                                size="lg"
+                                type="text"
+                                placeholder="Hours per week"
+                                value={values.hours}
+                                onChange={handleChange}
+                                required
+                                isInvalid={!!errors.hours}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.hours}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+
+                    <Col sm={2}>
+                        <Form.Group controlId="age">
+                            <Form.Label>Minimum age</Form.Label>
+                            <Form.Control
+                                size="lg"
+                                type="text"
+                                placeholder="Minimum age"
+                                value={values.age}
+                                onChange={handleChange}
+                                required
+                                isInvalid={!!errors.age}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.age}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+
+
+
+                    <Col sm={5}>
+                        <Form.Group controlId="timetable">
+                            <Form.Label>Timetable</Form.Label>
+                            <Form.Control
+                                size="lg"
+                                type="text"
+                                placeholder="Timetable"
+                                value={values.timetable}
+                                onChange={handleChange}
+                                required
+                                isInvalid={!!errors.timetable}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.timetable}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+
+                    <Col sm={2}>
+                        <Form.Group controlId="size">
+                            <Form.Label>Max class size</Form.Label>
+                            <Form.Control
+                                size="lg"
+                                type="text"
+                                placeholder="Max class size"
+                                value={values.size}
+                                onChange={handleChange}
+                                required
+                                isInvalid={!!errors.size}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.size}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+
                 </Form.Row>
 
                 <Form.Group controlId="description">
@@ -208,16 +332,16 @@ export default function Formdatas({ datas, handleForm }) {
                                     alt="Selected file"
                                 />
                             ) : (
-                                <img src={datas.cover} alt="Selected file" />
-                            )
+                                    <img src={datas.cover} alt="Selected file" />
+                                )
                         ) : (
-                            <p>
-                                <FiUploadCloud size={30} />
-                                <br></br>
+                                <p>
+                                    <FiUploadCloud size={30} />
+                                    <br></br>
                                 Drag 'n' drop some files here, or click to
                                 select files
-                            </p>
-                        )}
+                                </p>
+                            )}
                     </div>
 
                     <Form.Control.Feedback type="invalid" className="d-block">

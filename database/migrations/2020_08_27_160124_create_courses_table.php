@@ -19,6 +19,12 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->string('title');
+            $table->string('price');
+            $table->string('weeks');
+            $table->string('hours');
+            $table->string('timetable');
+            $table->string('age');
+            $table->string('size');
             $table->longText('description');
             $table->string('level');
             $table->string('cover')->nullable();

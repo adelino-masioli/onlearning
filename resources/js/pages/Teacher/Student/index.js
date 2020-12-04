@@ -37,14 +37,14 @@ export default function Student({ students }) {
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
-        const results = students.filter(function(item) {
+        const results = students.filter(function (item) {
             return Object.keys(item).some(key =>
                 excludeColumns.includes(key)
                     ? false
                     : item[key]
-                          .toString()
-                          .toLowerCase()
-                          .includes(lowercasedValue)
+                        .toString()
+                        .toLowerCase()
+                        .includes(lowercasedValue)
             );
         });
         setListRegisters(results);
@@ -61,7 +61,7 @@ export default function Student({ students }) {
                     <ul className="row">
                         <Col>
                             <Link
-                                classAtrributes="btn btn-secondary btn-new  mb-4"
+                                classAtrributes="btn btn-primary btn-new  mb-4"
                                 tootip="Create new student"
                                 placement="bottom"
                                 tootip="Create new student"
@@ -139,8 +139,8 @@ export default function Student({ students }) {
                                             Inactive
                                         </Badge>
                                     ) : (
-                                        <Badge variant="success">Active</Badge>
-                                    )}
+                                            <Badge variant="success">Active</Badge>
+                                        )}
                                 </td>
                                 <td className="text-center">
                                     {student.status == 0 ? (
@@ -148,16 +148,16 @@ export default function Student({ students }) {
                                             <FiXCircle />
                                         </span>
                                     ) : (
-                                        <Link
-                                            classAtrributes="mr-3"
-                                            tootip={`Edit ${student.name}`}
-                                            placement="top"
-                                            icon={<FiEdit2 />}
-                                            url={route("teacher-student-edit", {
-                                                uuid: student.uuid
-                                            })}
-                                        />
-                                    )}
+                                            <Link
+                                                classAtrributes="mr-3"
+                                                tootip={`Edit ${student.name}`}
+                                                placement="top"
+                                                icon={<FiEdit2 />}
+                                                url={route("teacher-student-edit", {
+                                                    uuid: student.uuid
+                                                })}
+                                            />
+                                        )}
 
                                     <Link
                                         classAtrributes={
@@ -175,8 +175,8 @@ export default function Student({ students }) {
                                             student.status == 0 ? (
                                                 <FiThumbsUp />
                                             ) : (
-                                                <FiThumbsDown />
-                                            )
+                                                    <FiThumbsDown />
+                                                )
                                         }
                                         value={student}
                                         handleFunction={handleConfirm}

@@ -30,26 +30,26 @@ export default function Edit({ classroom, courses }) {
 
                 <Link
                     classAtrributes="btn btn-primary btn-new  mb-4 mr-2"
-                    tootip="Add new material"
+                    tootip="Materials"
                     placement="bottom"
-                    tootip="Add new material"
-                    text="Add new material"
+                    tootip="Materials"
+                    text="Materials"
                     icon={<FiDownload />}
                     url={route(
-                        "materials-create",
+                        "classroom-materials",
                         classroom.uuid
                     )}
                 />
 
                 <Link
                     classAtrributes="btn btn-warning btn-new  mb-4 mr-2"
-                    tootip="Create new exam"
+                    tootip="Exams"
                     placement="bottom"
-                    tootip="Create new exam"
-                    text="Create new exam"
+                    tootip="Exams"
+                    text="Exams"
                     icon={<FiList />}
                     url={route(
-                        "exams-create",
+                        "classroom-exams",
                         classroom.uuid
                     )}
                 />

@@ -72724,6 +72724,10 @@ function classroom(_ref) {
     setListRegisters(results);
   }
 
+  var handleOpenRoom = function handleOpenRoom(status, value) {
+    window.open(value, '_blank');
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setListRegisters(classrooms);
   }, [classrooms]);
@@ -72776,7 +72780,7 @@ function classroom(_ref) {
   }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
   }, "Actions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    colSpan: "8",
+    colSpan: "10",
     className: "text-center text-muted"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiFrown"], {
     size: 20
@@ -72845,7 +72849,8 @@ function classroom(_ref) {
       placement: "top",
       text: "Room",
       icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiVideo"], null),
-      url: route("classrooms-room", register.uuid)
+      value: "https://meet.jit.si/".concat(register.meet),
+      handleFunction: handleOpenRoom
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
       classAtrributes: "text-success link",
       tootip: "Edit ".concat(register.title),
@@ -72954,13 +72959,13 @@ function Edit(_ref) {
     placement: "bottom"
   }, _defineProperty(_React$createElement, "tootip", "Back to classrooms"), _defineProperty(_React$createElement, "text", "Back to classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement2 = {
     classAtrributes: "btn btn-primary btn-new  mb-4 mr-2",
-    tootip: "Add new material",
+    tootip: "Materials",
     placement: "bottom"
-  }, _defineProperty(_React$createElement2, "tootip", "Add new material"), _defineProperty(_React$createElement2, "text", "Add new material"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiDownload"], null)), _defineProperty(_React$createElement2, "url", route("materials-create", classroom.uuid)), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement3 = {
+  }, _defineProperty(_React$createElement2, "tootip", "Materials"), _defineProperty(_React$createElement2, "text", "Materials"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiDownload"], null)), _defineProperty(_React$createElement2, "url", route("classroom-materials", classroom.uuid)), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement3 = {
     classAtrributes: "btn btn-warning btn-new  mb-4 mr-2",
-    tootip: "Create new exam",
+    tootip: "Exams",
     placement: "bottom"
-  }, _defineProperty(_React$createElement3, "tootip", "Create new exam"), _defineProperty(_React$createElement3, "text", "Create new exam"), _defineProperty(_React$createElement3, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiList"], null)), _defineProperty(_React$createElement3, "url", route("exams-create", classroom.uuid)), _React$createElement3)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement4 = {
+  }, _defineProperty(_React$createElement3, "tootip", "Exams"), _defineProperty(_React$createElement3, "text", "Exams"), _defineProperty(_React$createElement3, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiList"], null)), _defineProperty(_React$createElement3, "url", route("classroom-exams", classroom.uuid)), _React$createElement3)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_4__["default"], (_React$createElement4 = {
     classAtrributes: "btn btn-success btn-new  mb-4",
     tootip: "Students",
     placement: "bottom"
@@ -73323,6 +73328,10 @@ function classroom(_ref) {
     setListRegisters(results);
   }
 
+  var handleOpenRoom = function handleOpenRoom(status, value) {
+    window.open(value, '_blank');
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setListRegisters(classrooms);
   }, [classrooms]);
@@ -73375,7 +73384,7 @@ function classroom(_ref) {
   }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
   }, "Actions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    colSpan: "8",
+    colSpan: "10",
     className: "text-center text-muted"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiFrown"], {
     size: 20
@@ -73444,7 +73453,8 @@ function classroom(_ref) {
       placement: "top",
       text: "Room",
       icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiVideo"], null),
-      url: route("classrooms-room", register.uuid)
+      value: "https://meet.jit.si/".concat(register.meet),
+      handleFunction: handleOpenRoom
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
       classAtrributes: "text-success link",
       tootip: "Edit ".concat(register.title),
@@ -73506,7 +73516,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function ClassroomExam(_ref) {
-  var _React$createElement;
+  var _React$createElement, _React$createElement2;
 
   var exams = _ref.exams,
       classroom = _ref.classroom;
@@ -73552,7 +73562,11 @@ function ClassroomExam(_ref) {
     classAtrributes: "btn btn-secondary btn-new  mb-4",
     tootip: "List all classrooms",
     placement: "bottom"
-  }, _defineProperty(_React$createElement, "tootip", "List all classrooms"), _defineProperty(_React$createElement, "text", "List all classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, _defineProperty(_React$createElement, "tootip", "List all classrooms"), _defineProperty(_React$createElement, "text", "List all classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], (_React$createElement2 = {
+    classAtrributes: "btn btn-primary btn-new  mb-4 ml-2",
+    tootip: "Create new exam",
+    placement: "bottom"
+  }, _defineProperty(_React$createElement2, "tootip", "Create new exam"), _defineProperty(_React$createElement2, "text", "Create new exam"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiPlus"], null)), _defineProperty(_React$createElement2, "url", route("exams-create")), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
     placeholder: "Enter your search to filter",
     handleFunction: handleFilter
   }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -73659,7 +73673,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function ClassroomMaterial(_ref) {
-  var _React$createElement;
+  var _React$createElement, _React$createElement2;
 
   var materials = _ref.materials,
       classroom = _ref.classroom;
@@ -73705,7 +73719,11 @@ function ClassroomMaterial(_ref) {
     classAtrributes: "btn btn-secondary btn-new  mb-4",
     tootip: "List all classrooms",
     placement: "bottom"
-  }, _defineProperty(_React$createElement, "tootip", "List all classrooms"), _defineProperty(_React$createElement, "text", "List all classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, _defineProperty(_React$createElement, "tootip", "List all classrooms"), _defineProperty(_React$createElement, "text", "List all classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], (_React$createElement2 = {
+    classAtrributes: "btn btn-primary btn-new  mb-4 ml-2",
+    tootip: "Create new material",
+    placement: "bottom"
+  }, _defineProperty(_React$createElement2, "tootip", "Create new material"), _defineProperty(_React$createElement2, "text", "Create new material"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiPlus"], null)), _defineProperty(_React$createElement2, "url", route("materials-create")), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
     placeholder: "Enter your search to filter",
     handleFunction: handleFilter
   }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -73810,7 +73828,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function ClassroomStudent(_ref) {
-  var _React$createElement;
+  var _React$createElement, _React$createElement2;
 
   var students = _ref.students,
       classroom = _ref.classroom,
@@ -73857,7 +73875,11 @@ function ClassroomStudent(_ref) {
     classAtrributes: "btn btn-secondary btn-new  mb-4",
     tootip: "List all classrooms",
     placement: "bottom"
-  }, _defineProperty(_React$createElement, "tootip", "List all classrooms"), _defineProperty(_React$createElement, "text", "List all classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, _defineProperty(_React$createElement, "tootip", "List all classrooms"), _defineProperty(_React$createElement, "text", "List all classrooms"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiChevronLeft"], null)), _defineProperty(_React$createElement, "url", route("classrooms")), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], (_React$createElement2 = {
+    classAtrributes: "btn btn-primary btn-new  mb-4 ml-2",
+    tootip: "Create new student",
+    placement: "bottom"
+  }, _defineProperty(_React$createElement2, "tootip", "Create new student"), _defineProperty(_React$createElement2, "text", "Create new student"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__["FiPlus"], null)), _defineProperty(_React$createElement2, "url", route("teacher-student-create")), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
     placeholder: "Enter your search to filter",
     handleFunction: handleFilter
   }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -74070,6 +74092,12 @@ function Formdatas(_ref) {
     id: datas ? datas.register.id : "",
     title: datas ? datas.register.title : "",
     level: datas ? datas.register.level : "",
+    price: datas ? datas.register.price : "",
+    weeks: datas ? datas.register.weeks : "",
+    hours: datas ? datas.register.hours : "",
+    timetable: datas ? datas.register.timetable : "",
+    age: datas ? datas.register.age : "",
+    size: datas ? datas.register.size : "",
     description: datas ? datas.register.description : "",
     image: datas ? datas.cover.cover : "",
     show: datas ? datas.register.show : 0,
@@ -74140,6 +74168,12 @@ function Formdatas(_ref) {
     data.append("id", values.id || "");
     data.append("title", values.title || "");
     data.append("level", values.level || "");
+    data.append("price", values.price || "");
+    data.append("weeks", values.weeks || "");
+    data.append("hours", values.hours || "");
+    data.append("timetable", values.timetable || "");
+    data.append("age", values.age || "");
+    data.append("size", values.size || "");
     data.append("description", values.description || "");
     data.append("show", values.show || 0);
     data.append("status", values.status || 0);
@@ -74187,7 +74221,9 @@ function Formdatas(_ref) {
     value: values.id,
     onChange: handleChange,
     isInvalid: !!errors.id
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    md: 5
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
     controlId: "title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
     size: "lg",
@@ -74199,7 +74235,9 @@ function Formdatas(_ref) {
     isInvalid: !!errors.title
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
     type: "invalid"
-  }, errors.title))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+  }, errors.title))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    md: 5
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
     controlId: "level"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Level"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
     as: "select",
@@ -74227,7 +74265,91 @@ function Formdatas(_ref) {
     value: "C2 Proficiency"
   }, "C2 Proficiency")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
     type: "invalid"
-  }, errors.level)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+  }, errors.level))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    md: 2
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    controlId: "price"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    size: "lg",
+    type: "text",
+    placeholder: "Price",
+    value: values.price,
+    onChange: handleChange,
+    required: true,
+    isInvalid: !!errors.price
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, errors.price)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    sm: 1
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    controlId: "weeks"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Weeks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    size: "lg",
+    type: "text",
+    placeholder: "Weeks",
+    value: values.weeks,
+    onChange: handleChange,
+    required: true,
+    isInvalid: !!errors.weeks
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, errors.weeks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    sm: 2
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    controlId: "hours"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Hours per week"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    size: "lg",
+    type: "text",
+    placeholder: "Hours per week",
+    value: values.hours,
+    onChange: handleChange,
+    required: true,
+    isInvalid: !!errors.hours
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, errors.hours))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    sm: 2
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    controlId: "age"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Minimum age"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    size: "lg",
+    type: "text",
+    placeholder: "Minimum age",
+    value: values.age,
+    onChange: handleChange,
+    required: true,
+    isInvalid: !!errors.age
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, errors.age))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    sm: 5
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    controlId: "timetable"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Timetable"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    size: "lg",
+    type: "text",
+    placeholder: "Timetable",
+    value: values.timetable,
+    onChange: handleChange,
+    required: true,
+    isInvalid: !!errors.timetable
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, errors.timetable))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    sm: 2
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    controlId: "size"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Max class size"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    size: "lg",
+    type: "text",
+    placeholder: "Max class size",
+    value: values.size,
+    onChange: handleChange,
+    required: true,
+    isInvalid: !!errors.size
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, errors.size)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
     controlId: "description"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
     as: "textarea",
@@ -77005,7 +77127,7 @@ function Student(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_8__["default"], (_React$createElement = {
-    classAtrributes: "btn btn-secondary btn-new  mb-4",
+    classAtrributes: "btn btn-primary btn-new  mb-4",
     tootip: "Create new student",
     placement: "bottom"
   }, _defineProperty(_React$createElement, "tootip", "Create new student"), _defineProperty(_React$createElement, "text", "Create new student"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiPlus"], null)), _defineProperty(_React$createElement, "url", route("teacher-student-create")), _React$createElement))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {

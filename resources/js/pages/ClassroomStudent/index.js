@@ -4,7 +4,7 @@ import { usePage } from "@inertiajs/inertia-react";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiChevronLeft } from "react-icons/fi";
+import { FiFrown, FiChevronLeft, FiPlus } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";
@@ -57,6 +57,16 @@ export default function ClassroomStudent({ students, classroom, classroom_studen
                     text="List all classrooms"
                     icon={<FiChevronLeft />}
                     url={route("classrooms")}
+                />
+
+                <Link
+                    classAtrributes="btn btn-primary btn-new  mb-4 ml-2"
+                    tootip="Create new student"
+                    placement="bottom"
+                    tootip="Create new student"
+                    text="Create new student"
+                    icon={<FiPlus />}
+                    url={route("teacher-student-create")}
                 />
 
                 <Search
