@@ -239,3 +239,17 @@
     height:100%;
     border: 0px;
   }
+
+  .thumb-theme{
+      opacity: 0.3;
+      cursor: pointer;
+      transition: opacity 0.3s ease-in;
+
+
+    &:hover{
+        opacity: 1;
+    }
+  }
+  .thumb-theme-active{
+    opacity: 1;
+  }

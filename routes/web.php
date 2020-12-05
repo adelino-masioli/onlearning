@@ -150,3 +150,15 @@ Route::namespace('Student')->group(function () {
     Route::get('/student/profile', ["as" => "student-profile", "uses" => "StudentController@profile"]);
     Route::post('/student/update', ["as" => "student-update", "uses" => "StudentController@update"]);
 });
+
+
+//LandingPage
+Route::namespace('LandingPage')->group(function () {
+    Route::get('/landing-pages', ["as" => "landing-pages", "uses" => "LandingPageController@index"]);
+    Route::get('/landing-pages/create', ["as" => "landing-pages-create", "uses" => "LandingPageController@create"]);
+    Route::post('/landing-pages/store', ["as" => "landing-pages-store", "uses" => "LandingPageController@store"]);
+    Route::get('/landing-pages/edit/{uuid}', ["as" => "landing-pages-edit", "uses" => "LandingPageController@edit"]);
+    Route::post('/landing-pages/update', ["as" => "landing-pages-update", "uses" => "LandingPageController@update"]);
+    Route::post('/landing-pages/status', ["as" => "landing-pages-update-status", "uses" => "LandingPageController@status"]);
+    Route::post('/landing-pages/show', ["as" => "landing-pages-update-display", "uses" => "LandingPageController@display"]);
+});

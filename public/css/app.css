@@ -13086,6 +13086,20 @@ table-sm th .link,
   border: 0px;
 }
 
+.thumb-theme {
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in;
+}
+
+.thumb-theme:hover {
+  opacity: 1;
+}
+
+.thumb-theme-active {
+  opacity: 1;
+}
+
 .highlight {
   display: flex;
   flex-direction: column;

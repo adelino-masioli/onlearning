@@ -19,7 +19,8 @@ import {
     FiDownload,
     FiList,
     FiDollarSign,
-    FiBookmark
+    FiBookmark,
+    FiColumns
 } from "react-icons/fi";
 
 import TitlePage from "../../components/TitlePage";
@@ -89,6 +90,11 @@ export default function Template(props) {
                                         text="Payments"
                                         url="payments"
                                         icon={<FiDollarSign size="20" />}
+                                    />
+                                    <SidebarMenu
+                                        text="Landing Pages"
+                                        url="landing-pages"
+                                        icon={<FiColumns size="20" />}
                                     />
                                     <SidebarMenu
                                         text="My profile"
