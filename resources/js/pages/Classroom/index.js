@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import Row from "react-bootstrap/Row";
 
-import { FiFrown, FiPlus, FiEdit2, FiChevronLeft, FiBookOpen, FiUsers, FiDownload, FiList, FiVideo } from "react-icons/fi";
+import { FiFrown, FiPlus, FiEdit2, FiChevronLeft, FiUsers, FiDownload, FiList, FiVideo } from "react-icons/fi";
 
 import Template from "../../components/Template";
 import Link from "../../components/Link";

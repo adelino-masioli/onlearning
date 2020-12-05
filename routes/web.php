@@ -124,6 +124,22 @@ Route::namespace('ExamQuestionAnswer')->group(function () {
     Route::post('/answer/update', ["as" => "answers-update", "uses" => "ExamQuestionAnswerController@update"]);
 });
 
+//Booking
+Route::namespace('Booking')->group(function () {
+    Route::get('/bookings', ["as" => "bookings", "uses" => "BookingController@index"]);
+    Route::post('/bookings/store', ["as" => "bookings-store", "uses" => "BookingController@store"]);
+    Route::post('/bookings/status', ["as" => "bookings-update-status", "uses" => "BookingController@status"]);
+});
+//Payment
+Route::namespace('Payment')->group(function () {
+    Route::get('/payments', ["as" => "payments", "uses" => "PaymentController@index"]);
+    Route::get('/payments/create', ["as" => "payments-create", "uses" => "PaymentController@create"]);
+    Route::post('/payments/store', ["as" => "payments-store", "uses" => "PaymentController@store"]);
+    Route::get('/payments/edit/{uuid}', ["as" => "payments-edit", "uses" => "PaymentController@edit"]);
+    Route::post('/payments/update', ["as" => "payments-update", "uses" => "PaymentController@update"]);
+    Route::post('/payments/duplicate', ["as" => "payments-duplicate", "uses" => "PaymentController@duplicate"]);
+});
+
 
 //Student
 Route::namespace('Student')->group(function () {

@@ -75,9 +75,8 @@ export default function Course({ courses, highlights }) {
                                 icon={<FiPlus />}
                                 url={route("courses-create")}
                             />
-
                             <Link
-                                classAtrributes="btn btn-primary btn-new  ml-4 mb-4"
+                                classAtrributes="btn btn-primary btn-new  ml-2 mb-4"
                                 tootip="Create new course"
                                 placement="bottom"
                                 tootip="Create new classroom"

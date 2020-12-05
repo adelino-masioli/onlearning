@@ -5,7 +5,7 @@ import { FiPlus, FiBookOpen } from "react-icons/fi";
 
 import Template from "../../../components/Template";
 import Link from "../../../components/Link";
-import FormData from "../Partials/form";
+import FormData from "../Partials/FormCourse";
 
 export default function Edit({ course }) {
     function handleSubmit(values) {

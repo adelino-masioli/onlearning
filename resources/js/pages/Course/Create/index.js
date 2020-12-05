@@ -2,7 +2,7 @@ import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 
 import Template from "../../../components/Template";
-import FormData from "../Partials/form";
+import FormData from "../Partials/FormCourse";
 
 export default function Create() {
     function handleSubmit(values) {

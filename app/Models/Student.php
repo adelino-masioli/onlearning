@@ -51,4 +51,6 @@ class Student extends Model
     {
         return $this->belongsToMany('App\Models\Classroom');
     }
+
+
 }

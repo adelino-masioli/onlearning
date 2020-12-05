@@ -9,10 +9,10 @@ import Col from "react-bootstrap/Col";
 
 import { FiUploadCloud } from "react-icons/fi";
 
-import ToastMessage from "../../../components/ToastMessage";
-import Loading from "../../../components/Loading";
+import ToastMessage from "../../../../components/ToastMessage";
+import Loading from "../../../../components/Loading";
 
-export default function Formdatas({ datas, handleForm }) {
+export default function FormData({ datas, handleForm }) {
     const { errors, flash, csrf_token } = usePage();
     const formRef = useRef();
 
