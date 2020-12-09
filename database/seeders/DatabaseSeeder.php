@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ClassroomSeeder::class);
         $this->call(StudentSeeder::class);
         $this->call(StudentTeacherSeeder::class);
+        $this->call(LandingPageLayoutSeeder::class);
         Model::reguard();
     }
 }
