@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Classroom extends Model
 {
+    use HasFactory;
     use \App\Http\Traits\UsesUuid;
 
 
@@ -30,6 +31,10 @@ class Classroom extends Model
     public function teacher()
     {
         return $this->hasOne('App\Models\Teacher');
+    }
+    public function courses()
+    {
+        return $this->hasOne('App\Models\Course');
     }
 
     public function course()

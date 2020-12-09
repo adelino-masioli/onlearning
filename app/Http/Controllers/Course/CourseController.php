@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Course;
+
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -38,7 +39,7 @@ class CourseController extends Controller
                 'description' => $last->description,
                 'status'      => $last->status,
                 'title'       => $last->title,
-                'cover'       => url('/uploads/teachers/covers/thumbnail/'.$last->cover)
+                'cover'       => url('/uploads/teachers/covers/thumbnail/' . $last->cover)
             ];
             $highlights[] = $reg;
         }
@@ -46,7 +47,7 @@ class CourseController extends Controller
         return Inertia::render('Course', [
             "courses" => Course::with("classrooms")->with("students")->select("courses.*",  DB::raw("DATE_FORMAT(courses.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
             'highlights' => $highlights
-            ]);
+        ]);
     }
 
     public function create()
@@ -57,8 +58,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
-        $validation = $request->validate([
-            'title'        => 'required|max:255|unique:courses,title,'.$teacher->id.',teacher_id',
+        $request->validate([
+            'title'        => 'required|max:255|unique:courses,title,' . $teacher->id . ',teacher_id',
             'level'        => 'required',
             'price'        => 'required',
             'weeks'        => 'required',
@@ -102,7 +103,7 @@ class CourseController extends Controller
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $course = Course::where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:courses,title,'.$teacher->id.',teacher_id',
+            'title'        => 'required|max:255|unique:courses,title,' . $teacher->id . ',teacher_id',
             'level'        => 'required',
             'description'  => 'required'
         ]);
@@ -143,25 +144,23 @@ class CourseController extends Controller
 
     public function upload($file)
     {
-        if($file){
-            $imagename = time().'.'.$file->extension();
+        if ($file) {
+            $imagename = time() . '.' . $file->extension();
             $destinationPath = public_path('/uploads/teachers/covers/thumbnail');
 
             //create thumb
             $img = Image::make($file->path());
             $img->resize(400, 150, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$imagename);
+            })->save($destinationPath . '/' . $imagename);
 
             //create full image
             $destinationPath = public_path('/uploads/teachers/covers');
             $file->move($destinationPath, $imagename);
-
-        }else{
+        } else {
             $imagename = NULL;
         }
 
         return $imagename;
     }
-
 }

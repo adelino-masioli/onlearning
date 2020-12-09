@@ -12,30 +12,30 @@ import { FiUploadCloud } from "react-icons/fi";
 import ToastMessage from "../../../../components/ToastMessage";
 import Loading from "../../../../components/Loading";
 
-export default function FormData({ datas, handleForm }) {
+export default function FormCourse({ data_res, handleForm }) {
     const { errors, flash, csrf_token } = usePage();
     const formRef = useRef();
 
     const [values, setValues] = useState({
-        id: datas ? datas.register.id : "",
-        title: datas ? datas.register.title : "",
-        level: datas ? datas.register.level : "",
-        price: datas ? datas.register.price : "",
-        weeks: datas ? datas.register.weeks : "",
-        hours: datas ? datas.register.hours : "",
-        timetable: datas ? datas.register.timetable : "",
-        age: datas ? datas.register.age : "",
-        size: datas ? datas.register.size : "",
-        description: datas ? datas.register.description : "",
-        image: datas ? datas.cover.cover : "",
-        show: datas ? datas.register.show : 0,
-        status: datas ? datas.register.status : 0,
+        id: data_res ? data_res.register.id : "",
+        title: data_res ? data_res.register.title : "",
+        level: data_res ? data_res.register.level : "",
+        price: data_res ? data_res.register.price : "",
+        weeks: data_res ? data_res.register.weeks : "",
+        hours: data_res ? data_res.register.hours : "",
+        timetable: data_res ? data_res.register.timetable : "",
+        age: data_res ? data_res.register.age : "",
+        size: data_res ? data_res.register.size : "",
+        description: data_res ? data_res.register.description : "",
+        image: data_res ? data_res.cover.cover : "",
+        show: data_res ? data_res.register.show : 0,
+        status: data_res ? data_res.register.status : 0,
     });
     const [isSwitchOn, setIsSwitchOn] = useState(
-        datas && datas.status != 0 ? true : false
+        data_res && data_res.status != 0 ? true : false
     );
     const [isSwitchOnLandingPage, setIsSwitchOnLandingPage] = useState(
-        datas && datas.show != 0 ? true : false
+        data_res && data_res.show != 0 ? true : false
     );
     const [showToast, setShowToast] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
@@ -69,8 +69,8 @@ export default function FormData({ datas, handleForm }) {
         e.preventDefault();
 
         setShowToast(false);
-
         const data = new FormData();
+
         data.append("id", values.id || "");
         data.append("title", values.title || "");
         data.append("level", values.level || "");
@@ -109,7 +109,7 @@ export default function FormData({ datas, handleForm }) {
         }));
         setShowToast(flash.message ? true : false);
         setShowLoading(Object.keys(flash).length ? false : true);
-    }, [isSwitchOn, isSwitchOnLandingPage, flash]);
+    }, [isSwitchOn, isSwitchOnLandingPage, flash, data_res]);
 
     return (
         <>
@@ -325,14 +325,14 @@ export default function FormData({ datas, handleForm }) {
                             required
                             isInvalid={!!errors.image}
                         />
-                        {selectedFileUrl || (datas && datas.cover != null) ? (
+                        {selectedFileUrl || (data_res && data_res.cover != null) ? (
                             selectedFileUrl ? (
                                 <img
                                     src={selectedFileUrl}
                                     alt="Selected file"
                                 />
                             ) : (
-                                    <img src={datas.cover} alt="Selected file" />
+                                    <img src={data_res.cover} alt="Selected file" />
                                 )
                         ) : (
                                 <p>

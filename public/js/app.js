@@ -74512,7 +74512,7 @@ function Edit(_ref) {
     tootip: "Create new classroom",
     placement: "bottom"
   }, _defineProperty(_React$createElement2, "tootip", "Create new classroom"), _defineProperty(_React$createElement2, "text", "Create new classroom"), _defineProperty(_React$createElement2, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__["FiBookOpen"], null)), _defineProperty(_React$createElement2, "url", route("classrooms-create")), _React$createElement2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Partials_FormCourse__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    datas: course,
+    data_res: course,
     handleForm: handleSubmit
   })));
 }
@@ -74528,7 +74528,7 @@ function Edit(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormCourse; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
@@ -74569,8 +74569,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function FormData(_ref) {
-  var datas = _ref.datas,
+function FormCourse(_ref) {
+  var data_res = _ref.data_res,
       handleForm = _ref.handleForm;
 
   var _usePage = Object(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__["usePage"])(),
@@ -74581,30 +74581,30 @@ function FormData(_ref) {
   var formRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    id: datas ? datas.register.id : "",
-    title: datas ? datas.register.title : "",
-    level: datas ? datas.register.level : "",
-    price: datas ? datas.register.price : "",
-    weeks: datas ? datas.register.weeks : "",
-    hours: datas ? datas.register.hours : "",
-    timetable: datas ? datas.register.timetable : "",
-    age: datas ? datas.register.age : "",
-    size: datas ? datas.register.size : "",
-    description: datas ? datas.register.description : "",
-    image: datas ? datas.cover.cover : "",
-    show: datas ? datas.register.show : 0,
-    status: datas ? datas.register.status : 0
+    id: data_res ? data_res.register.id : "",
+    title: data_res ? data_res.register.title : "",
+    level: data_res ? data_res.register.level : "",
+    price: data_res ? data_res.register.price : "",
+    weeks: data_res ? data_res.register.weeks : "",
+    hours: data_res ? data_res.register.hours : "",
+    timetable: data_res ? data_res.register.timetable : "",
+    age: data_res ? data_res.register.age : "",
+    size: data_res ? data_res.register.size : "",
+    description: data_res ? data_res.register.description : "",
+    image: data_res ? data_res.cover.cover : "",
+    show: data_res ? data_res.register.show : 0,
+    status: data_res ? data_res.register.status : 0
   }),
       _useState2 = _slicedToArray(_useState, 2),
       values = _useState2[0],
       setValues = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(datas && datas.status != 0 ? true : false),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data_res && data_res.status != 0 ? true : false),
       _useState4 = _slicedToArray(_useState3, 2),
       isSwitchOn = _useState4[0],
       setIsSwitchOn = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(datas && datas.show != 0 ? true : false),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data_res && data_res.show != 0 ? true : false),
       _useState6 = _slicedToArray(_useState5, 2),
       isSwitchOnLandingPage = _useState6[0],
       setIsSwitchOnLandingPage = _useState6[1];
@@ -74696,7 +74696,7 @@ function FormData(_ref) {
     });
     setShowToast(flash.message ? true : false);
     setShowLoading(Object.keys(flash).length ? false : true);
-  }, [isSwitchOn, isSwitchOnLandingPage, flash]);
+  }, [isSwitchOn, isSwitchOnLandingPage, flash, data_res]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_8__["default"], {
     message: "Loading",
     show: showLoading,
@@ -74862,11 +74862,11 @@ function FormData(_ref) {
     name: "image",
     required: true,
     isInvalid: !!errors.image
-  })), selectedFileUrl || datas && datas.cover != null ? selectedFileUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  })), selectedFileUrl || data_res && data_res.cover != null ? selectedFileUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: selectedFileUrl,
     alt: "Selected file"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: datas.cover,
+    src: data_res.cover,
     alt: "Selected file"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiUploadCloud"], {
     size: 30

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentTeacher extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -15,8 +14,7 @@ class StudentTeacher extends Model
      */
     protected $fillable = [
         'teacher_id',
-        'student_id',
-        'status',
+        'student_id'
     ];
 
     public function teacher()
@@ -28,5 +26,4 @@ class StudentTeacher extends Model
     {
         return $this->belongsTo('App\Models\Student');
     }
-
 }

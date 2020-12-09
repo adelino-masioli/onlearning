@@ -12,6 +12,7 @@ export default function Edit({ course }) {
         Inertia.post(route("courses-update"), values);
     }
 
+
     return (
         <>
             <Template
@@ -37,7 +38,7 @@ export default function Edit({ course }) {
                     icon={<FiBookOpen />}
                     url={route("classrooms-create")}
                 />
-                <FormData datas={course} handleForm={handleSubmit} />
+                <FormData data_res={course} handleForm={handleSubmit} />
             </Template>
         </>
     );
