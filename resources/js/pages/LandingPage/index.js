@@ -39,6 +39,10 @@ export default function LandingPage({ landing_pages }) {
         Inertia.post(route("landing-pages-update-display"), data);
     };
 
+    const handleOpen = (status, value) => {
+        window.open("/landing-page/" + value);
+    };
+
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
@@ -111,6 +115,9 @@ export default function LandingPage({ landing_pages }) {
                                 Display on main website?
                             </th>
                             <th className="text-center text-uppercase">
+                                View
+                            </th>
+                            <th className="text-center text-uppercase">
                                 Status
                             </th>
                             <th className="text-center text-uppercase">
@@ -151,6 +158,16 @@ export default function LandingPage({ landing_pages }) {
                                         icon={register.default == 0 ? "No" : "Yes"}
                                         value={register}
                                         handleFunction={handleShowMainPage}
+                                    />
+                                </td>
+                                <td className="text-center">
+                                    <Link
+                                        classAtrributes="link btn btn-table btn-primary w-70"
+                                        tootip={`Open landing page ${register.title}`}
+                                        placement="top"
+                                        icon={"Open"}
+                                        value={register.slug}
+                                        handleFunction={handleOpen}
                                     />
                                 </td>
                                 <td className="text-center">

@@ -43,6 +43,11 @@ class Teacher extends Model
         return $this->belongsToMany('App\Models\Student');
     }
 
+    public function classrooms()
+    {
+        return $this->hasMany('App\Models\Classroom');
+    }
+
     public function materials()
     {
         return $this->hasMany('App\Models\Material');
@@ -50,5 +55,9 @@ class Teacher extends Model
     public function exams()
     {
         return $this->hasMany('App\Models\Exam');
+    }
+    public function landingpages()
+    {
+        return $this->hasMany('App\Models\LandingPage');
     }
 }

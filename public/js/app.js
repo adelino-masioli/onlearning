@@ -72038,6 +72038,12 @@ function Template(props) {
       size: "20"
     })
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SidebarMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    text: "Leads",
+    url: "leads",
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiFilter"], {
+      size: "20"
+    })
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SidebarMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
     text: "My profile",
     url: "teacher-profile",
     icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_8__["FiUser"], {
@@ -72331,6 +72337,10 @@ var map = {
 	"./LandingPage/Partials/FormLandingPage/index.js": "./resources/js/pages/LandingPage/Partials/FormLandingPage/index.js",
 	"./LandingPage/index": "./resources/js/pages/LandingPage/index.js",
 	"./LandingPage/index.js": "./resources/js/pages/LandingPage/index.js",
+	"./Lead": "./resources/js/pages/Lead/index.js",
+	"./Lead/": "./resources/js/pages/Lead/index.js",
+	"./Lead/index": "./resources/js/pages/Lead/index.js",
+	"./Lead/index.js": "./resources/js/pages/Lead/index.js",
 	"./Material": "./resources/js/pages/Material/index.js",
 	"./Material/": "./resources/js/pages/Material/index.js",
 	"./Material/Create": "./resources/js/pages/Material/Create/index.js",
@@ -76962,6 +76972,10 @@ function LandingPage(_ref) {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(route("landing-pages-update-display"), data);
   };
 
+  var handleOpen = function handleOpen(status, value) {
+    window.open("/landing-page/" + value);
+  };
+
   function handleFilter(search) {
     var excludeColumns = ["id"];
     var lowercasedValue = search.toLowerCase().trim();
@@ -77015,6 +77029,8 @@ function LandingPage(_ref) {
     className: "text-center text-uppercase"
   }, "Display on main website?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
+  }, "View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase"
   }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center text-uppercase"
   }, "Actions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -77037,6 +77053,15 @@ function LandingPage(_ref) {
       icon: register["default"] == 0 ? "No" : "Yes",
       value: register,
       handleFunction: handleShowMainPage
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      classAtrributes: "link btn btn-table btn-primary w-70",
+      tootip: "Open landing page ".concat(register.title),
+      placement: "top",
+      icon: "Open",
+      value: register.slug,
+      handleFunction: handleOpen
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -77067,6 +77092,211 @@ function LandingPage(_ref) {
     showConfirm: show,
     handleConfirm: handleConfirm,
     handleFunction: handleInactive,
+    value: user
+  })));
+}
+
+/***/ }),
+
+/***/ "./resources/js/pages/Lead/index.js":
+/*!******************************************!*\
+  !*** ./resources/js/pages/Lead/index.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Lead; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Table */ "./node_modules/react-bootstrap/esm/Table.js");
+/* harmony import */ var react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/ButtonGroup */ "./node_modules/react-bootstrap/esm/ButtonGroup.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fi */ "./node_modules/react-icons/fi/index.esm.js");
+/* harmony import */ var _components_Template__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/Template */ "./resources/js/components/Template/index.js");
+/* harmony import */ var _components_Link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/Link */ "./resources/js/components/Link/index.js");
+/* harmony import */ var _components_Confirm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/Confirm */ "./resources/js/components/Confirm/index.js");
+/* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/Search */ "./resources/js/components/Search/index.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Lead(_ref) {
+  var _React$createElement;
+
+  var leads = _ref.leads;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(leads),
+      _useState2 = _slicedToArray(_useState, 2),
+      listRegisters = _useState2[0],
+      setListRegisters = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      show = _useState4[0],
+      setShow = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      user = _useState6[0],
+      setUser = _useState6[1];
+
+  var handleConfirm = function handleConfirm(status, value) {
+    setShow(status);
+    setUser(value);
+  };
+
+  var handleStatus = function handleStatus(value) {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(route("leads-update-status"), value);
+  };
+
+  function handleFilter(search) {
+    var excludeColumns = ["id"];
+    var lowercasedValue = search.toLowerCase().trim();
+    var results = leads.filter(function (item) {
+      return Object.keys(item).some(function (key) {
+        return excludeColumns.includes(key) ? false : item[key].toString().toLowerCase().includes(lowercasedValue);
+      });
+    });
+    setListRegisters(results);
+  }
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setListRegisters(leads);
+  }, [leads]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Template__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    title: "My landing pages",
+    subtitle: "Teacher"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "highlight"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_8__["default"], (_React$createElement = {
+    classAtrributes: "btn btn-secondary btn-new  mb-4",
+    tootip: "List all students",
+    placement: "bottom"
+  }, _defineProperty(_React$createElement, "tootip", "List all students"), _defineProperty(_React$createElement, "text", "List all students"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiPlus"], null)), _defineProperty(_React$createElement, "url", route("teacher-student")), _React$createElement))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "col-md-12"
+  }, "List of leads"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    placeholder: "Enter your search to filter",
+    handleFunction: handleFilter
+  }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "col mt-2 text-center text-muted"
+  }, "Showing ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, listRegisters.length), " of total ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, listRegisters.length), " ", "record(s)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    striped: true,
+    bordered: true,
+    hover: true,
+    responsive: "md",
+    size: "md"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center"
+  }, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase",
+    style: {
+      width: "30%"
+    }
+  }, "Student"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase",
+    style: {
+      width: "25%"
+    }
+  }, "Course"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase"
+  }, "Level"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase"
+  }, "Created at"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center text-uppercase"
+  }, "Status"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listRegisters.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    colSpan: "6",
+    className: "text-center text-muted"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiFrown"], {
+    size: 20
+  }), " No records found")), listRegisters.map(function (register) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      key: register.id,
+      id: register.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-center"
+    }, register.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.student.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.course.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.student.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, register.date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      size: "sm",
+      className: "table-btn-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onClick: function onClick() {
+        return handleConfirm(true, {
+          id: register.id,
+          status: 0
+        });
+      },
+      className: "btn-table radius-left ".concat(register.status == 0 ? "btn-dark" : "btn-secondary", " ")
+    }, "Open"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onClick: function onClick() {
+        return handleConfirm(true, {
+          id: register.id,
+          status: 1
+        });
+      },
+      className: "btn-table ".concat(register.status == 1 ? "btn-secondary active" : "btn-secondary", " ")
+    }, "Contacted"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onClick: function onClick() {
+        return handleConfirm(true, {
+          id: register.id,
+          status: 2
+        });
+      },
+      className: "btn-table ".concat(register.status == 2 ? "btn-primary" : "btn-secondary", " ")
+    }, "Working"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onClick: function onClick() {
+        return handleConfirm(true, {
+          id: register.id,
+          status: 3
+        });
+      },
+      className: "btn-table ".concat(register.status == 3 ? "btn-success" : "btn-secondary", " ")
+    }, "Converted"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onClick: function onClick() {
+        return handleConfirm(true, {
+          id: register.id,
+          status: 4
+        });
+      },
+      className: "btn-table radius-right ".concat(register.status == 4 ? "btn-danger" : "btn-secondary", " ")
+    }, "Canceled"))));
+  }))), show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Confirm__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    header: "Confirmatiom",
+    text: "Are you sure you want to update status this lead?",
+    label: "Confirm",
+    showConfirm: show,
+    handleConfirm: handleConfirm,
+    handleFunction: handleStatus,
     value: user
   })));
 }

@@ -35,7 +35,7 @@ class StudentFactory extends Factory
             'country'       => $this->faker->country,
             'state'         => $this->faker->state,
             'city'          => $this->faker->city,
-            'level'         => $this->faker->word,
+            'level'         => "A1 Elementary",
             'about'         => $this->faker->text,
             'status'        => 1,
         ];

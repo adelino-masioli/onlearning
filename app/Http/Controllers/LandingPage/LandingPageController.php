@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\LandingPage;
+
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -31,7 +32,7 @@ class LandingPageController extends Controller
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         return Inertia::render('LandingPage', [
             "landing_pages" => LandingPage::select("landing_pages.*",  DB::raw("DATE_FORMAT(landing_pages.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get()
-            ]);
+        ]);
     }
 
     public function create()
@@ -45,7 +46,7 @@ class LandingPageController extends Controller
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:courses,title,'.$teacher->id.',teacher_id',
+            'title'        => 'required|max:255|unique:courses,title,' . $teacher->id . ',teacher_id',
             'template_id'  => 'required',
             'tags'         => 'required',
             'description'  => 'required',
@@ -60,7 +61,7 @@ class LandingPageController extends Controller
         $data = $request->all();
         $data += ["teacher_id" => $teacher->id];
         $data += ["cover"      => $image ? $image : NULL];
-        $data["slug"]          = Str::of($request->title)->slug('-');
+        $data["slug"]          = Str::of($teacher->name)->slug('-') . "/" . Str::of($request->title)->slug('-');
 
         $landing = LandingPage::create($data);
 
@@ -88,7 +89,7 @@ class LandingPageController extends Controller
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $landing = LandingPage::where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:landing_pages,title,'.$teacher->id.',teacher_id',
+            'title'        => 'required|max:255|unique:landing_pages,title,' . $teacher->id . ',teacher_id',
             'template_id'  => 'required',
             'tags'         => 'required',
             'description'  => 'required',
@@ -101,7 +102,7 @@ class LandingPageController extends Controller
 
         $data = $request->all();
         $data += ["cover" => $image ? $image : $landing->cover];
-        $data["slug"]   = Str::of($request->title)->slug('-');
+        $data["slug"]   = Str::of($teacher->name)->slug('-') . "/" . Str::of($request->title)->slug('-');
 
 
         $landing->update($data);
@@ -134,25 +135,23 @@ class LandingPageController extends Controller
 
     public function upload($file)
     {
-        if($file){
-            $imagename = time().'.'.$file->extension();
+        if ($file) {
+            $imagename = time() . '.' . $file->extension();
             $destinationPath = public_path('/uploads/landingpages/pages/thumbnail');
 
             //create thumb
             $img = Image::make($file->path());
             $img->resize(400, 150, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$imagename);
+            })->save($destinationPath . '/' . $imagename);
 
             //create full image
             $destinationPath = public_path('/uploads/landingpages/pages/');
             $file->move($destinationPath, $imagename);
-
-        }else{
+        } else {
             $imagename = NULL;
         }
 
         return $imagename;
     }
-
 }

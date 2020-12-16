@@ -13100,6 +13100,23 @@ table-sm th .link,
   opacity: 1;
 }
 
+.table-btn-group .btn {
+  min-width: 80px;
+  max-width: auto;
+  padding: 0.1rem 0.5rem;
+  font-size: 12px;
+}
+
+.table-btn-group .radius-left {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.table-btn-group .radius-right {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .highlight {
   display: flex;
   flex-direction: column;

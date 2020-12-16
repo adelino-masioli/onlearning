@@ -32,7 +32,7 @@ class LandingPage extends Model
 
     public function teacher()
     {
-        return $this->hasOne('App\Models\Teacher');
+        return $this->hasOne('App\Models\Teacher', 'id', 'teacher_id');
     }
     public function layout()
     {

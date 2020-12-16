@@ -20,7 +20,8 @@ import {
     FiList,
     FiDollarSign,
     FiBookmark,
-    FiColumns
+    FiColumns,
+    FiFilter
 } from "react-icons/fi";
 
 import TitlePage from "../../components/TitlePage";
@@ -95,6 +96,11 @@ export default function Template(props) {
                                         text="Landing Pages"
                                         url="landing-pages"
                                         icon={<FiColumns size="20" />}
+                                    />
+                                    <SidebarMenu
+                                        text="Leads"
+                                        url="leads"
+                                        icon={<FiFilter size="20" />}
                                     />
                                     <SidebarMenu
                                         text="My profile"

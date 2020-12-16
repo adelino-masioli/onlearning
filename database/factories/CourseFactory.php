@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Course;
@@ -33,7 +34,7 @@ class CourseFactory extends Factory
             'age'         => 18,
             'size'        => 15,
             'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
-            'level'       => $this->faker->word,
+            'level'       => "A1 Elementary",
             'cover'       => "cover-default.jpg",
             'show'        => 0,
             'status'      => 1,

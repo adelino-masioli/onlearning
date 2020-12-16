@@ -1,34 +1,41 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\File;
+use Illuminate\Http\Response;
 
 
 Auth::routes();
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/user', ["as" => "user", "uses" => "UserController@index"]);
 
-Route::get('logout', function (){
+
+Route::get('logout', function () {
     Auth::logout();
     return redirect('/');
 });
 
 
-Route::get('images/{filename}', function ($filename)
-{
-    $path = storage_path() . '/app/public/' . $filename;
+Route::get('/', 'HomeController@index')->name('index');
+Route::get('/home', 'HomeController@home')->name('home');
+Route::get('/landing-page/{teacher}/{slug}', 'HomeController@landing')->name('landing-page');
+Route::post('/landing-page-booking', 'HomeController@booking')->name('landing-page-booking');
+Route::post('/landing-page-contact', 'HomeController@contact')->name('landing-page-contact');
+Route::get('/user', ["as" => "user", "uses" => "UserController@index"]);
 
-    if(!File::exists($path)) abort(404);
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
+// Route::get('images/{filename}', function ($filename) {
+//     $path = storage_path() . '/app/public/' . $filename;
 
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
+//     if (!File::exists($path)) abort(404);
 
-    return $response;
-});
+//     $file = File::get($path);
+//     $type = File::mimeType($path);
+
+//     $response = Response::make($file, 200);
+//     $response->header("Content-Type", $type);
+
+//     return $response;
+// });
 
 //Teacher
 Route::namespace('Teacher')->group(function () {
@@ -161,4 +168,9 @@ Route::namespace('LandingPage')->group(function () {
     Route::post('/landing-pages/update', ["as" => "landing-pages-update", "uses" => "LandingPageController@update"]);
     Route::post('/landing-pages/status', ["as" => "landing-pages-update-status", "uses" => "LandingPageController@status"]);
     Route::post('/landing-pages/show', ["as" => "landing-pages-update-display", "uses" => "LandingPageController@display"]);
+});
+//Lead
+Route::namespace('Lead')->group(function () {
+    Route::get('/leads', ["as" => "leads", "uses" => "LeadController@index"]);
+    Route::post('/leads/status', ["as" => "leads-update-status", "uses" => "LeadController@status"]);
 });
