@@ -1,23 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\ClassroomStudent;
+
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 
 use Inertia\Inertia;
-use Auth;
-use DB;
-use Str;
-use Image;
+use Illuminate\Support\Facades\Auth;
 use \App\Models\Student;
-use \App\Models\Course;
 use \App\Models\Teacher;
 use \App\Models\Classroom;
-use \App\Models\ClassroomStudent;
+
 
 class ClassroomStudentController extends Controller
 {
@@ -27,8 +22,8 @@ class ClassroomStudentController extends Controller
     }
 
     public function index($uuid)
-    {   
-        
+    {
+
         $classrooms = [];
         $classroom_students = Classroom::where('uuid', $uuid)->first()->students;
         foreach ($classroom_students as $classroom_student) {
@@ -38,7 +33,7 @@ class ClassroomStudentController extends Controller
         $students = [];
 
 
-        if(Teacher::where("user_id", Auth::user()->id)->first()->students()->exists()){
+        if (Teacher::where("user_id", Auth::user()->id)->first()->students()->exists()) {
             $teacher_students = Teacher::where("user_id", Auth::user()->id)->first()->students;
             foreach ($teacher_students as $student) {
                 $reg = [
@@ -52,13 +47,13 @@ class ClassroomStudentController extends Controller
                 $students[] = $reg;
             }
         }
-   
+
 
         return Inertia::render('ClassroomStudent', [
             'students'   => $students,
             "classroom" => Classroom::where('uuid', $uuid)->first(),
             "classroom_students" => $classroom_students
-            ]);
+        ]);
     }
 
     public function store(Request $request)
@@ -68,9 +63,9 @@ class ClassroomStudentController extends Controller
         $classroom = Classroom::where('uuid', $request->input("classroom")["uuid"])->first();
 
 
-        if($classroom->students()->where('student_id', $student->id)->exists() > 0){
+        if ($classroom->students()->where('student_id', $student->id)->exists() > 0) {
             $classroom->students()->detach($student->id);
-        }else{
+        } else {
             $classroom->students()->attach($student->id);
         }
 
@@ -79,5 +74,4 @@ class ClassroomStudentController extends Controller
 
         return Redirect::route('classroom-students', $request->input("classroom")["uuid"]);
     }
-
 }

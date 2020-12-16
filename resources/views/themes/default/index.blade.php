@@ -61,7 +61,9 @@
           <div class="row justify-content-center mb-2">
             <div class="col-md-12  mb-1 text-center">
               @if($landing->teacher->avatar)
-                <img src="{{ asset('uploads/teachers/avatars/'.$landing->teacher->avatar) }}" alt="{{$landing->teacher->name}}" class="img-fluid rounded-circle">
+                <span class="teacher-thumbnail m-auto">
+                  <img src="{{ asset('uploads/teachers/avatars/thumbnail/'.$landing->teacher->avatar) }}" alt="{{$landing->teacher->name}}" class="img-fluid rounded-circle ">
+                </span>
               @endif
               <p class="lead"><small>{!!$landing->teacher->name!!}</small></p>
             </div>

@@ -852,3 +852,14 @@ textarea {
   font-size: 12px;
   display: none;
 }
+
+.teacher-thumbnail {
+  float: left;
+  width: 100%;
+}
+
+.teacher-thumbnail img {
+  display: inline;
+  width: 100px;
+  height: 100px;
+}
