@@ -141,7 +141,7 @@ $(document).ready(function ($) {
 
 	// navigation
 	var OnePageNav = function () {
-		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#'], a.go-to-contact[href^='#'], a.go-to-courses[href^='#']").on('click', function (e) {
+		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#'], a.go-to-contact[href^='#'], a.go-to-courses[href^='#'], a.go-to-about[href^='#']").on('click', function (e) {
 			e.preventDefault();
 
 			var hash = this.hash,

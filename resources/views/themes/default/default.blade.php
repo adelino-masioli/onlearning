@@ -64,21 +64,21 @@
                 <div class="col-md text-center">
                   <div class="ftco-footer-widget">
                     <ul class="list-unstyled">
-                      <li><a href="#" class="py-2 d-block">Courses</a></li>
+                      <li><a href="#section-courses" class="py-2 d-block go-to-courses">Courses</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="col-md text-center">
                    <div class="ftco-footer-widget">
                     <ul class="list-unstyled">
-                      <li><a href="#" class="py-2 d-block">About</a></li>
+                      <li><a href="#section-about" class="py-2 d-block go-to-about">About</a></li>
                     </ul>
                   </div>
                 </div>
                 <div class="col-md text-center">
                    <div class="ftco-footer-widget">
                     <ul class="list-unstyled">
-                      <li><a href="#" class="py-2 d-block">Contact</a></li>
+                      <li><a href="#section-contact" class="py-2 d-block go-to-contact">Contact</a></li>
                     </ul>
                   </div>
                 </div>
@@ -87,9 +87,18 @@
             <div class="col-md-12 mt-4">
               <div class="ftco-footer-widget mb-4">
                 <ul class="ftco-footer-social list-unstyled text-center float-lft">
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
+                  @if($landing->teacher->youtube)
+                    <li><a target="_blank" href="{{ $landing->teacher->youtube }}"><span class="icon-youtube"></span></a></li>
+                  @endif
+                  @if($landing->teacher->facebook)
+                    <li><a target="_blank" href="{{ $landing->teacher->facebook }}"><span class="icon-facebook"></span></a></li>
+                  @endif
+                  @if($landing->teacher->instagram)
+                    <li><a target="_blank" href="{{ $landing->teacher->instagram }}"><span class="icon-instagram"></span></a></li>
+                  @endif
+                  @if($landing->teacher->linkedin)
+                    <li><a target="_blank" href="{{ $landing->teacher->linkedin }}"><span class="icon-linkedin"></span></a></li>
+                  @endif
                 </ul>
               </div>
             </div>

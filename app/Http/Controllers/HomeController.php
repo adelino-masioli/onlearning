@@ -42,7 +42,7 @@ class HomeController extends Controller
     public function landing($teacher, $slug)
     {
         $landing = LandingPage::with("teacher")->where("slug", $teacher . "/" . $slug)->first();
-        $courses = Course::with("classrooms")->where("teacher_id", $landing->teacher_id)->where("show", "!=", 0)->get();
+        $courses = Course::with("classrooms")->where("teacher_id", $landing->teacher_id)->where("status", "!=", "0")->where("show", "!=", "0")->get();
         return view('themes.default.index', with(['landing' => $landing, 'courses' => $courses]));
     }
     public function booking(Request $request)

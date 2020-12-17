@@ -35,9 +35,11 @@
             
             <div class="course-img"><img src="{{asset("uploads/teachers/covers/thumbnail/".$course->cover)}}" alt="{{$course->title}}" class="img-fluid"></div>
            
-            <div class="media-body p-md-5 p-4">
+            <div class="media-body p-md-4 p-4">
               <h5 class="mt-0 title">{{$course->title}}</h5>
-              <p class="mb-5 description">{{$course->description}}</p>
+              <p class="mb-2">{{ Str::limit($course->description, 70) }}</p>
+              <p class="mb-3">Hours per week: <strong>{{ $course->hours}}</strong> | Level: <strong>{{ $course->level}}</strong></p>
+              <p class="d-none description">{{ $course->description}}</p>
               <p class="mb-0"><a href="#" class="btn btn-primary btn-sm"  data-course-uuid="{{$course->uuid}}">Booking now</a></p>
             </div>
           </div>
@@ -62,10 +64,11 @@
             <div class="col-md-12  mb-1 text-center">
               @if($landing->teacher->avatar)
                 <span class="teacher-thumbnail m-auto">
-                  <img src="{{ asset('uploads/teachers/avatars/thumbnail/'.$landing->teacher->avatar) }}" alt="{{$landing->teacher->name}}" class="img-fluid rounded-circle ">
+                  <img src="{{ asset('uploads/teachers/avatars/thumbnail/'.$landing->teacher->avatar) }}" alt="{{$landing->teacher->name}}" class="img-fluid rounded-circle img-thumbnail" style="width: 100px; height:100px;">
                 </span>
               @endif
               <p class="lead"><small>{!!$landing->teacher->name!!}</small></p>
+     
             </div>
             <div class="col-md-7">
               <p class="lead">{!!$landing->teacher->description!!} <a href="#section-contact" class="go-to-contact">Contact us</a></p>

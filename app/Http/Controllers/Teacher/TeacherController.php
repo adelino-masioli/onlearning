@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Teacher;
+
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -31,6 +32,15 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
 
+        $courses = [];
+        $classrooms = [];
+        $materials = [];
+        $students = [];
+        $leads = [];
+        $bookins = [];
+        $payments = [];
+        $landingpages = [];
+
         return Inertia::render('Teacher/Teacher/Edit', [
             'teacher' => [
                 "register" => $teacher,
@@ -45,14 +55,14 @@ class TeacherController extends Controller
             'name'  => ['required', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255']
         ]);
-        if($request->input('password') != ""){
+        if ($request->input('password') != "") {
             $validation = $request->validate([
                 'password' => 'sometimes|required|string|min:8',
                 'confirmpassword' => 'sometimes|required_with:password|same:password',
             ]);
         }
 
-         //upload image
+        //upload image
         $image = Self::upload($request->file("image"));
         $data_teacher = $request->all();
         $data_teacher += ["avatar" => $image ? $image : NULL];
@@ -62,9 +72,9 @@ class TeacherController extends Controller
 
         $user = User::findOrFail(Auth::user()->id);
         $data = ["name" => $request->input("name")];
-        
 
-        if($request->input('password') != ""){
+
+        if ($request->input('password') != "") {
             $data = ["password" => Hash::make($request->input('password'))];
         }
         $user->update($data);
@@ -76,20 +86,20 @@ class TeacherController extends Controller
 
     public function upload($file)
     {
-        if($file){
-            $imagename = time().'.'.$file->extension();
+        if ($file) {
+            $imagename = time() . '.' . $file->extension();
             $destinationPath = public_path('/uploads/teachers/avatars/thumbnail');
 
             //create thumb
             $img = Image::make($file->path());
             $img->resize(400, 400, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$imagename);
+            })->save($destinationPath . '/' . $imagename);
 
             //create full image
             $destinationPath = public_path('/uploads/teachers/avatars');
             $file->move($destinationPath, $imagename);
-        }else{
+        } else {
             $imagename = NULL;
         }
 
