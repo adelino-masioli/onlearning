@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Material;
+
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -27,9 +28,10 @@ class MaterialController extends Controller
 
     public function index()
     {
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         return Inertia::render('Material', [
-            "materials" => Material::with("teacher")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->get(),
-            ]);
+            "materials" => Material::with("teacher")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
+        ]);
     }
 
     public function create()
@@ -41,7 +43,7 @@ class MaterialController extends Controller
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:materials,title,'.$teacher->id.',teacher_id',
+            'title'        => 'required|max:255|unique:materials,title,' . $teacher->id . ',teacher_id',
             'description'  => 'required',
         ]);
 
@@ -69,7 +71,7 @@ class MaterialController extends Controller
     {
         $material = Material::with("teacher")->where('id', $request->input("id"))->first();
         $validation = $request->validate([
-            'title'        => 'required|max:255|unique:materials,title,'.$request->input("id").',id',
+            'title'        => 'required|max:255|unique:materials,title,' . $request->input("id") . ',id',
             'description'  => 'required'
         ]);
 
@@ -81,6 +83,4 @@ class MaterialController extends Controller
 
         return Redirect::route('materials-edit', $material->uuid);
     }
-
-
 }

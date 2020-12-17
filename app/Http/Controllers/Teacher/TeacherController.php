@@ -6,13 +6,18 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
-
-
-use Inertia\Inertia;
-use Auth;
-use \App\Models\Teacher;
-use \App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Image;
+use Inertia\Inertia;
+use \App\Models\Teacher;
+use \App\Models\Course;
+use \App\Models\Classroom;
+use App\Models\Lead;
+use \App\Models\Material;
+use App\Models\Booking;
+use \App\User;
+
 
 class TeacherController extends Controller
 {
@@ -25,21 +30,33 @@ class TeacherController extends Controller
 
     public function index()
     {
-        return Inertia::render('Teacher', []);
+        $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+
+        $courses = Course::where("teacher_id", $teacher->id)->get();
+        $classrooms = Classroom::where("teacher_id", $teacher->id)->get();
+        $materials = Material::where("teacher_id", $teacher->id)->get();
+        $students = $teacher->students;
+        $last_students = $teacher->last_students;
+        $leads = Lead::where("teacher_id", $teacher->id)->get();
+        $last_leads = Lead::with("teacher")->with("course")->with("student")->select("leads.*",  DB::raw("DATE_FORMAT(leads.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->limit(5)->get();
+        $bookings = Booking::where("teacher_id", $teacher->id)->get();
+
+
+        return Inertia::render('Teacher', [
+            "courses" => $courses,
+            "classrooms" => $classrooms,
+            "materials" => $materials,
+            "students" => $students,
+            "last_students" => $last_students,
+            "leads" => $leads,
+            "last_leads" => $last_leads,
+            "bookings" => $bookings,
+        ]);
     }
 
     public function edit()
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
-
-        $courses = [];
-        $classrooms = [];
-        $materials = [];
-        $students = [];
-        $leads = [];
-        $bookins = [];
-        $payments = [];
-        $landingpages = [];
 
         return Inertia::render('Teacher/Teacher/Edit', [
             'teacher' => [

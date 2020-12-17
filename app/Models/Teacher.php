@@ -38,10 +38,15 @@ class Teacher extends Model
         return $this->hasOne('App\User');
     }
 
-    public function students()
+    public function students($orderby = "id", $order = "asc")
     {
         return $this->belongsToMany('App\Models\Student');
     }
+    public function last_students()
+    {
+        return $this->belongsToMany('App\Models\Student')->orderBy("id", "desc")->limit(5);
+    }
+
 
     public function classrooms()
     {

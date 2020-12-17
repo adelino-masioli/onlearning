@@ -36,6 +36,10 @@ class LeadController extends Controller
 
         $landing->update(["status" => $request->input("status")]);
 
-        return Redirect::route('leads');
+        if ($request->input("redirect")) {
+            return Redirect::route($request->input("redirect"));
+        } else {
+            return Redirect::route('leads');
+        }
     }
 }
