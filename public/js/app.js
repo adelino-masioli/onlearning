@@ -79161,9 +79161,7 @@ function Student(_ref) {
     var excludeColumns = ["id"];
     var lowercasedValue = search.toLowerCase().trim();
     var results = students.filter(function (item) {
-      return Object.keys(item).some(function (key) {
-        return excludeColumns.includes(key) ? false : item[key].toString().toLowerCase().includes(lowercasedValue);
-      });
+      return item["name"].toString().toLowerCase().includes(lowercasedValue);
     });
     setListRegisters(results);
   }
@@ -79185,7 +79183,7 @@ function Student(_ref) {
   }, _defineProperty(_React$createElement, "tootip", "Create new student"), _defineProperty(_React$createElement, "text", "Create new student"), _defineProperty(_React$createElement, "icon", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiPlus"], null)), _defineProperty(_React$createElement, "url", route("teacher-student-create")), _React$createElement))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "col-md-12"
   }, "List of students"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    placeholder: "Enter your search to filter",
+    placeholder: "Enter a student name to filter",
     handleFunction: handleFilter
   }), listRegisters && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col mt-2 text-center text-muted"
@@ -79230,7 +79228,7 @@ function Student(_ref) {
       variant: "success"
     }, "Active")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
-    }, student.status == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, student.status == "Inactive" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "mr-3 text-muted"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiXCircle"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_8__["default"], {
       classAtrributes: "mr-3",
@@ -79241,8 +79239,8 @@ function Student(_ref) {
         uuid: student.uuid
       })
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Link__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      classAtrributes: student.status == 1 ? "text-danger link" : "text-success link",
-      tootip: student.status == 0 ? "Enable ".concat(student.name) : "Disable ".concat(student.name),
+      classAtrributes: student.status == "Active" ? "text-danger link" : "text-success link",
+      tootip: student.status == "Inactive" ? "Enable ".concat(student.name) : "Disable ".concat(student.name),
       placement: "top",
       icon: student.status == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiThumbsUp"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_6__["FiThumbsDown"], null),
       value: student,

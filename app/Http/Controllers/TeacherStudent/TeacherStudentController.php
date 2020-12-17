@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\TeacherStudent;
+
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-
+use DB;
 use Inertia\Inertia;
 use Auth;
 use \App\Models\Student;
@@ -24,9 +25,25 @@ class TeacherStudentController extends Controller
 
     public function index()
     {
-        $students = Teacher::where("user_id", Auth::user()->id)->first()->students;
+        $all_students = Teacher::where("user_id", Auth::user()->id)->first()->students;
+
+        $students = [];
+        foreach ($all_students as $student) {
+            $reg = [
+                'id'              => $student->id,
+                'uuid'            => $student->uuid,
+                'name'            => $student->name,
+                'email'           => $student->email,
+                'phone'           => $student->phone,
+                'country'         => $student->country,
+                'level'           => $student->level,
+                'status'          => $student->status == 1 ? "Active" : "Inactive",
+            ];
+            $students[] = $reg;
+        }
+
         return Inertia::render('Teacher/Student', [
-            'students' => $students
+            'students' =>  $students
         ]);
     }
 
@@ -76,10 +93,10 @@ class TeacherStudentController extends Controller
         $student = Student::where('id', $request->input("id"))->first();
         $validation = $request->validate([
             'name'  => 'required|max:255',
-            'email' => 'required|string|max:255|email|unique:students,email,' .$student->id,
+            'email' => 'required|string|max:255|email|unique:students,email,' . $student->id,
         ]);
 
-        if($request->input('password') != ""){
+        if ($request->input('password') != "") {
             $validation = $request->validate([
                 'password' => 'sometimes|required|string|min:8',
                 'confirmpassword' => 'sometimes|required_with:password|same:password',
@@ -90,7 +107,7 @@ class TeacherStudentController extends Controller
 
         $user = User::findOrFail($student->user_id);
         $data = ["name" => $request->input("name")];
-        if($request->input('password') != ""){
+        if ($request->input('password') != "") {
             $data = ["password" => Hash::make($request->input('password'))];
         }
         $user->update($data);
@@ -109,5 +126,4 @@ class TeacherStudentController extends Controller
 
         return Redirect::route('teacher-student');
     }
-
 }

@@ -34,25 +34,26 @@ export default function Student({ students }) {
         Inertia.post(route("teacher-student-update-status"), data);
     };
 
+
     function handleFilter(search) {
         const excludeColumns = ["id"];
         const lowercasedValue = search.toLowerCase().trim();
         const results = students.filter(function (item) {
-            return Object.keys(item).some(key =>
-                excludeColumns.includes(key)
-                    ? false
-                    : item[key]
-                        .toString()
-                        .toLowerCase()
-                        .includes(lowercasedValue)
-            );
+            return item["name"]
+                .toString()
+                .toLowerCase()
+                .includes(lowercasedValue)
         });
         setListRegisters(results);
     }
 
+
     useEffect(() => {
         setListRegisters(students);
     }, [students]);
+
+
+
 
     return (
         <>
@@ -75,9 +76,10 @@ export default function Student({ students }) {
                 </div>
 
                 <Search
-                    placeholder="Enter your search to filter"
+                    placeholder="Enter a student name to filter"
                     handleFunction={handleFilter}
                 />
+
 
                 {listRegisters && (
                     <Row>
@@ -143,7 +145,7 @@ export default function Student({ students }) {
                                         )}
                                 </td>
                                 <td className="text-center">
-                                    {student.status == 0 ? (
+                                    {student.status == "Inactive" ? (
                                         <span className="mr-3 text-muted">
                                             <FiXCircle />
                                         </span>
@@ -161,12 +163,12 @@ export default function Student({ students }) {
 
                                     <Link
                                         classAtrributes={
-                                            student.status == 1
+                                            student.status == "Active"
                                                 ? "text-danger link"
                                                 : "text-success link"
                                         }
                                         tootip={
-                                            student.status == 0
+                                            student.status == "Inactive"
                                                 ? `Enable ${student.name}`
                                                 : `Disable ${student.name}`
                                         }
