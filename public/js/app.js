@@ -75075,7 +75075,7 @@ function Course(_ref) {
       key: highlight.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PopCard__WEBPACK_IMPORTED_MODULE_10__["default"], {
       title: highlight.title,
-      description: highlight.description,
+      description: "".concat(highlight.description.split(" ").splice(0, 10).join(" "), "..."),
       cover: highlight.cover,
       url: route("courses-edit", {
         uuid: highlight.uuid

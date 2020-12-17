@@ -94,7 +94,7 @@ export default function Course({ courses, highlights }) {
                             >
                                 <PopCard
                                     title={highlight.title}
-                                    description={highlight.description}
+                                    description={`${highlight.description.split(" ").splice(0, 10).join(" ")}...`}
                                     cover={highlight.cover}
                                     url={route("courses-edit", {
                                         uuid: highlight.uuid
