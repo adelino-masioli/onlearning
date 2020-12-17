@@ -134,8 +134,8 @@ export default function classroom({ classrooms }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.course.title}</td>
-                                <td>{register.course.level}</td>
+                                <td>{register.course}</td>
+                                <td>{register.level}</td>
                                 <td className="text-center">
 
                                     <Link

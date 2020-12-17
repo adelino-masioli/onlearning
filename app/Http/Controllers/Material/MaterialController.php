@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 
 use Inertia\Inertia;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Str;
 use Image;
 use \App\Models\Material;
@@ -29,8 +29,26 @@ class MaterialController extends Controller
     public function index()
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+
+        $all_materials = Material::with("teacher")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get();
+
+        $materials = [];
+        foreach ($all_materials as $material) {
+
+            $reg = [
+                'uuid'            => $material->uuid,
+                'id'              => $material->id,
+                'title'           => $material->title,
+                'teacher'         => $material->teacher->name,
+                'link'            => $material->link,
+                'date'            => $material->date,
+                'status'          => $material->status == 1 ? "Published" : "Draft",
+            ];
+            $materials[] = $reg;
+        }
+
         return Inertia::render('Material', [
-            "materials" => Material::with("teacher")->select("materials.*",  DB::raw("DATE_FORMAT(materials.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
+            "materials" => $materials,
         ]);
     }
 

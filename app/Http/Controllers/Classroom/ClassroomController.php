@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Str;
 use \App\Models\Classroom;
 
@@ -24,8 +24,30 @@ class ClassroomController extends Controller
     public function index()
     {
         $teacher = Teacher::where("user_id", Auth::user()->id)->first();
+
+        $all_classrooms = Classroom::with("course")->with("students")->with("materials")->with("exams")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get();
+
+        $classrooms = [];
+        foreach ($all_classrooms as $classroom) {
+
+            $reg = [
+                'uuid'            => $classroom->uuid,
+                'id'              => $classroom->id,
+                'title'           => $classroom->title,
+                'course'          => $classroom->course->title,
+                'level'           => $classroom->course->level,
+                'students'        => $classroom->students,
+                'exams'           => $classroom->exams,
+                'materials'       => $classroom->materials,
+                'date'            => $classroom->date,
+                'status'          => $classroom->status,
+            ];
+            $classrooms[] = $reg;
+        }
+
+
         return Inertia::render('Classroom', [
-            "classrooms" => Classroom::with("course")->with("students")->with("materials")->with("exams")->select("classrooms.*",  DB::raw("DATE_FORMAT(classrooms.created_at, '%d/%m/%Y') as date"))->where("teacher_id", $teacher->id)->get(),
+            "classrooms" => $classrooms,
         ]);
     }
 

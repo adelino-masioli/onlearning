@@ -12,7 +12,7 @@ import Link from "../../components/Link";
 import Search from "../../components/Search";
 import { Col } from "react-bootstrap";
 
-export default function Material({ materials, classroom }) {
+export default function Material({ materials }) {
     const [listRegisters, setListRegisters] = useState(materials);
 
     function handleFilter(search) {
@@ -111,11 +111,11 @@ export default function Material({ materials, classroom }) {
                             <tr key={register.id} id={register.id}>
                                 <td className="text-center">{register.id}</td>
                                 <td>{register.title}</td>
-                                <td>{register.teacher.name}</td>
+                                <td>{register.teacher}</td>
                                 <td>{register.date}</td>
                                 <td>{register.link}</td>
                                 <td className="text-center">
-                                    {register.status == 0 ? (
+                                    {register.status == "Draft" ? (
                                         <Badge variant="secondary">Draft</Badge>
                                     ) : (
                                             <Badge variant="success">
