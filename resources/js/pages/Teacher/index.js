@@ -7,20 +7,12 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import {
     FiUsers,
-    FiLogOut,
-    FiMenu,
-    FiHome,
     FiFileText,
     FiBookOpen,
-    FiCommand,
     FiDownload,
-    FiList,
-    FiDollarSign,
     FiBookmark,
-    FiColumns,
     FiFilter,
-    FiEdit2,
-    FiXCircle,
+    FiFrown,
     FiSearch
 } from "react-icons/fi";
 
@@ -102,7 +94,7 @@ export default function Teacher({ courses, classrooms, materials, students, last
 
                 </ul>
 
-                <Card>
+                <Card className="card-table-dashboard">
                     <Card.Header><FiUsers size={20} className="text-dark" /> LAST STUDENTS</Card.Header>
                     <Card.Body>
                         <Table striped bordered hover responsive="md" size="md">
@@ -177,7 +169,7 @@ export default function Teacher({ courses, classrooms, materials, students, last
                 </Card>
 
 
-                <Card className="mt-4">
+                <Card className="card-table-dashboard mt-4">
                     <Card.Header><FiFilter size={20} className="text-dark" /> LAST LEADS</Card.Header>
                     <Card.Body>
                         <Table striped bordered hover responsive="md" size="md">

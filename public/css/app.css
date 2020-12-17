@@ -13164,6 +13164,10 @@ table-sm th .link,
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+.card-table-dashboard {
+  min-height: 300px;
+}
+
 .highlight {
   display: flex;
   flex-direction: column;
