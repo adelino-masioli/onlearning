@@ -12785,6 +12785,12 @@ table-sm th .link,
   font-style: normal;
 }
 
+input[type=email] {
+  background-image: none !important;
+  background-repeat: no-repeat !important;
+  background-size: 0px !important;
+}
+
 .gradient {
   position: absolute;
   width: 100%;

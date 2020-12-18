@@ -38,6 +38,7 @@ class ClassroomController extends Controller
                 'level'           => $classroom->course->level,
                 'students'        => $classroom->students,
                 'exams'           => $classroom->exams,
+                'meet'            => $classroom->meet,
                 'materials'       => $classroom->materials,
                 'date'            => $classroom->date,
                 'status'          => $classroom->status,

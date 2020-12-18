@@ -144,6 +144,12 @@ table-sm th,
 }
 
 
+input[type='email'] {
+    background-image:none!important;
+    background-repeat: no-repeat!important;
+    background-size: 0px!important;
+}
+
 //auth
 @import "auth";
 

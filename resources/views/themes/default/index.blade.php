@@ -147,7 +147,7 @@
             </div>
             <div class="form-group">
               <label for="email" class="sr-only">Email</label>
-              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
               <label for="subject" class="sr-only">Subject</label>
