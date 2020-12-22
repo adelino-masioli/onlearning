@@ -149,7 +149,7 @@ export default function FormData({ data, handleForm }) {
                 </Form.Row>
 
                 <Form.Row>
-                    <Col>
+                    {/* <Col>
                         <Form.Group controlId="youtube">
                             <Form.Label>Youtube</Form.Label>
                             <Form.Control
@@ -160,8 +160,8 @@ export default function FormData({ data, handleForm }) {
                                 onChange={handleChange}
                             />
                         </Form.Group>
-                    </Col>
-                    <Col>
+                    </Col> */}
+                    <Col md="8">
                         <Form.Group controlId="linkedin">
                             <Form.Label>Linkedin</Form.Label>
                             <Form.Control
@@ -173,7 +173,7 @@ export default function FormData({ data, handleForm }) {
                             />
                         </Form.Group>
                     </Col>
-                    <Col>
+                    <Col md="4">
                         <Form.Group controlId="level">
                             <Form.Label>English level</Form.Label>
                             <Form.Control

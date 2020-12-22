@@ -135,19 +135,22 @@ export default function Student({ students }) {
                                 <td>{student.phone}</td>
                                 <td>{student.country}</td>
                                 <td>{student.level}</td>
+
                                 <td className="text-center">
-                                    {student.status == 0 ? (
-                                        <Badge variant="secondary">
-                                            Inactive
-                                        </Badge>
+
+                                    {student.status == "Active" ? (
+                                        <Badge pill variant="success" onClick={() => handleConfirm(true, student)} className="cursor-pointer">Active</Badge>
+
                                     ) : (
-                                            <Badge variant="success">Active</Badge>
+                                            <Badge pill variant="secondary" onClick={() => handleConfirm(true, student)} className="cursor-pointer">
+                                                Inactive
+                                            </Badge>
                                         )}
                                 </td>
                                 <td className="text-center">
                                     {student.status == "Inactive" ? (
                                         <span className="mr-3 text-muted">
-                                            <FiXCircle />
+                                            <FiXCircle /> Edit
                                         </span>
                                     ) : (
                                             <Link
@@ -155,34 +158,14 @@ export default function Student({ students }) {
                                                 tootip={`Edit ${student.name}`}
                                                 placement="top"
                                                 icon={<FiEdit2 />}
+                                                text="Edit"
                                                 url={route("teacher-student-edit", {
                                                     uuid: student.uuid
                                                 })}
                                             />
                                         )}
 
-                                    <Link
-                                        classAtrributes={
-                                            student.status == "Active"
-                                                ? "text-danger link"
-                                                : "text-success link"
-                                        }
-                                        tootip={
-                                            student.status == "Inactive"
-                                                ? `Enable ${student.name}`
-                                                : `Disable ${student.name}`
-                                        }
-                                        placement="top"
-                                        icon={
-                                            student.status == 0 ? (
-                                                <FiThumbsUp />
-                                            ) : (
-                                                    <FiThumbsDown />
-                                                )
-                                        }
-                                        value={student}
-                                        handleFunction={handleConfirm}
-                                    />
+
                                 </td>
                             </tr>
                         ))}

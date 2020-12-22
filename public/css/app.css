@@ -13174,6 +13174,10 @@ input[type=email] {
   min-height: 300px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .highlight {
   display: flex;
   flex-direction: column;
